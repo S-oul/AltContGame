@@ -8,16 +8,20 @@ public class RhythmTest : MonoBehaviour
 
     public static event System.Action OnBeat;
 
-    public TextMeshProUGUI _text;
+    [SerializeField] TextMeshProUGUI _text;
 
-    public AudioSource musicSource;  
-    public float bpm = 120f;         
-    public KeyCode inputKey = KeyCode.Space;
+    [SerializeField] AudioSource musicSource;  
+    [SerializeField] float bpm = 120f;         
 
-    private float beatInterval;      
-    private float nextBeatTime;      
-    private bool isPlaying = false;
-    private float timingWindow = 0.15f;
+    float beatInterval;      
+    float nextBeatTime;      
+    bool isPlaying = false;
+    float lastBeatTime;
+
+    [SerializeField] float _timingWindow = 0.15f;
+    [SerializeField] float _alphaDepletion = .5f;
+    [SerializeField] float _DelayToPlaySong = .005f;
+
 
     List<KeyCode[]> _keyCodes = new List<KeyCode[]>
     {
@@ -26,25 +30,31 @@ public class RhythmTest : MonoBehaviour
         new KeyCode[] { KeyCode.L, KeyCode.M },*/
 
     };
-
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(_DelayToPlaySong);
+        musicSource.Play();
+    }
     void Start()
     {
         beatInterval = 60f / bpm;
         nextBeatTime = 0f;
-
-        isPlaying = true;
     }
 
     void Update()
     {
-        if (!isPlaying && Input.GetKeyDown(inputKey))
+        beatInterval = 60f / bpm;
+        if (_text.color.a > 0) _text.color = _text.color - new Color(0, 0, 0, _alphaDepletion * Time.deltaTime);
+
+        if (!isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
-            //StartMusic();
+            StartMusic();
+            isPlaying = true;
         }
 
         if (isPlaying)
         {
-            float songPosition = Time.time;
+            float songPosition = musicSource.time;
 
             if (songPosition >= nextBeatTime)
             {
@@ -74,7 +84,7 @@ public class RhythmTest : MonoBehaviour
     }
     void StartMusic()
     {
-        musicSource.Play();
+        StartCoroutine(Delay());
         nextBeatTime = musicSource.time + beatInterval;
         isPlaying = true;
     }
@@ -83,20 +93,23 @@ public class RhythmTest : MonoBehaviour
     {
         float beatDifference = Mathf.Abs(inputTime - nextBeatTime + beatInterval);
 
-        if (beatDifference <= timingWindow)
+        if (beatDifference <= _timingWindow)
         {
             _text.text = "Perfect !";
+            _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 1);
             Debug.Log("Perfect hit!");
         }
-        else if (beatDifference <= timingWindow * 2)
+        else if (beatDifference <= _timingWindow * 2)
         {
             _text.text = "Good";
-            Debug.Log("Good hit!");
+            _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, .5f);
+            Debug.Log("Good hit");
         }
         else
         {
+            _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, .1f);
             _text.text = "Miss...";
-            Debug.Log("Miss!");
+            Debug.Log("Miss");
         }
     }
 }
