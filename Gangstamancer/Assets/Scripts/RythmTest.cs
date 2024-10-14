@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RhythmTest : MonoBehaviour
 {
 
     public static event System.Action OnBeat;
+
+    public TextMeshProUGUI _text;
 
     public AudioSource musicSource;  
     public float bpm = 120f;         
@@ -62,7 +65,7 @@ public class RhythmTest : MonoBehaviour
         int reussite = 0;
         foreach (KeyCode key in _keyCodes[0])
         {
-            if (Input.GetKeyDown(key))
+            if (Input.GetKey(key))
             {
                 reussite++;
             }
@@ -82,14 +85,17 @@ public class RhythmTest : MonoBehaviour
 
         if (beatDifference <= timingWindow)
         {
+            _text.text = "Perfect !";
             Debug.Log("Perfect hit!");
         }
         else if (beatDifference <= timingWindow * 2)
         {
+            _text.text = "Good";
             Debug.Log("Good hit!");
         }
         else
         {
+            _text.text = "Miss...";
             Debug.Log("Miss!");
         }
     }

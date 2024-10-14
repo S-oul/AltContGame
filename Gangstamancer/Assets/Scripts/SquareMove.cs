@@ -7,6 +7,8 @@ public class SquareMove : MonoBehaviour
     [SerializeField] private List<Transform> waypoints = new List<Transform>();
     [SerializeField] private int currentWaypointIndex = 0;
 
+    [SerializeField] Animator animator;
+
     void OnEnable()
     {
         RhythmTest.OnBeat += Move;
@@ -14,6 +16,7 @@ public class SquareMove : MonoBehaviour
 
     void Move()
     {
+        animator.SetTrigger("OnBeat");
         if (waypoints.Count > 0)
         {
             if(currentWaypointIndex < waypoints.Count - 1)
