@@ -9,7 +9,7 @@ public class SquareMove : MonoBehaviour
 
     void OnEnable()
     {
-        RhythmManager.OnBeat += Move;
+        RhythmTest.OnBeat += Move;
     }
 
     void Move()
