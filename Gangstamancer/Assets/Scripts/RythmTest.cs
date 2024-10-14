@@ -65,7 +65,7 @@ public class RhythmTest : MonoBehaviour
         int reussite = 0;
         foreach (KeyCode key in _keyCodes[0])
         {
-            if (Input.GetKey(key))
+            if (Input.GetKeyDown(key))
             {
                 reussite++;
             }
