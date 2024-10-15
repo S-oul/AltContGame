@@ -7,7 +7,7 @@ public class TextPerfect : MonoBehaviour
     [SerializeField] Animator animator;
     void OnEnable()
     {
-        RhythmTest.OnBeat += OnBeat;
+        RythmTimeLine.OnBeat += OnBeat;
     }
 
     // Update is called once per frame

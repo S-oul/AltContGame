@@ -12,7 +12,7 @@ public class SquareMove : MonoBehaviour
 
     void OnEnable()
     {
-        RhythmTest.OnBeat += Move;
+        RythmTimeLine.OnBeat += Move;
     }
 
     void Move()

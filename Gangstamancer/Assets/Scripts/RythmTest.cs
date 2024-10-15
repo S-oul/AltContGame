@@ -6,6 +6,8 @@ using UnityEngine;
 public class RhythmTest : MonoBehaviour
 {
 
+
+
     public static event System.Action OnBeat;
 
     [SerializeField] TextMeshProUGUI _text;
