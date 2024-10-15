@@ -22,11 +22,15 @@ public class RythmTimeLine : MonoBehaviour
     bool _isPlaying = false;
     bool _isPaused = false;
 
+    /// ALL LEFT HAND POSES
     List<KeyCode[]> _keyCodes = new List<KeyCode[]>
     {
-        new KeyCode[] { KeyCode.Q, KeyCode.W },
-        new KeyCode[] { KeyCode.W, KeyCode.E },
-        new KeyCode[] { KeyCode.E, KeyCode.R }
+        new KeyCode[] { KeyCode.Q, KeyCode.W, KeyCode.R }, // MAJEUR 
+        new KeyCode[] { KeyCode.Q, KeyCode.W }, // Finger Gun
+        new KeyCode[] { KeyCode.W, KeyCode.E }, //Corne Du Diable
+        new KeyCode[] { KeyCode.R}, //Index
+        new KeyCode[] { KeyCode.Q}, //CallMe
+        new KeyCode[] { KeyCode.W, KeyCode.Q, KeyCode.E, KeyCode.R  }, //Poing
     };
     int _randomKeyCode = 0;
     int CheckInput()
@@ -48,9 +52,10 @@ public class RythmTimeLine : MonoBehaviour
         _sucessText.text = "";
         OnBeat?.Invoke();
         int intSuccess = CheckInput();
-        bool test = intSuccess == _keyCodes[_randomKeyCode].Length;
-        if (test)
+        bool fullSucses = intSuccess == _keyCodes[_randomKeyCode].Length;
+        if (fullSucses)
         {
+            _sucessText.color = new Color(1,1,1,1);
             _sucessText.text = "Good";
             SelectNewInputs();
         }
@@ -60,12 +65,16 @@ public class RythmTimeLine : MonoBehaviour
         _inputText.text = "";
         _randomKeyCode = Random.Range(0, _keyCodes.Count);
         foreach (KeyCode key in _keyCodes[_randomKeyCode])
-        _inputText.text += key + " ";
+            _inputText.text += key + " ";
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        SelectNewInputs();
+    }
     void Update()
     {
+        if(_sucessText.color.a >0) _sucessText.color = new Color(1,1,1,_sucessText.color.a - 0.01f);
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
             _isPlaying = true;
@@ -74,7 +83,6 @@ public class RythmTimeLine : MonoBehaviour
     }
     private void OnGUI()
     {
-        GUILayout.Label(_keyCodes[_randomKeyCode][0].ToString());
-        GUILayout.Label(_keyCodes[_randomKeyCode][1].ToString());
+        GUILayout.Label("CONVERSION QWERTY DE SES MORTS -- JOUEZ EN FULL HD 1920/1080");
     }
 }
