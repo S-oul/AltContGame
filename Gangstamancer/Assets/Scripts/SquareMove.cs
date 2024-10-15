@@ -6,6 +6,7 @@ public class SquareMove : MonoBehaviour
 {
     [SerializeField] private List<Transform> waypoints = new List<Transform>();
     [SerializeField] private int currentWaypointIndex = 0;
+    public int CurrentWaypointIndex { get => currentWaypointIndex; }
 
     [SerializeField] Animator animator;
 
@@ -31,4 +32,8 @@ public class SquareMove : MonoBehaviour
             transform.position = waypoints[currentWaypointIndex].position;
         }
     }
+    public Transform CurrentSquare()
+    {
+        return waypoints[currentWaypointIndex];
+    }   
 }
