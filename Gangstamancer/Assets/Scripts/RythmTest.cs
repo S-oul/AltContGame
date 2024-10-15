@@ -10,11 +10,11 @@ public class RhythmTest : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI _text;
 
-    [SerializeField] AudioSource musicSource;  
-    [SerializeField] float bpm = 120f;         
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] float bpm = 120f;
 
-    float beatInterval;      
-    float nextBeatTime;      
+    float beatInterval;
+    float nextBeatTime;
     bool isPlaying = false;
     float lastBeatTime;
 
@@ -26,9 +26,8 @@ public class RhythmTest : MonoBehaviour
     List<KeyCode[]> _keyCodes = new List<KeyCode[]>
     {
         new KeyCode[] { KeyCode.Z, KeyCode.E },
-      /*  new KeyCode[] { KeyCode.U, KeyCode.Y },
-        new KeyCode[] { KeyCode.L, KeyCode.M },*/
-
+        new KeyCode[] { KeyCode.U, KeyCode.Y },
+        new KeyCode[] { KeyCode.L, KeyCode.M }
     };
     IEnumerator Delay()
     {
@@ -41,12 +40,12 @@ public class RhythmTest : MonoBehaviour
         nextBeatTime = 0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         beatInterval = 60f / bpm;
-        if (_text.color.a > 0) _text.color = _text.color - new Color(0, 0, 0, _alphaDepletion * Time.deltaTime);
+        if (_text.color.a > 0) _text.color = _text.color - new Color(0, 0, 0, _alphaDepletion * Time.fixedDeltaTime);
 
-        if (!isPlaying && Input.GetKeyDown(KeyCode.Space))
+        if (!isPlaying && Input.GetKey(KeyCode.Space))
         {
             StartMusic();
             isPlaying = true;
@@ -60,12 +59,18 @@ public class RhythmTest : MonoBehaviour
             {
                 Debug.Log("Beat!");
                 OnBeat?.Invoke();
-                nextBeatTime += beatInterval; 
+                nextBeatTime += beatInterval;
             }
-
+        }
+    }
+    private void Update()
+    {
+        if (isPlaying)
+        {
+            float songPosition = musicSource.time;
             if (CheckInput())
             {
-                float inputTime = songPosition; 
+                float inputTime = songPosition;
                 CheckInputTiming(inputTime);
             }
         }
@@ -91,25 +96,53 @@ public class RhythmTest : MonoBehaviour
 
     void CheckInputTiming(float inputTime)
     {
-        float beatDifference = Mathf.Abs(inputTime - nextBeatTime + beatInterval);
-
-        if (beatDifference <= _timingWindow)
+        float beatDifference = inputTime - nextBeatTime + beatInterval;
+        if(beatDifference > 1-_timingWindow*2) beatDifference -= 1;
+        
+        if (beatDifference > 0)
         {
-            _text.text = "Perfect !";
-            _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 1);
-            Debug.Log("Perfect hit!");
+            if (beatDifference <= _timingWindow)
+            {
+                _text.text = "Perfect !";
+                _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 1);
+            }
+            else if (beatDifference <= _timingWindow * 2)
+            {
+                _text.text = "Good";
+                _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, .5f);
+            }
+            else
+            {
+                _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, .1f);
+                _text.text = "Miss...";
+            }
         }
-        else if (beatDifference <= _timingWindow * 2)
+        else if (beatDifference == 0)
         {
-            _text.text = "Good";
-            _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, .5f);
-            Debug.Log("Good hit");
+            _text.color = new Color(1, 0, 0, 1f);
+            _text.text = "WAHTS";
         }
         else
         {
-            _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, .1f);
-            _text.text = "Miss...";
-            Debug.Log("Miss");
+            if (beatDifference >= - _timingWindow)
+            {
+                _text.text = "Perfect !";
+                _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 1);
+            }
+            else if (beatDifference >= - _timingWindow * 2)
+            {
+                _text.text = "Good";
+                _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, .5f);
+            }
+            else
+            {
+                    _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, .1f);
+                    _text.text = "Miss...";
+            }
         }
+
+
+        Debug.Log(beatDifference + " " + _text.text);
+
     }
 }
