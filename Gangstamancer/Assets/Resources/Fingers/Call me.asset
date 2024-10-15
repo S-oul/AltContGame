@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ee888bdc217254080ff01b3f79f532, type: 3}
-  m_Name: HandsSequence
+  m_Script: {fileID: 11500000, guid: 1c66b3762d58660468f1fa9290d0c857, type: 3}
+  m_Name: Call me
   m_EditorClassIdentifier: 
-  handSigns:
-  - isTwoHands: 0
-    handSign: {fileID: 11400000, guid: 1980bb8f1908e1e4f9e560349aea78a4, type: 2}
-    handType: 0
-    handSignTwo: {fileID: 0}
-    height: 0
-    player: 0
+  FingersTypes: 14
