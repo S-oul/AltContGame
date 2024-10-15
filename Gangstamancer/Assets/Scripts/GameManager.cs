@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private int _currentSequenceIndex = 0;
     private float _timeBetweenSequences = 3f;
     private float _timeForPlayerToInput = 2f;
-    private HandSign _currentHandSign;
+    private HandsSign _currentHandSign;
 
     void Awake()
     {

@@ -8,24 +8,20 @@ using Unity.VisualScripting;
 [CreateAssetMenu(fileName = "HandsSequence", menuName = "Scriptables/HandsSequence")]
 public class HandsSequence : ScriptableObject
 {
-    public List<HandSign> handSigns = new List<HandSign>();
+    public List<HandsSign> handSigns = new List<HandsSign>();
 
-    public HandSign GetHandSign(int index) => handSigns[index];
+    public HandsSign GetHandSign(int index) => handSigns[index];
     public int SequenceCount => handSigns.Count;
 }
 
 [Serializable]
-public struct HandSign
+public struct HandsSign
 {
-    public bool isTwoHands;
     [Expandable]
-    public Fingers handSign;
+    public Fingers handSignLeft;
 
-    [HideIf("isTwoHands"), AllowNesting]
-    public HandType handType;
-
-    [Expandable, ShowIf("isTwoHands")]
-    public Fingers handSignTwo;
+    [Expandable]
+    public Fingers handSignRight;
 
     [HorizontalLine(color: EColor.Black)]
     public Height height;
@@ -38,12 +34,6 @@ public struct HandSign
         High
     }
 
-    public enum HandType
-    {
-        Left = 0,
-        Right
-    }
-
     public enum PlayerNumber
     {
         Player1 = 0,
@@ -54,43 +44,33 @@ public struct HandSign
     #region Operators
 
     #region Operator equals
-    public static bool operator ==(HandSign a, HandSign b) => a.isTwoHands ? IsEqualsTwoHands(a, b) && IsEqualsGeneric(a, b) : IsEqualsSingleHand(a, b) && IsEqualsGeneric(a, b);
+    public static bool operator ==(HandsSign a, HandsSign b) => IsEqualsTwoHands(a, b) && IsEqualsGeneric(a, b);
 
-    private static bool IsEqualsGeneric(HandSign a, HandSign b)
+    private static bool IsEqualsGeneric(HandsSign a, HandsSign b)
     {
         return a.height == b.height && a.player == b.player;
     }
 
-    private static bool IsEqualsSingleHand(HandSign a, HandSign b)
+    private static bool IsEqualsTwoHands(HandsSign a, HandsSign b)
     {
-        return a.handSign == b.handSign && a.handType == b.handType;
-    }
-
-    private static bool IsEqualsTwoHands(HandSign a, HandSign b)
-    {
-        return a.handSign == b.handSign && a.handSignTwo == b.handSignTwo;
+        return a.handSignLeft == b.handSignLeft && a.handSignRight == b.handSignRight;
     }
     #endregion
 
     #region Operator different
-    public static bool operator !=(HandSign a, HandSign b) => a.isTwoHands ? IsDifferentTwoHands(a, b) && IsDifferentGeneric(a, b) : IsDifferentSingleHand(a, b) && IsDifferentGeneric(a, b);
-    private static bool IsDifferentGeneric(HandSign a, HandSign b)
+    public static bool operator !=(HandsSign a, HandsSign b) => IsDifferentTwoHands(a, b) && IsDifferentGeneric(a, b);
+    private static bool IsDifferentGeneric(HandsSign a, HandsSign b)
     {
         return a.height != b.height || a.player != b.player;
     }
 
-    private static bool IsDifferentSingleHand(HandSign a, HandSign b)
+    private static bool IsDifferentTwoHands(HandsSign a, HandsSign b)
     {
-        return a.handSign != b.handSign || a.handType != b.handType;
-    }
-
-    private static bool IsDifferentTwoHands(HandSign a, HandSign b)
-    {
-        return a.handSign != b.handSign || a.handSignTwo != b.handSignTwo;
+        return a.handSignLeft != b.handSignLeft || a.handSignRight != b.handSignRight;
     }
     #endregion
 
-    public override bool Equals(object obj) => obj is HandSign handSign && handSign == this;
+    public override bool Equals(object obj) => obj is HandsSign handSign && handSign == this;
     public override int GetHashCode() => base.GetHashCode();
     #endregion
 }
