@@ -42,7 +42,7 @@ public class RhythmTest : MonoBehaviour
 
     void FixedUpdate()
     {
-        beatInterval = 60f / bpm;
+        //beatInterval = 60f / bpm;
         if (_text.color.a > 0) _text.color = _text.color - new Color(0, 0, 0, _alphaDepletion * Time.fixedDeltaTime);
 
         if (!isPlaying && Input.GetKey(KeyCode.Space))
@@ -54,24 +54,23 @@ public class RhythmTest : MonoBehaviour
         if (isPlaying)
         {
             float songPosition = musicSource.time;
-
             if (songPosition >= nextBeatTime)
             {
                 Debug.Log("Beat!");
                 OnBeat?.Invoke();
                 nextBeatTime += beatInterval;
+
             }
         }
     }
     private void Update()
     {
+        float beatDifference = Mathf.Abs(musicSource.time - nextBeatTime);
         if (isPlaying)
         {
-            float songPosition = musicSource.time;
             if (CheckInput())
             {
-                float inputTime = songPosition;
-                CheckInputTiming(inputTime);
+                CheckInputTiming(musicSource.time);
             }
         }
     }
