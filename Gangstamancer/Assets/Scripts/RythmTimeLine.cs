@@ -1,6 +1,8 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -9,9 +11,11 @@ public class RythmTimeLine : MonoBehaviour
 {
     public static event System.Action OnBeat;
 
-    public List<KeyCode> KeyCodesAvailable = new List<KeyCode>();
-    public PlayableDirector _timeLine;
-    
+    [SerializeField] List<KeyCode> Player1Inputs = new List<KeyCode>();
+    [SerializeField] PlayableDirector _timeLine;
+    [SerializeField] TextMeshProUGUI _text;
+
+
     bool _isPlaying = false;
     bool _isPaused = false;
 
@@ -22,45 +26,42 @@ public class RythmTimeLine : MonoBehaviour
         new KeyCode[] { KeyCode.L, KeyCode.M }
     };
     int _randomKeyCode = 0;
-    bool CheckInput()
+    int CheckInput()
     {
-        string aaaa = "";
-        foreach (KeyCode keyCode in KeyCodesAvailable)
+        int isSuccess = 0;
+        foreach (KeyCode key in Player1Inputs)
         {
-            if (Input.GetKey(keyCode))
-            {
-                aaaa+= keyCode.ToString();
-            }
-        }
-        Debug.Log(aaaa);
-        int reussite = 0;
-        foreach (KeyCode key in _keyCodes[_randomKeyCode])
-        {
+            Debug.Log(key);
             if (Input.GetKey(key))
             {
-                reussite++;
+                if (_keyCodes[_randomKeyCode].Contains(key)) isSuccess++;
+                else isSuccess--;
             }
         }
-        return reussite == _keyCodes[_randomKeyCode].Length - 1;
+        return isSuccess;
     }
 
     public void DoOnBeat()
     {
+        _text.text = "";
         OnBeat?.Invoke();
-        if (CheckInput())
+        Debug.Log(CheckInput());
+        bool test = CheckInput() == _keyCodes[_randomKeyCode].Length - 1;
+        if (test)
         {
+            _text.text = "Good";
             SelectNewInputs();
         }
     }
     private void SelectNewInputs()
     {
         _randomKeyCode = Random.Range(0, _keyCodes.Count);
-        Debug.Log("Changed  " +  _randomKeyCode);
+        Debug.Log("Changed  " + _randomKeyCode);
     }
 
     // Update is called once per frame
     void Update()
-    { 
+    {
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
             _isPlaying = true;

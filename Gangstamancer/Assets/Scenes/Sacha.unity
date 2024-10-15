@@ -341,8 +341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bf9f2013605aa4a85737228c28c629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KeyCodesAvailable: 610000007a00000065000000720000007400000079000000
+  Player1Inputs: 7a000000650000007900000075000000
   _timeLine: {fileID: 940111312}
+  _text: {fileID: 1677159411}
 --- !u!82 &940111316
 AudioSource:
   m_ObjectHideFlags: 0
