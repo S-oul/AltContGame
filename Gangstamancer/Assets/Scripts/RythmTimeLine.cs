@@ -22,7 +22,7 @@ public class RythmTimeLine : MonoBehaviour
     List<KeyCode[]> _keyCodes = new List<KeyCode[]>
     {
         new KeyCode[] { KeyCode.Z, KeyCode.E },
-        new KeyCode[] { KeyCode.U, KeyCode.Y },
+        new KeyCode[] { KeyCode.Y, KeyCode.U },
         new KeyCode[] { KeyCode.L, KeyCode.M }
     };
     int _randomKeyCode = 0;
@@ -31,7 +31,6 @@ public class RythmTimeLine : MonoBehaviour
         int isSuccess = 0;
         foreach (KeyCode key in Player1Inputs)
         {
-            Debug.Log(key);
             if (Input.GetKey(key))
             {
                 if (_keyCodes[_randomKeyCode].Contains(key)) isSuccess++;
@@ -45,8 +44,8 @@ public class RythmTimeLine : MonoBehaviour
     {
         _text.text = "";
         OnBeat?.Invoke();
-        Debug.Log(CheckInput());
-        bool test = CheckInput() == _keyCodes[_randomKeyCode].Length - 1;
+        int intSuccess = CheckInput();
+        bool test = intSuccess == _keyCodes[_randomKeyCode].Length;
         if (test)
         {
             _text.text = "Good";
