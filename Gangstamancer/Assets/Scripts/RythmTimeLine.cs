@@ -12,8 +12,11 @@ public class RythmTimeLine : MonoBehaviour
     public static event System.Action OnBeat;
 
     [SerializeField] List<KeyCode> Player1Inputs = new List<KeyCode>();
+    [SerializeField] List<KeyCode> Player2Inputs = new List<KeyCode>();
     [SerializeField] PlayableDirector _timeLine;
-    [SerializeField] TextMeshProUGUI _text;
+    [SerializeField] TextMeshProUGUI _sucessText;
+    [SerializeField] TextMeshProUGUI _inputText;
+
 
 
     bool _isPlaying = false;
@@ -21,9 +24,9 @@ public class RythmTimeLine : MonoBehaviour
 
     List<KeyCode[]> _keyCodes = new List<KeyCode[]>
     {
-        new KeyCode[] { KeyCode.Z, KeyCode.E },
-        new KeyCode[] { KeyCode.Y, KeyCode.U },
-        new KeyCode[] { KeyCode.L, KeyCode.M }
+        new KeyCode[] { KeyCode.Q, KeyCode.W },
+        new KeyCode[] { KeyCode.W, KeyCode.E },
+        new KeyCode[] { KeyCode.E, KeyCode.R }
     };
     int _randomKeyCode = 0;
     int CheckInput()
@@ -42,20 +45,22 @@ public class RythmTimeLine : MonoBehaviour
 
     public void DoOnBeat()
     {
-        _text.text = "";
+        _sucessText.text = "";
         OnBeat?.Invoke();
         int intSuccess = CheckInput();
         bool test = intSuccess == _keyCodes[_randomKeyCode].Length;
         if (test)
         {
-            _text.text = "Good";
+            _sucessText.text = "Good";
             SelectNewInputs();
         }
     }
     private void SelectNewInputs()
     {
+        _inputText.text = "";
         _randomKeyCode = Random.Range(0, _keyCodes.Count);
-        Debug.Log("Changed  " + _randomKeyCode);
+        foreach (KeyCode key in _keyCodes[_randomKeyCode])
+        _inputText.text += key + " ";
     }
 
     // Update is called once per frame
