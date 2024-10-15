@@ -788,8 +788,8 @@ MonoBehaviour:
   musicSource: {fileID: 1754008177}
   bpm: 74
   _timingWindow: 0.15
-  _alphaDepletion: 0.25
-  _DelayToPlaySong: 0.31
+  _alphaDepletion: 0.5
+  _DelayToPlaySong: 0
 --- !u!82 &1754008177
 AudioSource:
   m_ObjectHideFlags: 0

@@ -26,9 +26,8 @@ public class RhythmTest : MonoBehaviour
     List<KeyCode[]> _keyCodes = new List<KeyCode[]>
     {
         new KeyCode[] { KeyCode.Z, KeyCode.E },
-      /*  new KeyCode[] { KeyCode.U, KeyCode.Y },
-        new KeyCode[] { KeyCode.L, KeyCode.M },*/
-
+        new KeyCode[] { KeyCode.U, KeyCode.Y },
+        new KeyCode[] { KeyCode.L, KeyCode.M }
     };
     IEnumerator Delay()
     {
@@ -41,10 +40,10 @@ public class RhythmTest : MonoBehaviour
         nextBeatTime = 0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         beatInterval = 60f / bpm;
-        if (_text.color.a > 0) _text.color = _text.color - new Color(0, 0, 0, _alphaDepletion * Time.deltaTime);
+        if (_text.color.a > 0) _text.color = _text.color - new Color(0, 0, 0, _alphaDepletion * Time.fixedDeltaTime);
 
         if (!isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
@@ -62,10 +61,16 @@ public class RhythmTest : MonoBehaviour
                 OnBeat?.Invoke();
                 nextBeatTime += beatInterval; 
             }
-
+        }
+    }
+    private void Update()
+    {
+        if (isPlaying) 
+        {
+            float songPosition = musicSource.time;
             if (CheckInput())
             {
-                float inputTime = songPosition; 
+                float inputTime = songPosition;
                 CheckInputTiming(inputTime);
             }
         }
