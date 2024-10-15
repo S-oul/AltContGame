@@ -19,11 +19,12 @@ public class Fingers : ScriptableObject
         Pinky = 1 << 4
     }
 
-    public FingerType GetFingerFromInput(List<KeyCode> inputs)
+    public bool GetFingerFromInput(List<KeyCode> inputs, Fingers fingerP)
     {
         FingerType finger = FingerType.None;
 
-        if(inputs.Contains(KeyCode.A))
+        // WARNING: It's only placeholder code. We need to change it to the real implementation.
+        if (inputs.Contains(KeyCode.A))
             finger |= FingerType.Thumb;
         if (inputs.Contains(KeyCode.Z))
             finger |= FingerType.Index;
@@ -34,7 +35,6 @@ public class Fingers : ScriptableObject
         if (inputs.Contains(KeyCode.T))
             finger |= FingerType.Pinky;
 
-
-        return finger;
+        return finger == fingerP.FingersTypes ? true: false;
     }
 }

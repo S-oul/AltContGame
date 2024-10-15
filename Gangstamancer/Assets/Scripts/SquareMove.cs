@@ -10,12 +10,17 @@ public class SquareMove : MonoBehaviour
 
     [SerializeField] Animator animator;
 
-    void OnEnable()
+    private void OnEnable()
     {
-        RhythmTest.OnBeat += Move;
+        RhythmTest.OnBeat += Move;   
     }
 
-    void Move()
+    private void OnDisable()
+    {
+        RhythmTest.OnBeat -= Move;
+    }
+
+    private void Move()
     {
         animator.SetTrigger("OnBeat");
         if (waypoints.Count > 0)

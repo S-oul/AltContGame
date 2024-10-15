@@ -9,6 +9,9 @@ using Unity.VisualScripting;
 public class HandsSequence : ScriptableObject
 {
     public List<HandSign> handSigns = new List<HandSign>();
+
+    public HandSign GetHandSign(int index) => handSigns[index];
+    public int SequenceCount => handSigns.Count;
 }
 
 [Serializable]
@@ -26,7 +29,7 @@ public struct HandSign
 
     [HorizontalLine(color: EColor.Black)]
     public Height height;
-    public Player player;
+    public PlayerNumber player;
 
     public enum Height
     {
@@ -41,7 +44,7 @@ public struct HandSign
         Right
     }
 
-    public enum Player
+    public enum PlayerNumber
     {
         Player1 = 0,
         Player2
@@ -87,7 +90,7 @@ public struct HandSign
     }
     #endregion
 
-    public override bool Equals(object obj) => obj is HandSign sequence && sequence == this;
+    public override bool Equals(object obj) => obj is HandSign handSign && handSign == this;
     public override int GetHashCode() => base.GetHashCode();
     #endregion
 }

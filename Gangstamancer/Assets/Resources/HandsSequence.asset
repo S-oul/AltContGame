@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: HandsSequence
   m_EditorClassIdentifier: 
   handSigns:
-  - isTwoHands: 0
+  - isTwoHands: 1
     handSign: {fileID: 11400000, guid: 1980bb8f1908e1e4f9e560349aea78a4, type: 2}
-    handType: 0
-    handSignTwo: {fileID: 0}
-    height: 0
-    player: 0
+    handType: 1
+    handSignTwo: {fileID: 11400000, guid: 7e86709e23e2b794ca2028dbe0c806ff, type: 2}
+    height: 1
+    player: 1
