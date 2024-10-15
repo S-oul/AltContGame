@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,9 @@ public class GameManager : MonoBehaviour
     private float _timeBetweenSequences = 3f;
     private float _timeForPlayerToInput = 2f;
     private HandsSign _currentHandSign;
+    private List<KeyCode> _player1InputKeys;
+
+    [SerializeField] private List<KeyCode> _allInputKeysDown;
 
     void Awake()
     {
@@ -41,7 +45,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }   
+    }
+
+    private void Start()
+    {
+        _currentHandSign = _handsSequence.GetHandSign(_currentSequenceIndex);
+    }
 
     public void ChangeState(GameStates newState)
     {
@@ -99,10 +108,46 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // waiting for prefect player input
-        if (_currentHandSign.isTwoHands)
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyUp(KeyCode.A))
+            CheckInputFromList(KeyCode.A);
+        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyUp(KeyCode.Z))
+            CheckInputFromList(KeyCode.Z);
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyUp(KeyCode.E))
+            CheckInputFromList(KeyCode.E);
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyUp(KeyCode.R))
+            CheckInputFromList(KeyCode.R);
+        if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyUp(KeyCode.T))
+            CheckInputFromList(KeyCode.T);
+
+
+    }
+
+    private void CheckInputFromList(KeyCode key)
+    {
+        if(_allInputKeysDown.Contains(key))
+            _allInputKeysDown.Remove(key);
+        else
+            _allInputKeysDown.Add(key);
+
+        CheckPlayerInput();
+    }
+
+    private void CheckPlayerInput()
+    {
+        if (_currentHandSign.IsLeftHandCorrect(_allInputKeysDown))
         {
-            //if(_currentHandSign.handSign.GetFingerFromInput())
+            // correct input
+            Debug.Log("Correct input");
         }
+        else
+        {
+            // wrong input
+        }
+    }
+
+    private void CheckPlayer1()
+    {
+
     }
 
     private void GetPlayerInputKeys()

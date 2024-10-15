@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using Unity.VisualScripting;
+using static Fingers;
 
 [CreateAssetMenu(fileName = "HandsSequence", menuName = "Scriptables/HandsSequence")]
 public class HandsSequence : ScriptableObject
@@ -39,6 +40,47 @@ public struct HandsSign
         Player1 = 0,
         Player2
     }
+
+
+
+    public bool IsLeftHandCorrect(List<KeyCode> inputs)
+    {
+        FingerType finger = FingerType.None;
+
+        // WARNING: It's only placeholder code. We need to change it to the real implementation.
+        if (inputs.Contains(KeyCode.A))
+            finger |= FingerType.Thumb;
+        if (inputs.Contains(KeyCode.Z))
+            finger |= FingerType.Index;
+        if (inputs.Contains(KeyCode.E))
+            finger |= FingerType.Middle;
+        if (inputs.Contains(KeyCode.R))
+            finger |= FingerType.Ring;
+        if (inputs.Contains(KeyCode.T))
+            finger |= FingerType.Pinky;
+
+        return finger == handSignLeft.FingersTypes ? true : false;
+    }
+
+    public bool IsRightHandCorrect(List<KeyCode> inputs)
+    {
+        FingerType finger = FingerType.None;
+
+        // WARNING: It's only placeholder code. We need to change it to the real implementation.
+        if (inputs.Contains(KeyCode.Y))
+            finger |= FingerType.Thumb;
+        if (inputs.Contains(KeyCode.U))
+            finger |= FingerType.Index;
+        if (inputs.Contains(KeyCode.I))
+            finger |= FingerType.Middle;
+        if (inputs.Contains(KeyCode.O))
+            finger |= FingerType.Ring;
+        if (inputs.Contains(KeyCode.P))
+            finger |= FingerType.Pinky;
+
+        return finger == handSignRight.FingersTypes ? true : false;
+    }
+
 
 
     #region Operators
