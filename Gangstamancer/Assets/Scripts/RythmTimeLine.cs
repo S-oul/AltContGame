@@ -17,35 +17,35 @@ public class RythmTimeLine : MonoBehaviour
 
 
     [SerializeField] List<KeyCode> Player1Inputs = new List<KeyCode>();
+    [SerializeField] PlayerHandsInput _player1Inputs;
     [SerializeField] List<KeyCode> Player2Inputs = new List<KeyCode>();
+    [SerializeField] PlayerHandsInput _player2Inputs;
     [SerializeField] PlayableDirector _timeLine;
     [SerializeField] TextMeshProUGUI _sucessText;
     [SerializeField] TextMeshProUGUI _inputText;
 
+    [SerializeField] private HandsSequence handSequence1;
+    [SerializeField] private HandsSign _currentHandSign;
 
 
     bool _isPlaying = false;
     bool _isPaused = false;
 
     /// ALL LEFT HAND POSES
-    List<KeyCode[]> _keyCodes = new List<KeyCode[]>
-    {
-        new KeyCode[] { KeyCode.Q, KeyCode.W, KeyCode.R }, // MAJEUR 
-        new KeyCode[] { KeyCode.Q, KeyCode.W }, // Finger Gun
-        new KeyCode[] { KeyCode.W, KeyCode.E }, //Corne Du Diable
-        new KeyCode[] { KeyCode.R}, //Index
-        new KeyCode[] { KeyCode.Q}, //CallMe
-        new KeyCode[] { KeyCode.W, KeyCode.Q, KeyCode.E, KeyCode.R  }, //Poing
-    };
+    [SerializeField] private List<Fingers> _allFingers;
+    List<KeyCode> _keyCodes;
     int _randomKeyCode = 0;
     int CheckInput()
     {
         int isSuccess = 0;
-        foreach (KeyCode key in Player1Inputs)
+        List<KeyCode> toUse = _isPlayer1Turn ? _player1Inputs.playerInputs : _player2Inputs.playerInputs;
+
+        foreach (KeyCode key in toUse)
         {
             if (Input.GetKey(key))
             {
-                if (_keyCodes[_randomKeyCode].Contains(key)) isSuccess++;
+                if (_keyCodes.Contains(key)) 
+                    isSuccess++;
                 else isSuccess--;
             }
         }
@@ -57,7 +57,7 @@ public class RythmTimeLine : MonoBehaviour
         _sucessText.text = "";
         OnBeat?.Invoke();
         int intSuccess = CheckInput();
-        bool fullSucses = intSuccess == _keyCodes[_randomKeyCode].Length;
+        bool fullSucses = intSuccess == _keyCodes.Count;
         if (fullSucses)
         {
             _sucessText.color = new Color(1, 1, 1, 1);
@@ -65,27 +65,32 @@ public class RythmTimeLine : MonoBehaviour
             SelectNewInputs();
             if (_isPlayer1Turn)
             {
-                hypeMeter._winOMeter += .1f/2;
+                //hypeMeter._winOMeter += .1f/2;
             }
-            else hypeMeter._winOMeter -= .1f/2;
+            //else hypeMeter._winOMeter -= .1f/2;
         }
         else
         {
             if (!_isPlayer1Turn)
             {
-                hypeMeter._winOMeter += .1f / 2;
+                //hypeMeter._winOMeter += .1f / 2;
             }
-            else hypeMeter._winOMeter -= .1f / 2;
+            //else hypeMeter._winOMeter -= .1f / 2;
         }
 
         _isPlayer1Turn = !_isPlayer1Turn;
     }
     private void SelectNewInputs()
     {
+        handSequence1.handSigns.RemoveAt(0);
+        handSequence1.CreateRandomHandSign(HandsSign.PlayerNumber.Player1);
+        _currentHandSign = handSequence1.handSigns[0];
+        _keyCodes = handSequence1.handSigns[0].CreateKeyCodesFromFingers();
         _inputText.text = "";
         _randomKeyCode = Random.Range(0, _keyCodes.Count);
-        foreach (KeyCode key in _keyCodes[_randomKeyCode])
+        foreach (KeyCode key in _keyCodes)
             _inputText.text += key + " ";
+
     }
 
     private void Start()

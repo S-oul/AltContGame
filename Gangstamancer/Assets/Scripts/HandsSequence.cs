@@ -6,6 +6,7 @@ using NaughtyAttributes;
 using Unity.VisualScripting;
 using static Fingers;
 using System.Linq;
+using static HandsSign;
 
 [CreateAssetMenu(fileName = "HandsSequence", menuName = "Scriptables/HandsSequence")]
 public class HandsSequence : ScriptableObject
@@ -14,6 +15,21 @@ public class HandsSequence : ScriptableObject
 
     public HandsSign GetHandSign(int index) => handSigns[index];
     public int SequenceCount => handSigns.Count;
+
+    public void CreateRandomHandSign(PlayerNumber playerNumber)
+    {
+        GameManager gameManager = GameManager.Instance;
+        HandsSign handSign = new HandsSign();
+        handSign.handSignLeft = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
+        handSign.handSignRight = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
+        handSign.height = (HandsSign.Height)UnityEngine.Random.Range(0, 3);
+        // modulo to get player 1 then 2 every time
+        handSign.player = playerNumber;
+        handSign.inputsPlayer = handSign.player == HandsSign.PlayerNumber.Player1 ? gameManager.Player1Inputs : gameManager.Player2Inputs;
+        handSign.CreateKeyCodesFromFingers();
+        handSigns.Add(handSign);
+    }
+
 }
 
 [Serializable]
@@ -30,6 +46,7 @@ public struct HandsSign
     public PlayerNumber player;
 
     public PlayerHandsInput inputsPlayer;
+    public List<KeyCode> KeyCodesFingers;
 
     public enum Height
     {
@@ -67,7 +84,7 @@ public struct HandsSign
 
     private FingerType GetFingersFromInputs(List<KeyCode> inputs, List<KeyCode> hand)
     {
-        if (hand.Count != 5)
+        if (hand.Count != 4)
             throw new Exception("The hand must have 5 fingers");
 
         FingerType finger = FingerType.None;
@@ -83,6 +100,33 @@ public struct HandsSign
             finger |= FingerType.Pinky;
 
         return finger;
+    }
+
+    public List<KeyCode> CreateKeyCodesFromFingers()
+    {
+        List<KeyCode> keyCodes = new List<KeyCode>();
+        KeyCodesFingers = new List<KeyCode>();
+        if (handSignLeft.FingersTypes.HasFlag(FingerType.Index))
+            keyCodes.Add(inputsPlayer.LeftHandInputs[0]);
+        if (handSignLeft.FingersTypes.HasFlag(FingerType.Middle))
+            keyCodes.Add(inputsPlayer.LeftHandInputs[1]);
+        if (handSignLeft.FingersTypes.HasFlag(FingerType.Ring))
+            keyCodes.Add(inputsPlayer.LeftHandInputs[2]);
+        if (handSignLeft.FingersTypes.HasFlag(FingerType.Pinky))
+            keyCodes.Add(inputsPlayer.LeftHandInputs[3]);
+
+        if (handSignRight.FingersTypes.HasFlag(FingerType.Index))
+            keyCodes.Add(inputsPlayer.RightHandInputs[0]);
+        if (handSignRight.FingersTypes.HasFlag(FingerType.Middle))
+            keyCodes.Add(inputsPlayer.RightHandInputs[1]);
+        if (handSignRight.FingersTypes.HasFlag(FingerType.Ring))
+            keyCodes.Add(inputsPlayer.RightHandInputs[2]);
+        if (handSignRight.FingersTypes.HasFlag(FingerType.Pinky))
+            keyCodes.Add(inputsPlayer.RightHandInputs[3]);
+
+
+        return KeyCodesFingers = keyCodes;
+        
     }
 
 

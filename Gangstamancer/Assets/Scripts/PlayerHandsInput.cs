@@ -7,4 +7,5 @@ public class PlayerHandsInput : ScriptableObject
 {
     public List<KeyCode> LeftHandInputs = new List<KeyCode>();
     public List<KeyCode> RightHandInputs = new List<KeyCode>();
+    public List<KeyCode> playerInputs = new List<KeyCode>();
 }

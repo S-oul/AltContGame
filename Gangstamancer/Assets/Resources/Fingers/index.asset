@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c66b3762d58660468f1fa9290d0c857, type: 3}
   m_Name: index
   m_EditorClassIdentifier: 
-  FingersTypes: 29
+  FingersTypes: 28
+  SpriteLeft: {fileID: 0}
+  SpriteRight: {fileID: 0}

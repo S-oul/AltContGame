@@ -740,11 +740,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bf9f2013605aa4a85737228c28c629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hypeMeter: {fileID: 0}
   Player1Inputs: 7700000071000000650000007200000075000000690000006f00000070000000
+  _player1Inputs: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
   Player2Inputs: 
+  _player2Inputs: {fileID: 11400000, guid: 005330c4de2e8d243b946f4baf81a845, type: 2}
   _timeLine: {fileID: 940111312}
   _sucessText: {fileID: 1677159411}
   _inputText: {fileID: 557887972}
+  handSequence1: {fileID: 11400000, guid: e195a4b0ae078de4b8be6a87a4f45500, type: 2}
+  _currentHandSign:
+    handSignLeft: {fileID: 11400000, guid: e394d90e1d84b5746a3e8a6d08da80fd, type: 2}
+    handSignRight: {fileID: 11400000, guid: e394d90e1d84b5746a3e8a6d08da80fd, type: 2}
+    height: 0
+    player: 0
+    inputsPlayer: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
+    KeyCodesFingers: 
+  _allFingers:
+  - {fileID: 11400000, guid: e394d90e1d84b5746a3e8a6d08da80fd, type: 2}
+  - {fileID: 11400000, guid: 0b1843fe0ab6dcb47afc690a4b35f3cb, type: 2}
+  - {fileID: 11400000, guid: 1980bb8f1908e1e4f9e560349aea78a4, type: 2}
+  - {fileID: 11400000, guid: b419c7d68052ff44a8b4511496535235, type: 2}
+  - {fileID: 11400000, guid: d391665f60468894db1e5210f812cc74, type: 2}
+  - {fileID: 11400000, guid: 7e86709e23e2b794ca2028dbe0c806ff, type: 2}
 --- !u!82 &940111316
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1601,6 +1619,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1868682565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1868682566}
+  - component: {fileID: 1868682567}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1868682566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868682565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.22, y: -0.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1868682567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868682565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9c48dcfccc92a47a6261edebfc7b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player1Turn:
+    m_PersistentCalls:
+      m_Calls: []
+  Player2Turn:
+    m_PersistentCalls:
+      m_Calls: []
+  _handsSequence: {fileID: 11400000, guid: e195a4b0ae078de4b8be6a87a4f45500, type: 2}
+  _player1Inputs: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
+  _player2Inputs: {fileID: 11400000, guid: 005330c4de2e8d243b946f4baf81a845, type: 2}
+  _allInputKeysDown: 
+  _allFingers:
+  - {fileID: 11400000, guid: e394d90e1d84b5746a3e8a6d08da80fd, type: 2}
+  - {fileID: 11400000, guid: 0b1843fe0ab6dcb47afc690a4b35f3cb, type: 2}
+  - {fileID: 11400000, guid: 1980bb8f1908e1e4f9e560349aea78a4, type: 2}
+  - {fileID: 11400000, guid: b419c7d68052ff44a8b4511496535235, type: 2}
+  - {fileID: 11400000, guid: d391665f60468894db1e5210f812cc74, type: 2}
+  - {fileID: 11400000, guid: 7e86709e23e2b794ca2028dbe0c806ff, type: 2}
 --- !u!1 &1932303616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,3 +1848,4 @@ SceneRoots:
   - {fileID: 803342974}
   - {fileID: 238856308}
   - {fileID: 2115036790}
+  - {fileID: 1868682566}

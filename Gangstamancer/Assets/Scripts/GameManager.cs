@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
     }
     private GameStates _currentState;
     public GameStates CurrentState => _currentState;
+
+    public PlayerHandsInput Player1Inputs { get => _player1Inputs; set => _player1Inputs = value; }
+    public PlayerHandsInput Player2Inputs { get => _player2Inputs; set => _player2Inputs = value; }
+    public List<Fingers> AllFingers { get => _allFingers; set => _allFingers = value; }
+
     #endregion
 
 
@@ -56,11 +61,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        GenerateHandsSequence();    
-        _currentHandSign = _handsSequence.GetHandSign(_currentSequenceIndex);
-    }
 
     private void GenerateHandsSequence()
     {
@@ -68,12 +68,12 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             HandsSign handSign = new HandsSign();
-            handSign.handSignLeft = _allFingers[UnityEngine.Random.Range(0, _allFingers.Count)];
-            handSign.handSignRight = _allFingers[UnityEngine.Random.Range(0, _allFingers.Count)];
+            handSign.handSignLeft = AllFingers[UnityEngine.Random.Range(0, AllFingers.Count)];
+            handSign.handSignRight = AllFingers[UnityEngine.Random.Range(0, AllFingers.Count)];
             handSign.height = (HandsSign.Height)UnityEngine.Random.Range(0, 3);
             // modulo to get player 1 then 2 every time
             handSign.player = (HandsSign.PlayerNumber)(i % 2);
-            handSign.inputsPlayer = handSign.player == HandsSign.PlayerNumber.Player1 ? _player1Inputs : _player2Inputs;
+            handSign.inputsPlayer = handSign.player == HandsSign.PlayerNumber.Player1 ? Player1Inputs : Player2Inputs;
 
             _handsSequence.handSigns.Add(handSign);
         }
@@ -134,18 +134,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0;  i < _player1Inputs.LeftHandInputs.Count;  i++)
-        {
-            if (Input.GetKeyDown(_player1Inputs.LeftHandInputs[i]) || Input.GetKeyUp(_player1Inputs.LeftHandInputs[i]))
-                CheckInputFromList(_player1Inputs.LeftHandInputs[i]);
-        }
-
-        for (int i = 0; i < _player1Inputs.RightHandInputs.Count; i++)
-        {
-            if (Input.GetKeyDown(_player1Inputs.RightHandInputs[i]) || Input.GetKeyUp(_player1Inputs.RightHandInputs[i]))
-                CheckInputFromList(_player1Inputs.RightHandInputs[i]);
-        }
-
+        
     }
 
     private void CheckInputFromList(KeyCode key)
