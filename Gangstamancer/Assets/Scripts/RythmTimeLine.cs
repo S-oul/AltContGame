@@ -11,6 +11,11 @@ public class RythmTimeLine : MonoBehaviour
 {
     public static event System.Action OnBeat;
 
+    [SerializeField] HypeMeter hypeMeter;
+
+    bool _isPlayer1Turn = false;
+
+
     [SerializeField] List<KeyCode> Player1Inputs = new List<KeyCode>();
     [SerializeField] List<KeyCode> Player2Inputs = new List<KeyCode>();
     [SerializeField] PlayableDirector _timeLine;
@@ -55,10 +60,25 @@ public class RythmTimeLine : MonoBehaviour
         bool fullSucses = intSuccess == _keyCodes[_randomKeyCode].Length;
         if (fullSucses)
         {
-            _sucessText.color = new Color(1,1,1,1);
+            _sucessText.color = new Color(1, 1, 1, 1);
             _sucessText.text = "Good";
             SelectNewInputs();
+            if (_isPlayer1Turn)
+            {
+                hypeMeter._winOMeter += .1f/2;
+            }
+            else hypeMeter._winOMeter -= .1f/2;
         }
+        else
+        {
+            if (!_isPlayer1Turn)
+            {
+                hypeMeter._winOMeter += .1f / 2;
+            }
+            else hypeMeter._winOMeter -= .1f / 2;
+        }
+
+        _isPlayer1Turn = !_isPlayer1Turn;
     }
     private void SelectNewInputs()
     {
@@ -74,7 +94,7 @@ public class RythmTimeLine : MonoBehaviour
     }
     void Update()
     {
-        if(_sucessText.color.a >0) _sucessText.color = new Color(1,1,1,_sucessText.color.a - 0.01f);
+        if (_sucessText.color.a > 0) _sucessText.color = new Color(1, 1, 1, _sucessText.color.a - 0.01f);
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
             _isPlaying = true;
