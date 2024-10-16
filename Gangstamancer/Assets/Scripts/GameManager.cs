@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
     private HandsSign _currentHandSign;
     private List<KeyCode> _player1InputKeys;
 
+    [SerializeField] private List<KeyCode> _player1LeftHand;
+    [SerializeField] private List<KeyCode> _player1RightHand;
+    [SerializeField] private List<KeyCode> _player2LeftHand;
+    [SerializeField] private List<KeyCode> _player2RightHand;   
     [SerializeField] private List<KeyCode> _allInputKeysDown;
 
     void Awake()

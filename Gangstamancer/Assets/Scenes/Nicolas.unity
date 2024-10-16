@@ -580,7 +580,12 @@ MonoBehaviour:
   Player2Turn:
     m_PersistentCalls:
       m_Calls: []
-  _handsSequence: {fileID: 0}
+  _handsSequence: {fileID: 11400000, guid: e195a4b0ae078de4b8be6a87a4f45500, type: 2}
+  _player1LeftHand: 
+  _player1RightHand: 
+  _player2LeftHand: 
+  _player2RightHand: 
+  _allInputKeysDown: 
 --- !u!4 &927207904
 Transform:
   m_ObjectHideFlags: 0

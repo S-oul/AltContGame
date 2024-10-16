@@ -13,15 +13,7 @@ MonoBehaviour:
   m_Name: HandsSequence
   m_EditorClassIdentifier: 
   handSigns:
-  - isTwoHands: 1
-    handSign: {fileID: 11400000, guid: 1980bb8f1908e1e4f9e560349aea78a4, type: 2}
-    handType: 0
-    handSignTwo: {fileID: 11400000, guid: 0b1843fe0ab6dcb47afc690a4b35f3cb, type: 2}
-    height: 0
-    player: 0
-  - isTwoHands: 1
-    handSign: {fileID: 11400000, guid: d391665f60468894db1e5210f812cc74, type: 2}
-    handType: 0
-    handSignTwo: {fileID: 11400000, guid: 7e86709e23e2b794ca2028dbe0c806ff, type: 2}
+  - handSignLeft: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
+    handSignRight: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
     height: 0
     player: 0
