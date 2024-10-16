@@ -61,47 +61,6 @@ public struct HandsSign
         Player2
     }
 
-    public enum HandType
-    {
-        Left = 0,
-        Right
-    }
-
-    public bool IsHandCorrect(List<KeyCode> inputs, HandType handType)
-    {
-        return handType == HandType.Left ? IsLeftHandCorrect(inputs) : IsRightHandCorrect(inputs);
-    }
-
-    private bool IsLeftHandCorrect(List<KeyCode> inputs)
-    {
-        return handSignLeft.FingersTypes == GetFingersFromInputs(inputs, inputsPlayer.LeftHandInputs) ? true : false;
-    }   
-
-    private bool IsRightHandCorrect(List<KeyCode> inputs)
-    {
-        return handSignRight.FingersTypes == GetFingersFromInputs(inputs, inputsPlayer.RightHandInputs) ? true : false;
-    }
-
-    private FingerType GetFingersFromInputs(List<KeyCode> inputs, List<KeyCode> hand)
-    {
-        if (hand.Count != 4)
-            throw new Exception("The hand must have 5 fingers");
-
-        FingerType finger = FingerType.None;
-        if (inputs.Contains(hand[0]))
-            finger |= FingerType.Thumb;
-        if (inputs.Contains(hand[1]))
-            finger |= FingerType.Index;
-        if (inputs.Contains(hand[2]))
-            finger |= FingerType.Middle;
-        if (inputs.Contains(hand[3]))
-            finger |= FingerType.Ring;
-        if (inputs.Contains(hand[4]))
-            finger |= FingerType.Pinky;
-
-        return finger;
-    }
-
     public List<KeyCode> CreateKeyCodesFromFingers()
     {
         List<KeyCode> keyCodes = new List<KeyCode>();

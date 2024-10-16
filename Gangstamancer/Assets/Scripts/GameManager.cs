@@ -62,23 +62,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void GenerateHandsSequence()
-    {
-        _handsSequence.handSigns.Clear();
-        for (int i = 0; i < 10; i++)
-        {
-            HandsSign handSign = new HandsSign();
-            handSign.handSignLeft = AllFingers[UnityEngine.Random.Range(0, AllFingers.Count)];
-            handSign.handSignRight = AllFingers[UnityEngine.Random.Range(0, AllFingers.Count)];
-            handSign.height = (HandsSign.Height)UnityEngine.Random.Range(0, 3);
-            // modulo to get player 1 then 2 every time
-            handSign.player = (HandsSign.PlayerNumber)(i % 2);
-            handSign.inputsPlayer = handSign.player == HandsSign.PlayerNumber.Player1 ? Player1Inputs : Player2Inputs;
-
-            _handsSequence.handSigns.Add(handSign);
-        }
-    }
-
     public void ChangeState(GameStates newState)
     {
         switch (newState)
@@ -131,43 +114,4 @@ public class GameManager : MonoBehaviour
             yield break;
         }
     }
-
-    private void Update()
-    {
-        
-    }
-
-    private void CheckInputFromList(KeyCode key)
-    {
-        if(_allInputKeysDown.Contains(key))
-            _allInputKeysDown.Remove(key);
-        else
-            _allInputKeysDown.Add(key);
-
-        CheckPlayerInput();
-    }
-
-    private void CheckPlayerInput()
-    {
-        if (_handsSequence.GetHandSign(_currentSequenceIndex).IsHandCorrect(_allInputKeysDown, HandsSign.HandType.Left))
-        {
-            // correct input
-            Debug.Log("Correct input");
-        }
-        else
-        {
-            // wrong input
-        }
-    }
-
-    private void CheckPlayer1()
-    {
-
-    }
-
-    private void GetPlayerInputKeys()
-    {
-        // get player input keys
-    }
-
 }
