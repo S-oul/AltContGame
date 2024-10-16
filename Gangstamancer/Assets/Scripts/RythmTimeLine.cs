@@ -40,7 +40,7 @@ public class RythmTimeLine : MonoBehaviour
         int isSuccess = 0;
         List<KeyCode> toUse = _isPlayer1Turn ? _player1Inputs.playerInputs : _player2Inputs.playerInputs;
 
-        foreach (KeyCode key in toUse)
+        foreach (KeyCode key in _player1Inputs.playerInputs)
         {
             if (Input.GetKey(key))
             {
@@ -65,17 +65,17 @@ public class RythmTimeLine : MonoBehaviour
             SelectNewInputs();
             if (_isPlayer1Turn)
             {
-                //hypeMeter._winOMeter += .1f/2;
+                hypeMeter._winOMeter += .1f/2;
             }
-            //else hypeMeter._winOMeter -= .1f/2;
+            else hypeMeter._winOMeter -= .1f/2;
         }
         else
         {
             if (!_isPlayer1Turn)
             {
-                //hypeMeter._winOMeter += .1f / 2;
+                hypeMeter._winOMeter += .1f / 2;
             }
-            //else hypeMeter._winOMeter -= .1f / 2;
+            else hypeMeter._winOMeter -= .1f / 2;
         }
 
         _isPlayer1Turn = !_isPlayer1Turn;

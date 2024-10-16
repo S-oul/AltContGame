@@ -29,7 +29,6 @@ public class HandsSequence : ScriptableObject
         handSign.CreateKeyCodesFromFingers();
         handSigns.Add(handSign);
     }
-
 }
 
 [Serializable]
