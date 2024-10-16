@@ -103,7 +103,6 @@ public class RhythmManager : MonoBehaviour
     void CheckInputTiming(float inputTime)
     {
         float beatDifference = Mathf.Abs(inputTime - nextBeatTime + beatInterval);
-        _text.transform.position = currentSquare.CurrentSquare().position;  
         if (beatDifference <= _timingWindow)
         {
             _text.text = "Perfect !";
