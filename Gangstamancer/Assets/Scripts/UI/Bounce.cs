@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TextPerfect : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class Bounce : MonoBehaviour
 {
     [SerializeField] Animator animator;
-    void OnEnable()
+    void Start()
     {
-        RythmTimeLine.OnBeat += OnBeat;
+        animator = GetComponent<Animator>();
+        RythmTimeLine.OnBeat += DoOnBeat;
     }
 
     // Update is called once per frame
-    void OnBeat ()
+    void DoOnBeat ()
     {
         animator.SetTrigger("OnBeat");
     }

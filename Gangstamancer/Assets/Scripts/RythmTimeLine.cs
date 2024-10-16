@@ -28,6 +28,16 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] private HandsSign _currentHandSign;
 
 
+    [SerializeField] private SpriteRenderer _EcranPrincipalLeftSprite;
+    [SerializeField] private SpriteRenderer _EcranPrincipalRightSprite;
+
+    [SerializeField] private SpriteRenderer _EcranGaucheLeftSprite;
+    [SerializeField] private SpriteRenderer _EcranGaucheRightSprite;
+
+    [SerializeField] private SpriteRenderer _EcranDroitLeftSprite;
+    [SerializeField] private SpriteRenderer _EcranDroitRightSprite;
+
+
     bool _isPlaying = false;
     bool _isPaused = false;
 
@@ -86,6 +96,12 @@ public class RythmTimeLine : MonoBehaviour
         _currentHandSign = handSequence1.handSigns[0];
         _keyCodes = handSequence1.handSigns[0].CreateKeyCodesFromFingers();
         _inputText.text = "";
+
+        _EcranPrincipalLeftSprite.sprite = handSequence1.handSigns[0].handSignLeft.SpriteLeft;
+        _EcranPrincipalRightSprite.sprite = handSequence1.handSigns[0].handSignRight.SpriteRight;
+
+        _EcranGaucheLeftSprite.sprite = handSequence1.handSigns[1].handSignLeft.SpriteLeft;
+        _EcranGaucheRightSprite.sprite = handSequence1.handSigns[1].handSignRight.SpriteRight;
 
 
         foreach (KeyCode key in _keyCodes)
