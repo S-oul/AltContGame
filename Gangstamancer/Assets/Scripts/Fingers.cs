@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,4 +19,10 @@ public class Fingers : ScriptableObject
         Ring = 1 << 3,
         Pinky = 1 << 4
     }
+
+    [ShowAssetPreview]
+    public Sprite SpriteLeft;
+
+    [ShowAssetPreview]
+    public Sprite SpriteRight;
 }

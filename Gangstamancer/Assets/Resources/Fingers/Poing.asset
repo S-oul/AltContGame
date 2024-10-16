@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Poing
   m_EditorClassIdentifier: 
   FingersTypes: -1
+  SpriteLeft: {fileID: 0}
+  SpriteRight: {fileID: 0}

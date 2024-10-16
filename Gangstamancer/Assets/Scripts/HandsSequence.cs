@@ -5,6 +5,7 @@ using UnityEngine;
 using NaughtyAttributes;
 using Unity.VisualScripting;
 using static Fingers;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "HandsSequence", menuName = "Scriptables/HandsSequence")]
 public class HandsSequence : ScriptableObject
@@ -28,6 +29,8 @@ public struct HandsSign
     public Height height;
     public PlayerNumber player;
 
+    public PlayerHandsInput inputsPlayer;
+
     public enum Height
     {
         Low = 0,
@@ -41,46 +44,46 @@ public struct HandsSign
         Player2
     }
 
-
-
-    public bool IsLeftHandCorrect(List<KeyCode> inputs)
+    public enum HandType
     {
-        FingerType finger = FingerType.None;
-
-        // WARNING: It's only placeholder code. We need to change it to the real implementation.
-        if (inputs.Contains(KeyCode.A))
-            finger |= FingerType.Thumb;
-        if (inputs.Contains(KeyCode.Z))
-            finger |= FingerType.Index;
-        if (inputs.Contains(KeyCode.E))
-            finger |= FingerType.Middle;
-        if (inputs.Contains(KeyCode.R))
-            finger |= FingerType.Ring;
-        if (inputs.Contains(KeyCode.T))
-            finger |= FingerType.Pinky;
-
-        return finger == handSignLeft.FingersTypes ? true : false;
+        Left = 0,
+        Right
     }
 
-    public bool IsRightHandCorrect(List<KeyCode> inputs)
+    public bool IsHandCorrect(List<KeyCode> inputs, HandType handType)
     {
-        FingerType finger = FingerType.None;
-
-        // WARNING: It's only placeholder code. We need to change it to the real implementation.
-        if (inputs.Contains(KeyCode.Y))
-            finger |= FingerType.Thumb;
-        if (inputs.Contains(KeyCode.U))
-            finger |= FingerType.Index;
-        if (inputs.Contains(KeyCode.I))
-            finger |= FingerType.Middle;
-        if (inputs.Contains(KeyCode.O))
-            finger |= FingerType.Ring;
-        if (inputs.Contains(KeyCode.P))
-            finger |= FingerType.Pinky;
-
-        return finger == handSignRight.FingersTypes ? true : false;
+        return handType == HandType.Left ? IsLeftHandCorrect(inputs) : IsRightHandCorrect(inputs);
     }
 
+    private bool IsLeftHandCorrect(List<KeyCode> inputs)
+    {
+        return handSignLeft.FingersTypes == GetFingersFromInputs(inputs, inputsPlayer.LeftHandInputs) ? true : false;
+    }   
+
+    private bool IsRightHandCorrect(List<KeyCode> inputs)
+    {
+        return handSignRight.FingersTypes == GetFingersFromInputs(inputs, inputsPlayer.RightHandInputs) ? true : false;
+    }
+
+    private FingerType GetFingersFromInputs(List<KeyCode> inputs, List<KeyCode> hand)
+    {
+        if (hand.Count != 5)
+            throw new Exception("The hand must have 5 fingers");
+
+        FingerType finger = FingerType.None;
+        if (inputs.Contains(hand[0]))
+            finger |= FingerType.Thumb;
+        if (inputs.Contains(hand[1]))
+            finger |= FingerType.Index;
+        if (inputs.Contains(hand[2]))
+            finger |= FingerType.Middle;
+        if (inputs.Contains(hand[3]))
+            finger |= FingerType.Ring;
+        if (inputs.Contains(hand[4]))
+            finger |= FingerType.Pinky;
+
+        return finger;
+    }
 
 
     #region Operators

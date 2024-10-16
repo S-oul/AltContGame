@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Call me
   m_EditorClassIdentifier: 
   FingersTypes: 14
+  SpriteLeft: {fileID: 0}
+  SpriteRight: {fileID: 0}
