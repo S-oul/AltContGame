@@ -34,7 +34,6 @@ public class RythmTimeLine : MonoBehaviour
     /// ALL LEFT HAND POSES
     [SerializeField] private List<Fingers> _allFingers;
     List<KeyCode> _keyCodes;
-    int _randomKeyCode = 0;
     int CheckInput()
     {
         int isSuccess = 0;
@@ -87,7 +86,8 @@ public class RythmTimeLine : MonoBehaviour
         _currentHandSign = handSequence1.handSigns[0];
         _keyCodes = handSequence1.handSigns[0].CreateKeyCodesFromFingers();
         _inputText.text = "";
-        _randomKeyCode = Random.Range(0, _keyCodes.Count);
+
+
         foreach (KeyCode key in _keyCodes)
             _inputText.text += key + " ";
 
