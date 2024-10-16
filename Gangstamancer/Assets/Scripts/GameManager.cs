@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
 
+    [Expandable]
     [SerializeField] private HandsSequence _handsSequence;
     private int _currentSequenceIndex = 0;
     private float _timeBetweenSequences = 3f;
@@ -33,11 +35,14 @@ public class GameManager : MonoBehaviour
     private HandsSign _currentHandSign;
     private List<KeyCode> _player1InputKeys;
 
-    [SerializeField] private List<KeyCode> _player1LeftHand;
-    [SerializeField] private List<KeyCode> _player1RightHand;
-    [SerializeField] private List<KeyCode> _player2LeftHand;
-    [SerializeField] private List<KeyCode> _player2RightHand;   
+    [Expandable]
+    [SerializeField] private PlayerHandsInput _player1Inputs;
+    [Expandable]
+    [SerializeField] private PlayerHandsInput _player2Inputs;
     [SerializeField] private List<KeyCode> _allInputKeysDown;
+
+    //Random
+    [SerializeField] private List<Fingers> _allFingers;
 
     void Awake()
     {
@@ -53,7 +58,25 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        GenerateHandsSequence();    
         _currentHandSign = _handsSequence.GetHandSign(_currentSequenceIndex);
+    }
+
+    private void GenerateHandsSequence()
+    {
+        _handsSequence.handSigns.Clear();
+        for (int i = 0; i < 10; i++)
+        {
+            HandsSign handSign = new HandsSign();
+            handSign.handSignLeft = _allFingers[UnityEngine.Random.Range(0, _allFingers.Count)];
+            handSign.handSignRight = _allFingers[UnityEngine.Random.Range(0, _allFingers.Count)];
+            handSign.height = (HandsSign.Height)UnityEngine.Random.Range(0, 3);
+            // modulo to get player 1 then 2 every time
+            handSign.player = (HandsSign.PlayerNumber)(i % 2);
+            handSign.inputsPlayer = handSign.player == HandsSign.PlayerNumber.Player1 ? _player1Inputs : _player2Inputs;
+
+            _handsSequence.handSigns.Add(handSign);
+        }
     }
 
     public void ChangeState(GameStates newState)
@@ -111,18 +134,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // waiting for prefect player input
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyUp(KeyCode.A))
-            CheckInputFromList(KeyCode.A);
-        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyUp(KeyCode.Z))
-            CheckInputFromList(KeyCode.Z);
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyUp(KeyCode.E))
-            CheckInputFromList(KeyCode.E);
-        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyUp(KeyCode.R))
-            CheckInputFromList(KeyCode.R);
-        if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyUp(KeyCode.T))
-            CheckInputFromList(KeyCode.T);
+        for (int i = 0;  i < _player1Inputs.LeftHandInputs.Count;  i++)
+        {
+            if (Input.GetKeyDown(_player1Inputs.LeftHandInputs[i]) || Input.GetKeyUp(_player1Inputs.LeftHandInputs[i]))
+                CheckInputFromList(_player1Inputs.LeftHandInputs[i]);
+        }
 
+        for (int i = 0; i < _player1Inputs.RightHandInputs.Count; i++)
+        {
+            if (Input.GetKeyDown(_player1Inputs.RightHandInputs[i]) || Input.GetKeyUp(_player1Inputs.RightHandInputs[i]))
+                CheckInputFromList(_player1Inputs.RightHandInputs[i]);
+        }
 
     }
 
@@ -138,7 +160,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckPlayerInput()
     {
-        if (_currentHandSign.IsLeftHandCorrect(_allInputKeysDown))
+        if (_handsSequence.GetHandSign(_currentSequenceIndex).IsHandCorrect(_allInputKeysDown, HandsSign.HandType.Left))
         {
             // correct input
             Debug.Log("Correct input");
