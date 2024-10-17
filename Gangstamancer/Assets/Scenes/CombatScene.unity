@@ -2566,6 +2566,7 @@ MonoBehaviour:
   _allInputKeysDown: 
   _allFingers:
   - {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
+  - {fileID: 11400000, guid: 34116dfa3d635704897a04c2993e910d, type: 2}
 --- !u!1 &1932303616
 GameObject:
   m_ObjectHideFlags: 0
