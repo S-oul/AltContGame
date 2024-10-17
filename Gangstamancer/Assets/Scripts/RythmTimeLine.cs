@@ -59,18 +59,14 @@ public class RythmTimeLine : MonoBehaviour
 
     public void DoOnBeat()
     {
-        TextMeshProUGUI oldSuccessText = _isPlayer1Turn ? _sucessTextPlayer2 : _sucessTextPlayer1;
-        oldSuccessText.text = "";
-        TextMeshProUGUI _successTextCurrentPlayer = _isPlayer1Turn ? _sucessTextPlayer1 : _sucessTextPlayer2;
-
-        _successTextCurrentPlayer.text = "";
+        _sucessTextPlayer1.text = "";
         OnBeat?.Invoke();
         int intSuccess = CheckInput();
         bool fullSucses = intSuccess == _currentKeyCodes.Count;
         if (fullSucses)
         {
-            _successTextCurrentPlayer.color = Color.black;
-            _successTextCurrentPlayer.text = "Good";
+            _sucessTextPlayer1.color = Color.black;
+            _sucessTextPlayer1.text = "Good";
             if (_isPlayer1Turn)
             {
                 hypeMeter._winOMeter += .1f/2;

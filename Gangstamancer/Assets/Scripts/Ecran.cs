@@ -33,6 +33,8 @@ public class Ecran : MonoBehaviour
             {
                 animator.SetTrigger("Quit");
             }
+            if (handAnims[i].pos == 4) handAnims[i].pos = -1;
+
             handAnims[i].pos++;
         }
     }
