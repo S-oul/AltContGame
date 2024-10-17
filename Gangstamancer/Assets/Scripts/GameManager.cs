@@ -27,29 +27,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameStates _currentState;
     public GameStates CurrentState => _currentState;
 
-    public PlayerHandsInput Player1Inputs { get => _player1Inputs; set => _player1Inputs = value; }
-    public PlayerHandsInput Player2Inputs { get => _player2Inputs; set => _player2Inputs = value; }
-    public List<Fingers> AllFingers { get => _allFingers; set => _allFingers = value; }
-
     #endregion
 
-
-    [Expandable]
-    [SerializeField] private HandsSequence _handsSequence;
     private int _currentSequenceIndex = 0;
     private float _timeBetweenSequences = 3f;
     private float _timeForPlayerToInput = 2f;
     private HandsSign _currentHandSign;
     private List<KeyCode> _player1InputKeys;
 
-    [Expandable]
-    [SerializeField] private PlayerHandsInput _player1Inputs;
-    [Expandable]
-    [SerializeField] private PlayerHandsInput _player2Inputs;
-    [SerializeField] private List<KeyCode> _allInputKeysDown;
-
-    //Random
+    [SerializeField, Expandable] private PlayerHandsInput _player1Inputs;
+    [SerializeField, Expandable] private PlayerHandsInput _player2Inputs;
     [SerializeField] private List<Fingers> _allFingers;
+
+    public PlayerHandsInput Player1Inputs { get => _player1Inputs; set => _player1Inputs = value; }
+    public PlayerHandsInput Player2Inputs { get => _player2Inputs; set => _player2Inputs = value; }
+    public List<Fingers> AllFingers { get => _allFingers; set => _allFingers = value; }
 
     void Awake()
     {
