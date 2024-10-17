@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: cornes du diable
   m_EditorClassIdentifier: 
   FingersTypes: 12
+  SpriteLeft: {fileID: 21300000, guid: 55870fe950852cf4cbbdbcb7990a917a, type: 3}
+  SpriteRight: {fileID: 21300000, guid: e0a40fc71dd143a449cfc1db16c1bf3a, type: 3}

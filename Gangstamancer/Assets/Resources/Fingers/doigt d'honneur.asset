@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: doigt d'honneur
   m_EditorClassIdentifier: 
   FingersTypes: 26
-  SpriteLeft: {fileID: 21300000, guid: 37f62d65d3f145c4f84677fccaa0d0cd, type: 3}
-  SpriteRight: {fileID: 21300000, guid: 37f62d65d3f145c4f84677fccaa0d0cd, type: 3}
+  SpriteLeft: {fileID: 21300000, guid: e4e72dc59fab043488ddfb3d169c7df2, type: 3}
+  SpriteRight: {fileID: 21300000, guid: f6d5026c51b51b84aa0abcf4ba1b009c, type: 3}

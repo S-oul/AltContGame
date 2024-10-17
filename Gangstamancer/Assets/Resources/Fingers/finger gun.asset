@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: finger gun
   m_EditorClassIdentifier: 
   FingersTypes: 24
-  SpriteLeft: {fileID: 0}
-  SpriteRight: {fileID: 0}
+  SpriteLeft: {fileID: 21300000, guid: c4d9ed4d811836343aa3ad5203732b0a, type: 3}
+  SpriteRight: {fileID: 21300000, guid: c4403d23017957740a46c7dfe05aadc0, type: 3}
