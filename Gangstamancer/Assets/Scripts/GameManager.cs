@@ -10,19 +10,21 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
-    public UnityEvent Player1Turn;
-    public UnityEvent Player2Turn;
+    public static event System.Action Player1Turn;
+    public static event System.Action Player2Turn;
 
     #region GameStates
     public enum GameStates
     {
         MainMenu,
         GameStart,
-        Player1Turn,
-        Player2Turn,
+        Player1Defense,
+        Player1Attack,
+        Player2Defense,
+        Player2Attack,
         GameOver
     }
-    private GameStates _currentState;
+    [SerializeField] private GameStates _currentState;
     public GameStates CurrentState => _currentState;
 
     public PlayerHandsInput Player1Inputs { get => _player1Inputs; set => _player1Inputs = value; }
@@ -61,20 +63,73 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int PlayerTurn()
+    {
+        switch (_currentState)
+        {
+            case GameStates.Player1Defense:
+            case GameStates.Player1Attack:
+                return 1;
+            case GameStates.Player2Defense:
+            case GameStates.Player2Attack:
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
+    public void ChangeNextStatePlayer()
+    {
+        switch (_currentState)
+        {
+            case GameStates.Player1Defense:
+                ChangeState(GameStates.Player1Attack);
+                break;
+            case GameStates.Player1Attack:
+                ChangeState(GameStates.Player2Defense);
+                break;
+            case GameStates.Player2Defense:
+                ChangeState(GameStates.Player2Attack);
+                break;
+            case GameStates.Player2Attack:
+                ChangeState(GameStates.Player1Defense);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void CurrentPlayerFailedAttack()
+    {
+        switch (_currentState)
+        {
+            case GameStates.Player1Attack:
+                ChangeState(GameStates.Player2Defense);
+                break;
+            case GameStates.Player2Attack:
+                ChangeState(GameStates.Player1Defense);
+                break;
+            default:
+                break;
+        }
+    }
 
     public void ChangeState(GameStates newState)
     {
+        _currentState = newState;
         switch (newState)
         {
             case GameStates.MainMenu:
                 break;
             case GameStates.GameStart:
                 break;
-            case GameStates.Player1Turn:
-                Player1Turn.Invoke();
+            case GameStates.Player1Defense:
                 break;
-            case GameStates.Player2Turn:
-                Player2Turn.Invoke();   
+            case GameStates.Player1Attack:
+                break;
+            case GameStates.Player2Defense:
+                break;
+            case GameStates.Player2Attack:
                 break;
             case GameStates.GameOver:
                 break;

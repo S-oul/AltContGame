@@ -22,11 +22,10 @@ public class HandsSequence : ScriptableObject
         HandsSign handSign = new HandsSign();
         handSign.handSignLeft = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
         handSign.handSignRight = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
-        handSign.height = (HandsSign.Height)UnityEngine.Random.Range(0, 3);
-        // modulo to get player 1 then 2 every time
+        handSign.height = (Height)UnityEngine.Random.Range(1, 3);
         handSign.player = playerNumber;
-        handSign.inputsPlayer = handSign.player == HandsSign.PlayerNumber.Player1 ? gameManager.Player1Inputs : gameManager.Player2Inputs;
-        handSign.CreateKeyCodesFromFingers();
+        handSign.inputsPlayer = handSign.player == PlayerNumber.Player1 ? gameManager.Player1Inputs : gameManager.Player2Inputs;
+        handSign.KeyCodesFingers = handSign.CreateKeyCodesFromFingers();
         handSigns.Add(handSign);
     }
 }
