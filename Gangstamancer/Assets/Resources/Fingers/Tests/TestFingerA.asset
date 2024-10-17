@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c66b3762d58660468f1fa9290d0c857, type: 3}
   m_Name: TestFingerA
   m_EditorClassIdentifier: 
-  FingersTypes: 2
+  FingersTypes: 6
   SpriteLeft: {fileID: 21300000, guid: e4e72dc59fab043488ddfb3d169c7df2, type: 3}
   SpriteRight: {fileID: 21300000, guid: f6d5026c51b51b84aa0abcf4ba1b009c, type: 3}

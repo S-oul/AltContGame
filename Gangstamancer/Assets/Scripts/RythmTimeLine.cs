@@ -111,9 +111,6 @@ public class RythmTimeLine : MonoBehaviour
 
     private void Start()
     {
-        int bpm = UniBpmAnalyzer.AnalyzeBpm(targetClip);
-        Debug.Log("BPM is " + bpm);
-
         CreateNewSequenceAtStart();
         SelectNewInputs();
     }

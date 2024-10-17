@@ -14,27 +14,28 @@ public class Ecran : MonoBehaviour
 
     void DoOnBeat()
     {
-        foreach (HandAnim t in handAnims)
+        for (int i = 0; i < handAnims.Count; i++)
         {
-            Animator animator = t.transform.GetComponent<Animator>();
-            if(t.pos == 0)
+            Animator animator = handAnims[i].transform.GetComponent<Animator>();
+            if (handAnims[i].pos == 0)
             {
                 animator.SetTrigger("Arrive");
             }
-            if (t.pos == 1)
+            if (handAnims[i].pos == 1)
             {
                 animator.SetTrigger("Middle");
             }
-            if (t.pos == 2)
+            if (handAnims[i].pos == 2)
             {
                 animator.SetTrigger("Leave");
             }
+            handAnims[i].pos++;
         }
     }
 
 }
 [System.Serializable]
-public struct HandAnim
+public class HandAnim
 {
     public Transform transform;
     public int pos;
