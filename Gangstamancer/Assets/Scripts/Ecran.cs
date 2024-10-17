@@ -27,7 +27,11 @@ public class Ecran : MonoBehaviour
             }
             if (handAnims[i].pos == 2)
             {
-                animator.SetTrigger("Leave");
+                animator.SetTrigger("ToMiddle");
+            }
+            if (handAnims[i].pos == 3) 
+            {
+                animator.SetTrigger("Quit");
             }
             handAnims[i].pos++;
         }
