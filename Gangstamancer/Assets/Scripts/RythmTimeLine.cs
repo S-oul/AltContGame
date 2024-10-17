@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using static GameManager;
 
 public class RythmTimeLine : MonoBehaviour
 {
@@ -38,6 +39,13 @@ public class RythmTimeLine : MonoBehaviour
     bool _isPlaying = false;
     bool _isPaused = false;
 
+    bool _player1AttackSuccess = false;
+    bool _player1DefenseSuccess = false;
+
+    bool _player2AttackSuccess = false;
+    bool _player2DefenseSuccess = false;
+
+
     int CheckInput()
     {
         int isSuccess = 0;
@@ -64,8 +72,30 @@ public class RythmTimeLine : MonoBehaviour
         bool fullSucses = intSuccess == _currentKeyCodes.Count;
         if (fullSucses || Input.GetKey(KeyCode.Space))
         {
-            if(GameManager.Instance.CurrentState == GameManager.GameStates.Player1Attack) FouleUnitaire.Instance.AddLeftFan();
-            if (GameManager.Instance.CurrentState == GameManager.GameStates.Player2Attack) FouleUnitaire.Instance.AddRightFan();
+
+            switch (GameManager.Instance.CurrentState)
+            {
+                case GameStates.Player1Defense:
+                    _player1DefenseSuccess = true;
+                    break;
+
+                case GameStates.Player1Attack:
+                    _player1AttackSuccess = true;
+                    FouleUnitaire.Instance.AddLeftFan();
+
+                    break;
+
+                case GameStates.Player2Defense:
+                    _player2DefenseSuccess = true;
+                    break;
+
+                case GameStates.Player2Attack:
+                    _player2AttackSuccess = true;
+                    FouleUnitaire.Instance.AddRightFan();
+
+                    break;
+            }
+
 
             //DO PLAYER ATTACK
             //DO DEFENSE ?????
@@ -79,6 +109,27 @@ public class RythmTimeLine : MonoBehaviour
         }
         else
         {
+            switch (GameManager.Instance.CurrentState)
+            {
+                case GameStates.Player1Defense:
+                    _player1DefenseSuccess = false;
+                    break;
+
+                case GameStates.Player1Attack:
+                    _player1AttackSuccess = false;
+
+                    break;
+
+                case GameStates.Player2Defense:
+                    _player2DefenseSuccess = false;
+                    break;
+
+                case GameStates.Player2Attack:
+                    _player2AttackSuccess = false;
+
+                    break;
+            }
+
             if (!_isPlayer1Turn)
             {
                 hypeMeter._winOMeter += .1f / 2;

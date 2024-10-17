@@ -114,7 +114,7 @@ public class FouleUnitaire : MonoBehaviour
     {
         float oldAngle = Camera.main.transform.eulerAngles.z;
         int i = 0;
-        while (i < 20)
+        while (i < 10)
         {
             Camera.main.transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldAngle, diff, i / 50f));
             i++;
