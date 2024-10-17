@@ -141,32 +141,5 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         ChangeState(GameStates.GameStart);
-        StartCoroutine(PlaySequence());
-    }
-
-    private IEnumerator PlaySequence()
-    {
-        while (_currentSequenceIndex < _handsSequence.SequenceCount)
-        {
-            yield return new WaitForSeconds(_timeBetweenSequences);
-            yield return StartCoroutine(PlayHandSign());
-            _currentSequenceIndex++;
-        }
-    }
-
-    private IEnumerator PlayHandSign()
-    {
-        float timer = 0;
-        while (timer < _timeForPlayerToInput)
-        {
-            timer += Time.deltaTime;
-            _currentHandSign = _handsSequence.GetHandSign(_currentSequenceIndex);
-            if (false)
-            {
-                // wait for player input
-                //yield return new WaitUntil(() => handSign == _handsSequence.GetHandSign(_currentSequenceIndex));
-            }
-            yield break;
-        }
     }
 }

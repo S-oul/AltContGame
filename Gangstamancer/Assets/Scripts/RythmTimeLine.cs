@@ -69,7 +69,7 @@ public class RythmTimeLine : MonoBehaviour
         bool fullSucses = intSuccess == _currentKeyCodes.Count;
         if (fullSucses)
         {
-            _successTextCurrentPlayer.color = new Color(1, 1, 1, 1);
+            _successTextCurrentPlayer.color = Color.black;
             _successTextCurrentPlayer.text = "Good";
             if (_isPlayer1Turn)
             {
@@ -132,9 +132,10 @@ public class RythmTimeLine : MonoBehaviour
 
     void Update()
     {
-        if (_sucessTextPlayer1.color.a > 0) _sucessTextPlayer1.color = new Color(1, 1, 1, _sucessTextPlayer1.color.a - 0.01f);
+        if (_sucessTextPlayer1.color.a > 0) _sucessTextPlayer1.color = new Color(0, 0, 0, _sucessTextPlayer1.color.a - 0.01f);
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
+            GameManager.Instance.ChangeState(GameManager.GameStates.Player1Defense);
             _isPlaying = true;
             _timeLine.Play();
         }
