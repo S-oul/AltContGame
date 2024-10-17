@@ -62,8 +62,11 @@ public class RythmTimeLine : MonoBehaviour
         OnBeat?.Invoke();
         int intSuccess = CheckInput();
         bool fullSucses = intSuccess == _currentKeyCodes.Count;
-        if (fullSucses)
+        if (fullSucses || Input.GetKey(KeyCode.Space))
         {
+            if(GameManager.Instance.CurrentState == GameManager.GameStates.Player1Attack) FouleUnitaire.Instance.AddLeftFan();
+            if (GameManager.Instance.CurrentState == GameManager.GameStates.Player2Attack) FouleUnitaire.Instance.AddRightFan();
+
             //DO PLAYER ATTACK
             //DO DEFENSE ?????
             _sucessTextPlayer1.color = Color.black;
