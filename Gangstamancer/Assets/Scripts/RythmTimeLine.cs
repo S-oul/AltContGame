@@ -17,12 +17,11 @@ public class RythmTimeLine : MonoBehaviour
     bool _isPlayer1Turn = false;
 
     [SerializeField] AudioClip targetClip;
-
-    [SerializeField] List<KeyCode> Player1Inputs = new List<KeyCode>();
-    [SerializeField] PlayerHandsInput _player1Inputs;
-    [SerializeField] List<KeyCode> Player2Inputs = new List<KeyCode>();
-    [SerializeField] PlayerHandsInput _player2Inputs;
     [SerializeField] PlayableDirector _timeLine;
+
+    [Header("Players Inputs")]
+    [SerializeField] PlayerHandsInput _player1Inputs;
+    [SerializeField] PlayerHandsInput _player2Inputs;
 
     [Header("UI Players")]
     [SerializeField] TextMeshProUGUI _sucessTextPlayer1;
@@ -30,18 +29,16 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] TextMeshProUGUI _sucessTextPlayer2;
     [SerializeField] TextMeshProUGUI _inputTextPlayer2;
 
+    [Header("Players Hands Sequences")]
     [SerializeField] private HandsSequence _player1HandSequence;
     [SerializeField] private HandsSequence _player2HandSequence;
-
-    [SerializeField] private HandsSequence _currentHandsSequence;
+    private HandsSequence _currentHandsSequence;
+    private List<KeyCode> _currentKeyCodes;
 
 
     bool _isPlaying = false;
     bool _isPaused = false;
 
-    /// ALL LEFT HAND POSES
-    [SerializeField] private List<Fingers> _allFingers;
-    [SerializeField] List<KeyCode> _keyCodes;
     int CheckInput()
     {
         int isSuccess = 0;
@@ -52,7 +49,7 @@ public class RythmTimeLine : MonoBehaviour
         {
             if (Input.GetKey(key))
             {
-                if (_keyCodes.Contains(key)) 
+                if (_currentKeyCodes.Contains(key)) 
                     isSuccess++;
                 else isSuccess--;
             }
@@ -69,7 +66,7 @@ public class RythmTimeLine : MonoBehaviour
         _successTextCurrentPlayer.text = "";
         OnBeat?.Invoke();
         int intSuccess = CheckInput();
-        bool fullSucses = intSuccess == _keyCodes.Count;
+        bool fullSucses = intSuccess == _currentKeyCodes.Count;
         if (fullSucses)
         {
             _successTextCurrentPlayer.color = new Color(1, 1, 1, 1);
@@ -101,13 +98,13 @@ public class RythmTimeLine : MonoBehaviour
 
         _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
         _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? HandsSign.PlayerNumber.Player1: HandsSign.PlayerNumber.Player2);
-        _keyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
+        _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
 
 
         TextMeshProUGUI inputText = _isPlayer1Turn ? _inputTextPlayer1 : _inputTextPlayer2;
         inputText.text = "";
 
-        foreach (KeyCode key in _keyCodes)
+        foreach (KeyCode key in _currentKeyCodes)
             inputText.text += key + " ";
 
     }
