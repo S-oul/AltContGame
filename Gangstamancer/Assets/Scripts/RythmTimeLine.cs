@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,21 +23,17 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] List<KeyCode> Player2Inputs = new List<KeyCode>();
     [SerializeField] PlayerHandsInput _player2Inputs;
     [SerializeField] PlayableDirector _timeLine;
-    [SerializeField] TextMeshProUGUI _sucessText;
-    [SerializeField] TextMeshProUGUI _inputText;
 
-    [SerializeField] private HandsSequence handSequence1;
-    [SerializeField] private HandsSign _currentHandSign;
+    [Header("UI Players")]
+    [SerializeField] TextMeshProUGUI _sucessTextPlayer1;
+    [SerializeField] TextMeshProUGUI _inputTextPlayer1;
+    [SerializeField] TextMeshProUGUI _sucessTextPlayer2;
+    [SerializeField] TextMeshProUGUI _inputTextPlayer2;
 
+    [SerializeField] private HandsSequence _player1HandSequence;
+    [SerializeField] private HandsSequence _player2HandSequence;
 
-    [SerializeField] private SpriteRenderer _EcranPrincipalLeftSprite;
-    [SerializeField] private SpriteRenderer _EcranPrincipalRightSprite;
-
-    [SerializeField] private SpriteRenderer _EcranGaucheLeftSprite;
-    [SerializeField] private SpriteRenderer _EcranGaucheRightSprite;
-
-    [SerializeField] private SpriteRenderer _EcranDroitLeftSprite;
-    [SerializeField] private SpriteRenderer _EcranDroitRightSprite;
+    [SerializeField] private HandsSequence _currentHandsSequence;
 
 
     bool _isPlaying = false;
@@ -44,13 +41,14 @@ public class RythmTimeLine : MonoBehaviour
 
     /// ALL LEFT HAND POSES
     [SerializeField] private List<Fingers> _allFingers;
-    List<KeyCode> _keyCodes;
+    [SerializeField] List<KeyCode> _keyCodes;
     int CheckInput()
     {
         int isSuccess = 0;
+
         List<KeyCode> toUse = _isPlayer1Turn ? _player1Inputs.playerInputs : _player2Inputs.playerInputs;
 
-        foreach (KeyCode key in _player1Inputs.playerInputs)
+        foreach (KeyCode key in toUse)
         {
             if (Input.GetKey(key))
             {
@@ -64,15 +62,18 @@ public class RythmTimeLine : MonoBehaviour
 
     public void DoOnBeat()
     {
-        _sucessText.text = "";
+        TextMeshProUGUI oldSuccessText = _isPlayer1Turn ? _sucessTextPlayer2 : _sucessTextPlayer1;
+        oldSuccessText.text = "";
+        TextMeshProUGUI _successTextCurrentPlayer = _isPlayer1Turn ? _sucessTextPlayer1 : _sucessTextPlayer2;
+
+        _successTextCurrentPlayer.text = "";
         OnBeat?.Invoke();
         int intSuccess = CheckInput();
         bool fullSucses = intSuccess == _keyCodes.Count;
         if (fullSucses)
         {
-            _sucessText.color = new Color(1, 1, 1, 1);
-            _sucessText.text = "Good";
-            SelectNewInputs();
+            _successTextCurrentPlayer.color = new Color(1, 1, 1, 1);
+            _successTextCurrentPlayer.text = "Good";
             if (_isPlayer1Turn)
             {
                 hypeMeter._winOMeter += .1f/2;
@@ -88,25 +89,26 @@ public class RythmTimeLine : MonoBehaviour
             else hypeMeter._winOMeter -= .1f / 2;
         }
 
-        _isPlayer1Turn = !_isPlayer1Turn;
+
+        GameManager.Instance.ChangeNextStatePlayer();
+        _isPlayer1Turn = GameManager.Instance.PlayerTurn() == 1;
+        SelectNewInputs();
     }
     private void SelectNewInputs()
     {
-        handSequence1.handSigns.RemoveAt(0);
-        handSequence1.CreateRandomHandSign(HandsSign.PlayerNumber.Player1);
-        _currentHandSign = handSequence1.handSigns[0];
-        _keyCodes = handSequence1.handSigns[0].CreateKeyCodesFromFingers();
-        _inputText.text = "";
+        ClearTextInput();
+        _currentHandsSequence.handSigns.RemoveAt(0); // remove the handsign that was just played
 
-        _EcranPrincipalLeftSprite.sprite = handSequence1.handSigns[0].handSignLeft.SpriteLeft;
-        _EcranPrincipalRightSprite.sprite = handSequence1.handSigns[0].handSignRight.SpriteRight;
+        _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
+        _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? HandsSign.PlayerNumber.Player1: HandsSign.PlayerNumber.Player2);
+        _keyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
 
-        _EcranGaucheLeftSprite.sprite = handSequence1.handSigns[1].handSignLeft.SpriteLeft;
-        _EcranGaucheRightSprite.sprite = handSequence1.handSigns[1].handSignRight.SpriteRight;
 
+        TextMeshProUGUI inputText = _isPlayer1Turn ? _inputTextPlayer1 : _inputTextPlayer2;
+        inputText.text = "";
 
         foreach (KeyCode key in _keyCodes)
-            _inputText.text += key + " ";
+            inputText.text += key + " ";
 
     }
 
@@ -114,11 +116,26 @@ public class RythmTimeLine : MonoBehaviour
     {
         int bpm = UniBpmAnalyzer.AnalyzeBpm(targetClip);
         Debug.Log("BPM is " + bpm);
+
+        CreateNewSequenceAtStart();
         SelectNewInputs();
     }
+
+    private void CreateNewSequenceAtStart()
+    {
+        _isPlayer1Turn = GameManager.Instance.PlayerTurn() == 1;
+        _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
+        _player1HandSequence.handSigns.Clear();
+        _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1);
+        _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1);
+        _player2HandSequence.handSigns.Clear();
+        _player2HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player2);
+        _player2HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player2);
+    }
+
     void Update()
     {
-        if (_sucessText.color.a > 0) _sucessText.color = new Color(1, 1, 1, _sucessText.color.a - 0.01f);
+        if (_sucessTextPlayer1.color.a > 0) _sucessTextPlayer1.color = new Color(1, 1, 1, _sucessTextPlayer1.color.a - 0.01f);
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
             _isPlaying = true;
@@ -128,5 +145,11 @@ public class RythmTimeLine : MonoBehaviour
     private void OnGUI()
     {
         GUILayout.Label("CONVERSION QWERTY DE SES MORTS -- JOUEZ EN FULL HD 1920/1080");
+    }
+
+    private void ClearTextInput()
+    {
+        _inputTextPlayer1.text = "";
+        _inputTextPlayer2.text = "";
     }
 }
