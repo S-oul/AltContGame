@@ -16,7 +16,6 @@ public class RythmTimeLine : MonoBehaviour
 
     bool _isPlayer1Turn = false;
 
-    [SerializeField] AudioClip targetClip;
     [SerializeField] PlayableDirector _timeLine;
 
     [Header("Players Inputs")]
@@ -65,6 +64,8 @@ public class RythmTimeLine : MonoBehaviour
         bool fullSucses = intSuccess == _currentKeyCodes.Count;
         if (fullSucses)
         {
+            //DO PLAYER ATTACK
+            //DO DEFENSE ?????
             _sucessTextPlayer1.color = Color.black;
             _sucessTextPlayer1.text = "Good";
             if (_isPlayer1Turn)
