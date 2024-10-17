@@ -608,7 +608,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1754008175}
   - {fileID: 940111313}
   - {fileID: 1868682566}
   - {fileID: 1404088587}
@@ -711,6 +710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hypeMeter: {fileID: 1404088588}
+  targetClip: {fileID: 8300000, guid: a89f51ced95b4e445b8d1cb0e5c48da4, type: 3}
   Player1Inputs: 7700000071000000650000007200000075000000690000006f00000070000000
   _player1Inputs: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
   Player2Inputs: 
@@ -726,6 +726,12 @@ MonoBehaviour:
     player: 0
     inputsPlayer: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
     KeyCodesFingers: 
+  _EcranPrincipalLeftSprite: {fileID: 0}
+  _EcranPrincipalRightSprite: {fileID: 0}
+  _EcranGaucheLeftSprite: {fileID: 0}
+  _EcranGaucheRightSprite: {fileID: 0}
+  _EcranDroitLeftSprite: {fileID: 0}
+  _EcranDroitRightSprite: {fileID: 0}
   _allFingers:
   - {fileID: 11400000, guid: e394d90e1d84b5746a3e8a6d08da80fd, type: 2}
   - {fileID: 11400000, guid: 0b1843fe0ab6dcb47afc690a4b35f3cb, type: 2}
@@ -1786,105 +1792,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1677159413}
---- !u!1 &1754008173
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1754008175}
-  - component: {fileID: 1754008176}
-  - component: {fileID: 1754008179}
-  - component: {fileID: 1754008178}
-  m_Layer: 0
-  m_Name: RythmManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1754008175
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754008173}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 672902952}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1754008176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754008173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ce843ac9a8bcb4ba2431e219574422, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _text: {fileID: 1677159411}
-  musicSource: {fileID: 0}
-  bpm: 37
-  _timingWindow: 0.15
-  _alphaDepletion: 0.5
-  _DelayToPlaySong: 0
---- !u!114 &1754008178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754008173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Events:
-    m_Signals:
-    - {fileID: 11400000, guid: 28c1af7cbf8a973469bcb6d737c7f50f, type: 2}
-    m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1754008173}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!320 &1754008179
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754008173}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 07f554d0ee37a45468e9d67b38a2fee3, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings: []
-  m_ExposedReferences:
-    m_References: []
 --- !u!1 &1868682565
 GameObject:
   m_ObjectHideFlags: 0

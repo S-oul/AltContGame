@@ -15,6 +15,7 @@ public class RythmTimeLine : MonoBehaviour
 
     bool _isPlayer1Turn = false;
 
+    [SerializeField] AudioClip targetClip;
 
     [SerializeField] List<KeyCode> Player1Inputs = new List<KeyCode>();
     [SerializeField] PlayerHandsInput _player1Inputs;
@@ -111,6 +112,8 @@ public class RythmTimeLine : MonoBehaviour
 
     private void Start()
     {
+        int bpm = UniBpmAnalyzer.AnalyzeBpm(targetClip);
+        Debug.Log("BPM is " + bpm);
         SelectNewInputs();
     }
     void Update()
