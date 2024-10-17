@@ -77,20 +77,29 @@ public class RythmTimeLine : MonoBehaviour
             {
                 case GameStates.Player1Defense:
                     _player1DefenseSuccess = true;
+                    print("P1 Success Defense");
                     break;
 
                 case GameStates.Player1Attack:
                     _player1AttackSuccess = true;
-                    FouleUnitaire.Instance.AddLeftFan();
+                    print("P1 Sucess A");
 
+
+                    FouleUnitaire.Instance.AddLeftFan();
                     break;
 
                 case GameStates.Player2Defense:
                     _player2DefenseSuccess = true;
+                    print("P2 Success D");
+
+
                     break;
 
                 case GameStates.Player2Attack:
                     _player2AttackSuccess = true;
+                    print("P2 Success A");
+
+
                     FouleUnitaire.Instance.AddRightFan();
 
                     break;
@@ -101,11 +110,7 @@ public class RythmTimeLine : MonoBehaviour
             //DO DEFENSE ?????
             _sucessTextPlayer1.color = Color.black;
             _sucessTextPlayer1.text = "Good";
-            if (_isPlayer1Turn)
-            {
-                hypeMeter._winOMeter += .1f/2;
-            }
-            else hypeMeter._winOMeter -= .1f/2;
+
         }
         else
         {
@@ -113,28 +118,59 @@ public class RythmTimeLine : MonoBehaviour
             {
                 case GameStates.Player1Defense:
                     _player1DefenseSuccess = false;
+                    print("P1 Failed Defnse");
+
+                    if (_player2AttackSuccess)
+                    {
+                        print("P1 Failed Defend P2");
+                        if (FouleUnitaire.Instance.FouleLeft == 0) Debug.LogError("GAMEOVER");
+
+                        print(FouleUnitaire.Instance.FouleRight + "   " + FouleUnitaire.Instance.FouleRight / 2);
+                        for (int i = 0; i < FouleUnitaire.Instance.FouleRight / 2; i++)
+                        {
+                            FouleUnitaire.Instance.RemoveLeftFan();
+                        }
+                    }
                     break;
 
                 case GameStates.Player1Attack:
                     _player1AttackSuccess = false;
+                    print("P1 Failed Attack");
+
 
                     break;
 
                 case GameStates.Player2Defense:
                     _player2DefenseSuccess = false;
+                    print("P2 Failed Defnse");
+
+
+                    if (_player1AttackSuccess)
+                    {
+                        print("P2 Failed Defnse against P1");
+
+                        if (FouleUnitaire.Instance.FouleRight == 0) Debug.LogError("GAMEOVER");
+
+                        print(FouleUnitaire.Instance.FouleLeft + "   " +FouleUnitaire.Instance.FouleLeft / 2);
+                        for(int i = 0; i < FouleUnitaire.Instance.FouleLeft/2; i++)
+                        {
+                            FouleUnitaire.Instance.RemoveRightFan();
+                        }
+                    }
+
+                    //CODE (4LAN) FOR SUPERS ATTACKS
                     break;
 
                 case GameStates.Player2Attack:
                     _player2AttackSuccess = false;
+                    print("P2 failed attack");
+
 
                     break;
             }
 
-            if (!_isPlayer1Turn)
-            {
-                hypeMeter._winOMeter += .1f / 2;
-            }
-            else hypeMeter._winOMeter -= .1f / 2;
+            _sucessTextPlayer1.color = Color.black;
+            _sucessTextPlayer1.text = "FAIL";
         }
 
 
@@ -183,7 +219,7 @@ public class RythmTimeLine : MonoBehaviour
         if (_sucessTextPlayer1.color.a > 0) _sucessTextPlayer1.color = new Color(0, 0, 0, _sucessTextPlayer1.color.a - 0.01f);
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.Instance.ChangeState(GameManager.GameStates.Player1Defense);
+            GameManager.Instance.ChangeState(GameManager.GameStates.Player1Attack);
             _isPlaying = true;
             _timeLine.Play();
         }

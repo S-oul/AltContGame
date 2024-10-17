@@ -8,6 +8,10 @@ public class FouleUnitaire : MonoBehaviour
 {
     private static FouleUnitaire _instance;
     public static FouleUnitaire Instance => _instance;
+
+    public int FouleLeft { get => _fouleLeft; set => _fouleLeft = value; }
+    public int FouleRight { get => _fouleRight; set => _fouleRight = value; }
+
     void Awake()
     {
         if (_instance == null)
@@ -27,8 +31,8 @@ public class FouleUnitaire : MonoBehaviour
     [SerializeField] int MaxFoule = 10;
 
 
-    [SerializeField] int FouleLeft = 0;
-    [SerializeField] int FouleRight = 0;
+    [SerializeField] int _fouleLeft = 0;
+    [SerializeField] int _fouleRight = 0;
 
 
 
@@ -42,34 +46,28 @@ public class FouleUnitaire : MonoBehaviour
     GameObject goBehindLeft;
     GameObject goBehindRight;
 
+    List<GameObject> _LastLeftJoined = new List<GameObject>();
+    List<GameObject> _LastRightJoined = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-        FouleLeft = NBFouleStart;
-        FouleRight = NBFouleStart;
         for (int i = 0; i < NBFouleStart; i++)
         {
-            GameObject go = Instantiate(PrefabPersoFoule[0], posLeft[i].position, Quaternion.identity);
+            AddLeftFan();
+            AddRightFan();
         }
-
-        for (int i = 0; i < NBFouleStart; i++)
-        {
-            GameObject go = Instantiate(PrefabPersoFoule[0], posRight[i].position, Quaternion.identity); 
-        }
-
-        goBehindLeft = Instantiate(PrefabPersoFoule[0], behindLeft.position, Quaternion.identity);
-        goBehindRight = Instantiate(PrefabPersoFoule[0], behindRight.position, Quaternion.identity);
-
     }
 
 
     [Button]
     public void AddLeftFan()
     {
+        if (FouleLeft == MaxFoule) return;
 
-        FouleLeft++;
-        StartCoroutine(goToPos(goBehindLeft, posLeft[FouleLeft]));
         goBehindLeft = Instantiate(PrefabPersoFoule[0], behindLeft.position, Quaternion.identity);
+        StartCoroutine(goToPos(goBehindLeft, posLeft[FouleLeft], false));
+        FouleLeft++;
+        _LastLeftJoined.Add(goBehindLeft);
 
         CheckCam();
     }
@@ -77,28 +75,54 @@ public class FouleUnitaire : MonoBehaviour
     [Button]
     public void AddRightFan()
     {
+        if (FouleRight == MaxFoule) return;
 
+        goBehindRight = Instantiate(PrefabPersoFoule[1], behindRight.position, Quaternion.identity);
+        StartCoroutine(goToPos(goBehindRight, posRight[FouleRight], false));
         FouleRight++;
-        StartCoroutine(goToPos(goBehindRight, posRight[FouleRight]));
-        goBehindRight = Instantiate(PrefabPersoFoule[0], behindRight.position, Quaternion.identity);
+        _LastRightJoined.Add(goBehindRight);
 
         CheckCam();
     }
+    [Button]
+    public void RemoveLeftFan()
+    {
+        if (FouleLeft == 0) return;
 
-    IEnumerator goToPos(GameObject go, Transform pos)
+        FouleLeft--;
+        StartCoroutine(goToPos(_LastLeftJoined[_LastLeftJoined.Count - 1], posLeft[FouleLeft], true));
+        _LastLeftJoined.Remove(goBehindLeft);
+        if (FouleLeft > 0) goBehindLeft = _LastLeftJoined[_LastLeftJoined.Count - 1];
+
+        CheckCam();
+    }
+    [Button]
+    public void RemoveRightFan()
+    {
+        if (FouleRight == 0) return;
+        FouleRight--;
+        StartCoroutine(goToPos(_LastRightJoined[_LastRightJoined.Count - 1], posRight[FouleLeft], true));
+        _LastRightJoined.Remove(goBehindRight);
+        if (FouleRight > 0) goBehindRight = _LastRightJoined[_LastRightJoined.Count - 1];
+
+        CheckCam();
+    }
+    IEnumerator goToPos(GameObject go, Transform pos, bool destroy)
     {
         int i = 0;
         Vector3 startPos = go.transform.position;
-        while(i< 50)
+        while (i < 50)
         {
             go.transform.position = Vector3.Lerp(startPos, pos.position, i / 50f);
             i++;
             yield return null;
         }
+        if (destroy) Destroy(go);
     }
 
     void CheckCam()
     {
+        return;
         int diff = FouleLeft - FouleRight;
         if (Mathf.Abs(diff) >= 2)
         {
