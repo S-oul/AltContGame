@@ -20,13 +20,11 @@ public class Ecran : MonoBehaviour
     private void OnEnable()
     {
         RythmTimeLine.CreateNewHandSign += CreateHandSignOnScreen;
-        RythmTimeLine.RemoveOldHandSign += RemoveHandSignOnScreen;
     }
 
     private void OnDisable()
     {
         RythmTimeLine.CreateNewHandSign -= CreateHandSignOnScreen;
-        RythmTimeLine.RemoveOldHandSign -= RemoveHandSignOnScreen;
     }
 
     void Start()
@@ -178,32 +176,6 @@ public class Ecran : MonoBehaviour
         var handAnim = handsSign.player == HandsSign.PlayerNumber.Player1 ? handAnimsPlayer1 : handAnimsPlayer2;
         int lastPos = handAnim.Count > 0 && handAnim.Last().pos < 1 ? handAnim.Last().pos - 1 : 0;
         handAnim.Add(new HandAnim(handsScreen.transform, handsSign, lastPos));
-    }
-
-    private void RemoveHandSignOnScreen(HandsSign handsSign)
-    {
-
-        return;
-        GameObject handsScreenParent = handsSign.player == HandsSign.PlayerNumber.Player1 ? _handsScreenPlayer1Parent : _handsScreenPlayer2Parent;
-        RemoveHandSignFromList(handsScreenParent.transform.GetChild(0).gameObject, handsSign);
-        Destroy(handsScreenParent.transform.GetChild(0).gameObject);
-
-    }
-
-    private void RemoveHandSignFromList(GameObject handsScreen, HandsSign handsSign)
-    {
-        if (handsSign.player == HandsSign.PlayerNumber.Player1)
-        {
-            HandAnim hand = handAnimsPlayer1.Find(x => x.handsSign.Equals(handsSign));
-            handAnimsPlayer1.Remove(hand);
-            Destroy(hand.transform.gameObject);
-        }
-        else
-        {
-            HandAnim hand = handAnimsPlayer2.Find(x => x.handsSign.Equals(handsSign));
-            handAnimsPlayer2.Remove(hand);
-            Destroy(hand.transform.gameObject);
-        }
     }
 
 }

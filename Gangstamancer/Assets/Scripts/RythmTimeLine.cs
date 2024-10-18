@@ -13,7 +13,6 @@ public class RythmTimeLine : MonoBehaviour
 {
     public static event System.Action OnBeat;
     public static event System.Action<HandsSign> CreateNewHandSign;
-    public static event System.Action<HandsSign> RemoveOldHandSign;
 
     [SerializeField] HypeMeter hypeMeter;
 
