@@ -14,8 +14,6 @@ public class RythmTimeLine : MonoBehaviour
     public static event System.Action OnBeat;
     public static event System.Action<HandsSign> CreateNewHandSign;
 
-    [SerializeField] HypeMeter hypeMeter;
-
     bool _isPlayer1Turn = false;
 
     [SerializeField] PlayableDirector _timeLine;
@@ -27,13 +25,14 @@ public class RythmTimeLine : MonoBehaviour
     [Header("UI Players")]
     [SerializeField] TextMeshProUGUI _sucessTextPlayer1;
     [SerializeField] TextMeshProUGUI _inputTextPlayer1;
-    [SerializeField] TextMeshProUGUI _sucessTextPlayer2;
     [SerializeField] TextMeshProUGUI _inputTextPlayer2;
 
     [Header("Players Hands Sequences")]
     [SerializeField] private HandsSequence _player1HandSequence;
     [SerializeField] private HandsSequence _player2HandSequence;
 
+
+    [Header("Ecren Principal PNG")]
     [SerializeField] Sprite BGPurpleAttack;
     [SerializeField] Sprite BGPurpleDefense;
     [SerializeField] Sprite BGYellowAttack;

@@ -1289,13 +1289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bf9f2013605aa4a85737228c28c629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hypeMeter: {fileID: 1404088588}
   _timeLine: {fileID: 940111312}
   _player1Inputs: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
   _player2Inputs: {fileID: 11400000, guid: 005330c4de2e8d243b946f4baf81a845, type: 2}
   _sucessTextPlayer1: {fileID: 1677159411}
   _inputTextPlayer1: {fileID: 557887972}
-  _sucessTextPlayer2: {fileID: 0}
   _inputTextPlayer2: {fileID: 956625773}
   _player1HandSequence: {fileID: 11400000, guid: e195a4b0ae078de4b8be6a87a4f45500, type: 2}
   _player2HandSequence: {fileID: 11400000, guid: a136619e72410d240a302aa92dee8a16, type: 2}
