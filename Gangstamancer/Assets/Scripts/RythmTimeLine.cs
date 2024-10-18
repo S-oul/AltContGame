@@ -33,6 +33,14 @@ public class RythmTimeLine : MonoBehaviour
     [Header("Players Hands Sequences")]
     [SerializeField] private HandsSequence _player1HandSequence;
     [SerializeField] private HandsSequence _player2HandSequence;
+
+    [SerializeField] Sprite BGPurpleAttack;
+    [SerializeField] Sprite BGPurpleDefense;
+    [SerializeField] Sprite BGYellowAttack;
+    [SerializeField] Sprite BGYellowDefense;
+    [SerializeField] SpriteRenderer BGEcranPrincipal;
+
+
     private HandsSequence _currentHandsSequence;
     private List<KeyCode> _currentKeyCodes;
 
@@ -45,6 +53,8 @@ public class RythmTimeLine : MonoBehaviour
 
     bool _player2AttackSuccess = false;
     bool _player2DefenseSuccess = false;
+
+
 
 
     int CheckInput()
@@ -75,6 +85,7 @@ public class RythmTimeLine : MonoBehaviour
         switch (GameManager.Instance.CurrentState)
         {
             case GameStates.Player1Defense:
+                BGEcranPrincipal.sprite = BGPurpleAttack;
                 _player1DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Defense is  " + fullSucses;
 
@@ -96,6 +107,8 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player1Attack:
+                BGEcranPrincipal.sprite = BGYellowDefense;
+
                 _player1AttackSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Attack is  " + fullSucses;
 
@@ -105,6 +118,8 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player2Defense:
+                BGEcranPrincipal.sprite = BGYellowAttack;
+
                 _player2DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P2 Defense is  " + fullSucses;
 
@@ -126,6 +141,8 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player2Attack:
+                BGEcranPrincipal.sprite = BGPurpleDefense;
+
                 _player2AttackSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;
 
