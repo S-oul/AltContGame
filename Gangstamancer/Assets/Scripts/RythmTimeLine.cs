@@ -145,7 +145,6 @@ public class RythmTimeLine : MonoBehaviour
     private void SelectNewInputs()
     {
         ClearTextInput();
-        RemoveOldHandSign.Invoke(_currentHandsSequence.handSigns[0]);
         _currentHandsSequence.handSigns.RemoveAt(0); // remove the handsign that was just played
 
         _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
