@@ -16,7 +16,7 @@ public class HandsSequence : ScriptableObject
     public HandsSign GetHandSign(int index) => handSigns[index];
     public int SequenceCount => handSigns.Count;
 
-    public void CreateRandomHandSign(PlayerNumber playerNumber)
+    public HandsSign CreateRandomHandSign(PlayerNumber playerNumber)
     {
         GameManager gameManager = GameManager.Instance;
         HandsSign handSign = new HandsSign();
@@ -27,6 +27,7 @@ public class HandsSequence : ScriptableObject
         handSign.inputsPlayer = handSign.player == PlayerNumber.Player1 ? gameManager.Player1Inputs : gameManager.Player2Inputs;
         handSign.KeyCodesFingers = handSign.CreateKeyCodesFromFingers();
         handSigns.Add(handSign);
+        return handSign;
     }
 }
 
