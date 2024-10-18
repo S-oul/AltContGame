@@ -2,7 +2,6 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class FouleUnitaire : MonoBehaviour
 {
@@ -90,7 +89,7 @@ public class FouleUnitaire : MonoBehaviour
         if (FouleLeft == 0) return;
 
         FouleLeft--;
-        StartCoroutine(goToPos(_LastLeftJoined[_LastLeftJoined.Count - 1], posLeft[FouleLeft], true));
+        StartCoroutine(goToPos(_LastLeftJoined[_LastLeftJoined.Count - 1], behindLeft, true));
         _LastLeftJoined.Remove(goBehindLeft);
         if (FouleLeft > 0) goBehindLeft = _LastLeftJoined[_LastLeftJoined.Count - 1];
 
@@ -101,7 +100,7 @@ public class FouleUnitaire : MonoBehaviour
     {
         if (FouleRight == 0) return;
         FouleRight--;
-        StartCoroutine(goToPos(_LastRightJoined[_LastRightJoined.Count - 1], posRight[FouleLeft], true));
+        StartCoroutine(goToPos(_LastRightJoined[_LastRightJoined.Count - 1], behindRight, true));
         _LastRightJoined.Remove(goBehindRight);
         if (FouleRight > 0) goBehindRight = _LastRightJoined[_LastRightJoined.Count - 1];
 
