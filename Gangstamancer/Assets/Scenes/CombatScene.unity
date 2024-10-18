@@ -1299,11 +1299,11 @@ MonoBehaviour:
   _inputTextPlayer2: {fileID: 956625773}
   _player1HandSequence: {fileID: 11400000, guid: e195a4b0ae078de4b8be6a87a4f45500, type: 2}
   _player2HandSequence: {fileID: 11400000, guid: a136619e72410d240a302aa92dee8a16, type: 2}
-  BGPurpleAttack: {fileID: 0}
-  BGPurpleDefense: {fileID: 0}
-  BGYellowAttack: {fileID: 0}
-  BGYellowDefense: {fileID: 0}
-  BGEcranPrincipal: {fileID: 0}
+  BGPurpleAttack: {fileID: 21300000, guid: d007c1b9d992a754a80a849252883a52, type: 3}
+  BGPurpleDefense: {fileID: 21300000, guid: 0490ba8e6db6ec949a5a95853d59d33a, type: 3}
+  BGYellowAttack: {fileID: 21300000, guid: f8b75883ba66b31468dd5ef08e8265ad, type: 3}
+  BGYellowDefense: {fileID: 21300000, guid: ed95c8c9ed372d347887ecc118d6be8c, type: 3}
+  BGEcranPrincipal: {fileID: 1579427903}
 --- !u!82 &940111316
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3043,7 +3043,7 @@ Transform:
   m_GameObject: {fileID: 1579427901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.44, y: 0, z: 0}
+  m_LocalPosition: {x: -0.33, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3089,7 +3089,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f4c1e70374a1a284da7f2b741b7f7e58, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

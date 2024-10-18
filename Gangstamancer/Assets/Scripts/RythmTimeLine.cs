@@ -85,7 +85,7 @@ public class RythmTimeLine : MonoBehaviour
         switch (GameManager.Instance.CurrentState)
         {
             case GameStates.Player1Defense:
-                BGEcranPrincipal.sprite = BGPurpleAttack;
+                BGEcranPrincipal.sprite = BGYellowAttack;
                 _player1DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Defense is  " + fullSucses;
 
@@ -107,7 +107,7 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player1Attack:
-                BGEcranPrincipal.sprite = BGYellowDefense;
+                BGEcranPrincipal.sprite = BGPurpleDefense;
 
                 _player1AttackSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Attack is  " + fullSucses;
@@ -118,7 +118,7 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player2Defense:
-                BGEcranPrincipal.sprite = BGYellowAttack;
+                BGEcranPrincipal.sprite = BGPurpleAttack;
 
                 _player2DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P2 Defense is  " + fullSucses;
@@ -141,7 +141,7 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player2Attack:
-                BGEcranPrincipal.sprite = BGPurpleDefense;
+                BGEcranPrincipal.sprite = BGYellowDefense;
 
                 _player2AttackSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;

@@ -15,6 +15,6 @@ public class Bounce : MonoBehaviour
     // Update is called once per frame
     void DoOnBeat ()
     {
-        animator.SetTrigger("OnBeat");
+        animator?.SetTrigger("OnBeat");
     }
 }
