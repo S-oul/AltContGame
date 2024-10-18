@@ -13,15 +13,27 @@ MonoBehaviour:
   m_Name: HandsSequencePlayer1
   m_EditorClassIdentifier: 
   handSigns:
-  - handSignLeft: {fileID: 11400000, guid: e394d90e1d84b5746a3e8a6d08da80fd, type: 2}
-    handSignRight: {fileID: 11400000, guid: e394d90e1d84b5746a3e8a6d08da80fd, type: 2}
+  - handSignLeft: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
+    handSignRight: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
+    height: 2
+    player: 0
+    inputsPlayer: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
+    KeyCodesFingers: 610000007a0000007500000069000000
+  - handSignLeft: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
+    handSignRight: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
+    height: 2
+    player: 0
+    inputsPlayer: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
+    KeyCodesFingers: 610000007a0000007500000069000000
+  - handSignLeft: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
+    handSignRight: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
     height: 1
     player: 0
     inputsPlayer: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
-    KeyCodesFingers: 610000007a0000006500000075000000690000006f000000
-  - handSignLeft: {fileID: 11400000, guid: d391665f60468894db1e5210f812cc74, type: 2}
-    handSignRight: {fileID: 11400000, guid: b419c7d68052ff44a8b4511496535235, type: 2}
+    KeyCodesFingers: 610000007a0000007500000069000000
+  - handSignLeft: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
+    handSignRight: {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
     height: 1
     player: 0
     inputsPlayer: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
-    KeyCodesFingers: 7a00000065000000720000006f00000070000000
+    KeyCodesFingers: 610000007a0000007500000069000000

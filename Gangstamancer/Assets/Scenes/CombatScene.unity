@@ -1299,10 +1299,10 @@ MonoBehaviour:
   _inputTextPlayer2: {fileID: 956625773}
   _player1HandSequence: {fileID: 11400000, guid: e195a4b0ae078de4b8be6a87a4f45500, type: 2}
   _player2HandSequence: {fileID: 11400000, guid: a136619e72410d240a302aa92dee8a16, type: 2}
-  BGPurpleAttack: {fileID: 21300000, guid: d007c1b9d992a754a80a849252883a52, type: 3}
-  BGPurpleDefense: {fileID: 21300000, guid: 0490ba8e6db6ec949a5a95853d59d33a, type: 3}
-  BGYellowAttack: {fileID: 21300000, guid: f8b75883ba66b31468dd5ef08e8265ad, type: 3}
-  BGYellowDefense: {fileID: 21300000, guid: ed95c8c9ed372d347887ecc118d6be8c, type: 3}
+  BGPurpleAttack: {fileID: 21300000, guid: c085a10b069318a4da61206b10b3c804, type: 3}
+  BGPurpleDefense: {fileID: 21300000, guid: 98719b55f9b9db84f93fed55071a7ff4, type: 3}
+  BGYellowAttack: {fileID: 21300000, guid: bec9f85aa8cf0a2459a1e4388e9f867b, type: 3}
+  BGYellowDefense: {fileID: 21300000, guid: 6046050dc0a5b334ca02a5e6bbe5b6b5, type: 3}
   BGEcranPrincipal: {fileID: 1579427903}
 --- !u!82 &940111316
 AudioSource:
@@ -3042,8 +3042,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579427901}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.33, y: 0.42, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -4.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3520,6 +3520,7 @@ MonoBehaviour:
   _allFingers:
   - {fileID: 11400000, guid: 5f1e9b65a8168e543a21a17545876182, type: 2}
   - {fileID: 11400000, guid: 34116dfa3d635704897a04c2993e910d, type: 2}
+  - {fileID: 11400000, guid: 787e8fc2982af074e9842234973a8b86, type: 2}
 --- !u!1 &1886625884
 GameObject:
   m_ObjectHideFlags: 0

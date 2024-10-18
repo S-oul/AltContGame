@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FingersTypes: 6
   SpriteLeft: {fileID: 21300000, guid: c4d9ed4d811836343aa3ad5203732b0a, type: 3}
-  SpriteRight: {fileID: 21300000, guid: e0a40fc71dd143a449cfc1db16c1bf3a, type: 3}
+  SpriteRight: {fileID: 21300000, guid: c4403d23017957740a46c7dfe05aadc0, type: 3}
