@@ -192,12 +192,10 @@ public class Ecran : MonoBehaviour
         {
             if (isPlayer1)
             {
-                Debug.Log("Create Player 1 full");
                 CreateHandSignplayer1(handsSigns[i], false);
             }
             else
             {
-                Debug.Log("Create Player 2 full");
                 CreateHandSignplayer2(handsSigns[i], false);
             }
         }
@@ -206,12 +204,10 @@ public class Ecran : MonoBehaviour
         {
             if (isPlayer1)
             {
-                Debug.Log("Create Player 2 empty");
                 CreateHandSignplayer2(handsSigns[i], true);
             }
             else
             {
-                Debug.Log("Create Player 1 empty");
                 CreateHandSignplayer1(handsSigns[i], true);
             }
         }
