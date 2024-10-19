@@ -237,8 +237,9 @@ public class Ecran : MonoBehaviour
         }
 
         GameObject handsScreen = Instantiate(_prefabHandsScreenPlayer1, new Vector3(50, 50, 0), Quaternion.identity, _handsScreenPlayer1Parent.transform);
-        handsScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handsSign.handSignLeft.SpriteLeft;
-        handsScreen.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handsSign.handSignRight.SpriteRight;
+        handsScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handsSign.handSignLeft.SpriteToDoLeft;
+        handsScreen.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handsSign.handSignRight.SpriteToDoRight;
+        handsScreen.transform.GetChild(1).GetComponent<SpriteRenderer>().flipX = true;
         AddHandSignFromList(handsScreen, handsSign);
     }
 
@@ -250,8 +251,9 @@ public class Ecran : MonoBehaviour
             return;
         }
         GameObject handsScreen = Instantiate(_prefabHandsScreenPlayer2, new Vector3(50, 50, 0), Quaternion.identity, _handsScreenPlayer2Parent.transform);
-        handsScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handsSign.handSignLeft.SpriteLeft;
-        handsScreen.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handsSign.handSignRight.SpriteRight;
+        handsScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handsSign.handSignLeft.SpriteToDoLeft;
+        handsScreen.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handsSign.handSignRight.SpriteToDoRight;
+        handsScreen.transform.GetChild(1).GetComponent<SpriteRenderer>().flipX = true;  
         AddHandSignFromList(handsScreen, handsSign);
     }
 

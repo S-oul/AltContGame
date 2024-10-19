@@ -25,4 +25,10 @@ public class Fingers : ScriptableObject
 
     [ShowAssetPreview]
     public Sprite SpriteRight;
+
+    [ShowAssetPreview]
+    public Sprite SpriteToDoLeft;
+
+    [ShowAssetPreview]
+    public Sprite SpriteToDoRight;
 }

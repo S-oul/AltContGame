@@ -77,6 +77,7 @@ public class RythmTimeLine : MonoBehaviour
 
     public void DoOnBeat()
     {
+        BGEcranPrincipal.color = Color.white;
         _sucessTextPlayer1.text = GameManager.Instance.CurrentState.ToString() + "  ";
         OnBeat?.Invoke();
         int intSuccess = CheckInput();
