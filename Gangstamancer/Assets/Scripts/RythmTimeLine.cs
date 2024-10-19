@@ -13,6 +13,7 @@ public class RythmTimeLine : MonoBehaviour
 {
     public static event System.Action OnBeat;
     public static event System.Action<HandsSign> CreateNewHandSign;
+    public static event System.Action<List<HandsSign>> CreateNewMultipleHandsSigns;
 
     bool _isPlayer1Turn = false;
 
@@ -168,43 +169,45 @@ public class RythmTimeLine : MonoBehaviour
         CreateNewHandSign.Invoke(handSign);
         _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
 
+        DiplayCurrentKeyCodes();
+
+    }
+
+    private void DiplayCurrentKeyCodes()
+    {
+        _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
         TextMeshProUGUI inputText = _isPlayer1Turn ? _inputTextPlayer1 : _inputTextPlayer2;
         inputText.text = "";
 
         foreach (KeyCode key in _currentKeyCodes)
             inputText.text += key + " ";
-
     }
 
     private void Start()
     {
         CreateNewSequenceAtStart();
-        SelectNewInputs();
+        DiplayCurrentKeyCodes();
     }
 
     private void CreateNewSequenceAtStart()
     {
-        HandsSign tempHandSign;
+        List<HandsSign> tempHandSign = new List<HandsSign>();
         _isPlayer1Turn = GameManager.Instance.PlayerTurn() == 1;
         _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
 
-
         _player1HandSequence.handSigns.Clear();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1);
-        CreateNewHandSign.Invoke(tempHandSign);
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1);
-        CreateNewHandSign.Invoke(tempHandSign);
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1);
-        CreateNewHandSign.Invoke(tempHandSign);
-
-
         _player2HandSequence.handSigns.Clear();
-        tempHandSign = _player2HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player2);
-        CreateNewHandSign.Invoke(tempHandSign);
-        tempHandSign = _player2HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player2);
-        CreateNewHandSign.Invoke(tempHandSign);
-        tempHandSign = _player2HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player2);
-        CreateNewHandSign.Invoke(tempHandSign);
+
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1, 2);
+        CreateNewMultipleHandsSigns.Invoke(tempHandSign);
+
+        tempHandSign.Clear();
+        tempHandSign = _player2HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player2, 2);
+        CreateNewMultipleHandsSigns.Invoke(tempHandSign);
+
+        tempHandSign.Clear();
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1, 2);
+        CreateNewMultipleHandsSigns.Invoke(tempHandSign);
     }
 
     

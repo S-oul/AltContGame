@@ -20,11 +20,13 @@ public class Ecran : MonoBehaviour
     private void OnEnable()
     {
         RythmTimeLine.CreateNewHandSign += CreateHandSignOnScreen;
+        RythmTimeLine.CreateNewMultipleHandsSigns += CreateMultipleHandSignsOnScreen;
     }
 
     private void OnDisable()
     {
         RythmTimeLine.CreateNewHandSign -= CreateHandSignOnScreen;
+        RythmTimeLine.CreateNewMultipleHandsSigns -= CreateMultipleHandSignsOnScreen;
     }
 
     void Start()
@@ -53,23 +55,35 @@ public class Ecran : MonoBehaviour
 
         for (int i = 0; i < handAnimsPlayer1.Count; i++)
         {
+            if (handAnimsPlayer1[i].transform == null && handAnimsPlayer1[i].pos < 4)
+            {
+                handAnimsPlayer1[i].pos++;
+                continue;
+            }else if (handAnimsPlayer1[i].transform == null && handAnimsPlayer1[i].pos == 4)
+            {
+                HandAnim hand = handAnimsPlayer1[i];
+                handAnimsPlayer1.RemoveAt(i);
+                i--;
+                continue;
+            }
+
             Animator animator = handAnimsPlayer1[i].transform.GetComponent<Animator>();
             if (handAnimsPlayer1[i].pos < 0)
             {
                 handAnimsPlayer1[i].pos++;
                 continue;
             }
-            else if (handAnimsPlayer1[i].pos == 0 && HandAnimCanMoveToNextPoint(i, handAnimsPlayer1))
+            else if (handAnimsPlayer1[i].pos == 0)
             {
                 animator.SetTrigger("Arrive");
                 handAnimsPlayer1[i].pos++;
             }
-            else if (handAnimsPlayer1[i].pos == 1 && HandAnimCanMoveToNextPoint(i, handAnimsPlayer1))
+            else if (handAnimsPlayer1[i].pos == 1)
             {
                 animator.SetTrigger("Middle");
                 handAnimsPlayer1[i].pos++;
             }
-            else if (handAnimsPlayer1[i].pos == 2 && HandAnimCanMoveToNextPoint(i, handAnimsPlayer1) && IsPlayerTurn(HandsSign.PlayerNumber.Player1))
+            else if (handAnimsPlayer1[i].pos == 2)
             {
                 animator.SetTrigger("ToMiddle");
                 handAnimsPlayer1[i].pos++;
@@ -97,23 +111,36 @@ public class Ecran : MonoBehaviour
 
         for (int i = 0; i < handAnimsPlayer2.Count; i++)
         {
+            if (handAnimsPlayer2[i].transform == null && handAnimsPlayer2[i].pos < 4)
+            {
+                handAnimsPlayer2[i].pos++;
+                continue;
+            }
+            else if (handAnimsPlayer2[i].transform == null && handAnimsPlayer2[i].pos == 4)
+            {
+                HandAnim hand = handAnimsPlayer2[i];
+                handAnimsPlayer2.RemoveAt(i);
+                i--;
+                continue;
+            }
+
             Animator animator = handAnimsPlayer2[i].transform.GetComponent<Animator>();
             if (handAnimsPlayer2[i].pos < 0)
             {
                 handAnimsPlayer2[i].pos++;
                 continue;
             }
-            else if (handAnimsPlayer2[i].pos == 0 && HandAnimCanMoveToNextPoint(i, handAnimsPlayer2))
+            else if (handAnimsPlayer2[i].pos == 0)
             {
                 animator.SetTrigger("Arrive");
                 handAnimsPlayer2[i].pos++;
             }
-            else if (handAnimsPlayer2[i].pos == 1 && HandAnimCanMoveToNextPoint(i, handAnimsPlayer2))
+            else if (handAnimsPlayer2[i].pos == 1)
             {
                 animator.SetTrigger("Middle");
                 handAnimsPlayer2[i].pos++;
             }
-            else if (handAnimsPlayer2[i].pos == 2 && HandAnimCanMoveToNextPoint(i, handAnimsPlayer2) && IsPlayerTurn(HandsSign.PlayerNumber.Player2))
+            else if (handAnimsPlayer2[i].pos == 2)
             {
                 animator.SetTrigger("ToMiddle");
                 handAnimsPlayer2[i].pos++;
@@ -131,9 +158,6 @@ public class Ecran : MonoBehaviour
                 i--;
                 continue;
             }
-
-
-
 
         }
     }
@@ -161,11 +185,75 @@ public class Ecran : MonoBehaviour
         return false;
     }
 
+    private void CreateMultipleHandSignsOnScreen(List<HandsSign> handsSigns)
+    {
+        bool isPlayer1 = handsSigns[0].player == HandsSign.PlayerNumber.Player1;
+        for (int i = 0; i < handsSigns.Count; i++)
+        {
+            if (isPlayer1)
+            {
+                Debug.Log("Create Player 1 full");
+                CreateHandSignplayer1(handsSigns[i], false);
+            }
+            else
+            {
+                Debug.Log("Create Player 2 full");
+                CreateHandSignplayer2(handsSigns[i], false);
+            }
+        }
+        
+        for (int i = 0; i < handsSigns.Count; i++)
+        {
+            if (isPlayer1)
+            {
+                Debug.Log("Create Player 2 empty");
+                CreateHandSignplayer2(handsSigns[i], true);
+            }
+            else
+            {
+                Debug.Log("Create Player 1 empty");
+                CreateHandSignplayer1(handsSigns[i], true);
+            }
+        }
+    }
+
     private void CreateHandSignOnScreen(HandsSign handsSign)
     {
-        GameObject handsScreenPrefab = handsSign.player == HandsSign.PlayerNumber.Player1 ? _prefabHandsScreenPlayer1 : _prefabHandsScreenPlayer2;
-        GameObject handsScreenParent = handsSign.player == HandsSign.PlayerNumber.Player1 ? _handsScreenPlayer1Parent : _handsScreenPlayer2Parent;
-        GameObject handsScreen = Instantiate(handsScreenPrefab, new Vector3(50, 50, 0), Quaternion.identity, handsScreenParent.transform);
+
+        if (handsSign.player == HandsSign.PlayerNumber.Player1)
+        {
+            CreateHandSignplayer1(handsSign, false);
+            CreateHandSignplayer2(handsSign, true);
+        }
+        else
+        {
+            CreateHandSignplayer1(handsSign, true);
+            CreateHandSignplayer2(handsSign, false);
+        }
+    }
+
+    private void CreateHandSignplayer1(HandsSign handsSign, bool isEmpty)
+    {
+        if (isEmpty)
+        {
+            AddEmptyHandSignFromListPlayer1(new HandsSign());
+            return;
+        }
+
+        GameObject handsScreen = Instantiate(_prefabHandsScreenPlayer1, new Vector3(50, 50, 0), Quaternion.identity, _handsScreenPlayer1Parent.transform);
+        handsScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handsSign.handSignLeft.SpriteLeft;
+        handsScreen.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handsSign.handSignRight.SpriteRight;
+        AddHandSignFromList(handsScreen, handsSign);
+    }
+
+    private void CreateHandSignplayer2(HandsSign handsSign, bool isEmpty)
+    {
+        if (isEmpty)
+        {
+            AddEmptyHandSignFromListPlayer2(handsSign);
+            return;
+        }
+        GameObject handsScreen = Instantiate(_prefabHandsScreenPlayer2, new Vector3(50, 50, 0), Quaternion.identity, _handsScreenPlayer2Parent.transform);
         handsScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handsSign.handSignLeft.SpriteLeft;
         handsScreen.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handsSign.handSignRight.SpriteRight;
         AddHandSignFromList(handsScreen, handsSign);
@@ -176,6 +264,20 @@ public class Ecran : MonoBehaviour
         var handAnim = handsSign.player == HandsSign.PlayerNumber.Player1 ? handAnimsPlayer1 : handAnimsPlayer2;
         int lastPos = handAnim.Count > 0 && handAnim.Last().pos < 1 ? handAnim.Last().pos - 1 : 0;
         handAnim.Add(new HandAnim(handsScreen.transform, handsSign, lastPos));
+    }
+    private void AddEmptyHandSignFromListPlayer1(HandsSign handsSign)
+    {
+        List<HandAnim> handAnim = handAnimsPlayer1;
+
+        int lastPos = handAnim.Count > 0 && handAnim.Last().pos < 1 ? handAnim.Last().pos - 1 : 0;
+        handAnim.Add(new HandAnim(null, handsSign, lastPos));
+    }
+    private void AddEmptyHandSignFromListPlayer2(HandsSign handsSign)
+    {
+        List<HandAnim> handAnim = handAnimsPlayer2;
+
+        int lastPos = handAnim.Count > 0 && handAnim.Last().pos < 1 ? handAnim.Last().pos - 1 : 0;
+        handAnim.Add(new HandAnim(null, handsSign, lastPos));
     }
 
 }
