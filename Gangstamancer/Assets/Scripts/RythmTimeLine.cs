@@ -166,7 +166,7 @@ public class RythmTimeLine : MonoBehaviour
         _currentHandsSequence.handSigns.RemoveAt(0); // remove the handsign that was just played
 
         _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
-        var handSign = _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? HandsSign.PlayerNumber.Player1: HandsSign.PlayerNumber.Player2);
+        var handSign = _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1: PlayerNumber.Player2);
         CreateNewHandSign.Invoke(handSign);
         _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
 
@@ -192,22 +192,22 @@ public class RythmTimeLine : MonoBehaviour
 
     private void CreateNewSequenceAtStart()
     {
-        List<HandsSign> tempHandSign = new List<HandsSign>();
         _isPlayer1Turn = GameManager.Instance.PlayerTurn() == 1;
         _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
 
         _player1HandSequence.handSigns.Clear();
         _player2HandSequence.handSigns.Clear();
 
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1, 2);
+        List<HandsSign> tempHandSign = new List<HandsSign>();
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(PlayerNumber.Player1, 2);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
 
         tempHandSign.Clear();
-        tempHandSign = _player2HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player2, 2);
+        tempHandSign = _player2HandSequence.CreateRandomHandSign(PlayerNumber.Player2, 2);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
 
         tempHandSign.Clear();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(HandsSign.PlayerNumber.Player1, 2);
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(PlayerNumber.Player1, 2);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
     }
 
