@@ -51,6 +51,11 @@ public class HandsSequence : ScriptableObject
 
     }
 }
+public enum PlayerNumber
+{
+    Player1 = 0,
+    Player2
+}
 
 [Serializable]
 public struct HandsSign
@@ -63,7 +68,7 @@ public struct HandsSign
 
     [HorizontalLine(color: EColor.Black)]
     public Height height;
-    public PlayerNumber? player;
+    public PlayerNumber player;
 
     public PlayerHandsInput inputsPlayer;
     public List<KeyCode> KeyCodesFingers;
@@ -75,11 +80,6 @@ public struct HandsSign
         High
     }
 
-    public enum PlayerNumber
-    {
-        Player1 = 0,
-        Player2
-    }
 
     public List<KeyCode> CreateKeyCodesFromFingers()
     {
