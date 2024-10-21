@@ -44,7 +44,10 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] SpriteRenderer BGEcranPrincipal;
 
     [SerializeField] Animator _player1;
+    [SerializeField] Animator _player1Attack;
+
     [SerializeField] Animator _player2;
+    [SerializeField] Animator _player2Attack;
 
 
     private HandsSequence _currentHandsSequence;
@@ -124,6 +127,8 @@ public class RythmTimeLine : MonoBehaviour
                             for (int i = 0; i < FouleUnitaire.Instance.FouleRight; i++)
                             {
                                 FouleUnitaire.Instance.RemoveLeftFan();
+                                _player2.SetBool("Sayajin", false);
+                                _player2SuperAttack = false;
                             }
                         }
                             print(FouleUnitaire.Instance.FouleRight + "   " + FouleUnitaire.Instance.FouleRight / 2);
@@ -189,6 +194,8 @@ public class RythmTimeLine : MonoBehaviour
                             for (int i = 0; i < FouleUnitaire.Instance.FouleRight; i++)
                             {
                                 FouleUnitaire.Instance.RemoveLeftFan();
+                                _player1.SetBool("Sayajin", false);
+                                _player1SuperAttack = false;
                             }
                         }
                         for (int i = 0; i < FouleUnitaire.Instance.FouleLeft / 2; i++)
