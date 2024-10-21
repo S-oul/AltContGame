@@ -135,7 +135,6 @@ public class ChooseWhoStart : MonoBehaviour
             {
                 if (fingerType1.Contains(key))
                 {
-                    print("YEEEEEEEEEEEEEEES");
                     isSuccess++;
                 }
                 else isSuccess--;

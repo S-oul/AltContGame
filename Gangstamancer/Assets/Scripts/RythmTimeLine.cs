@@ -149,6 +149,8 @@ public class RythmTimeLine : MonoBehaviour
                     _player2SuperAttack = true;
                     _player2.SetBool("Sayajin", true);
 
+                    _player1SuperAttack = false;
+                    _player1.SetBool("Sayajin", false);
                 }
 
                 if (fullSucses && FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
@@ -207,6 +209,10 @@ public class RythmTimeLine : MonoBehaviour
                 {
                     _player1SuperAttack = true;
                     _player1.SetBool("Sayajin", true);
+
+                    _player2SuperAttack = false;
+                    _player2.SetBool("Sayajin", false);
+
 
                 }
 
