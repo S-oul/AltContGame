@@ -49,7 +49,7 @@ public class FouleUnitaire : MonoBehaviour
     List<GameObject> _LastLeftJoined = new List<GameObject>();
     List<GameObject> _LastRightJoined = new List<GameObject>();
     // Start is called before the first frame update
-    void Start()
+    public void OnStart()
     {
         for (int i = 0; i < NBFouleStart; i++)
         {

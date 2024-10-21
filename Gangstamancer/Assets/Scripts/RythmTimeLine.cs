@@ -47,6 +47,8 @@ public class RythmTimeLine : MonoBehaviour
     private HandsSequence _currentHandsSequence;
     private List<KeyCode> _currentKeyCodes;
 
+    public GameManager.GameStates firstState;
+
 
     bool _isPlaying = false;
     bool _isPaused = false;
@@ -229,12 +231,20 @@ public class RythmTimeLine : MonoBehaviour
         if (_sucessTextPlayer1.color.a > 0) _sucessTextPlayer1.color = new Color(0, 0, 0, _sucessTextPlayer1.color.a - 0.01f);
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.Instance.ChangeState(GameManager.GameStates.Player2Attack);
+            GameManager.Instance.ChangeState(firstState);
             CreateNewSequenceAtStart();
             DiplayCurrentKeyCodes();
             _isPlaying = true;
             _timeLine.Play();
         }
+    }
+    public void OnStart()
+    {
+        GameManager.Instance.ChangeState(firstState);
+        CreateNewSequenceAtStart();
+        DiplayCurrentKeyCodes();
+        _isPlaying = true;
+        _timeLine.Play();
     }
     private void OnGUI()
     {
