@@ -2,16 +2,16 @@ using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
-    public static event System.Action Player1Turn;
-    public static event System.Action Player2Turn;
 
     #region GameStates
     public enum GameStates
@@ -29,19 +29,18 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    private int _currentSequenceIndex = 0;
-    private float _timeBetweenSequences = 3f;
-    private float _timeForPlayerToInput = 2f;
-    private HandsSign _currentHandSign;
-    private List<KeyCode> _player1InputKeys;
 
     [SerializeField, Expandable] private PlayerHandsInput _player1Inputs;
     [SerializeField, Expandable] private PlayerHandsInput _player2Inputs;
     [SerializeField] private List<Fingers> _allFingers;
+    [SerializeField] private RythmTimeLine _rythmTimeLine;  
 
+
+    #region Accessors   
     public PlayerHandsInput Player1Inputs { get => _player1Inputs; set => _player1Inputs = value; }
     public PlayerHandsInput Player2Inputs { get => _player2Inputs; set => _player2Inputs = value; }
     public List<Fingers> AllFingers { get => _allFingers; set => _allFingers = value; }
+    #endregion
 
     void Awake()
     {
@@ -124,6 +123,7 @@ public class GameManager : MonoBehaviour
             case GameStates.Player2Attack:
                 break;
             case GameStates.GameOver:
+                _rythmTimeLine.StopBeat();  
                 break;
             default:
                 break;
