@@ -43,6 +43,9 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] Sprite BGYellowDefense;
     [SerializeField] SpriteRenderer BGEcranPrincipal;
 
+    [SerializeField] Animator _player1;
+    [SerializeField] Animator _player2;
+
 
     private HandsSequence _currentHandsSequence;
     private List<KeyCode> _currentKeyCodes;
@@ -108,7 +111,7 @@ public class RythmTimeLine : MonoBehaviour
                             }
                         }
 
-                        if (FouleUnitaire.Instance.FouleLeft == 0) OnGameOver.Invoke(2);
+                        if (FouleUnitaire.Instance.FouleLeft == 0) OnGameOver?.Invoke(2);
 
                         print(FouleUnitaire.Instance.FouleRight + "   " + FouleUnitaire.Instance.FouleRight / 2);
                         for (int i = 0; i < FouleUnitaire.Instance.FouleRight / 2; i++)
@@ -126,9 +129,14 @@ public class RythmTimeLine : MonoBehaviour
                 _player1AttackSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Attack is  " + fullSucses;
 
-
+                if (!fullSucses)
+                {
+                    _player2.SetTrigger("Sayajin");
+                }
 
                 if (fullSucses && FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
+
+
                 break;
 
             case GameStates.Player2Defense:
@@ -148,7 +156,7 @@ public class RythmTimeLine : MonoBehaviour
                                 FouleUnitaire.Instance.AddLeftFan();
                             }
                         }
-                        if (FouleUnitaire.Instance.FouleRight == 0) OnGameOver.Invoke(1);
+                        if (FouleUnitaire.Instance.FouleRight == 0) OnGameOver?.Invoke(1);
 
                         print(FouleUnitaire.Instance.FouleLeft + "   " + FouleUnitaire.Instance.FouleLeft / 2);
                         for (int i = 0; i < FouleUnitaire.Instance.FouleLeft / 2; i++)
@@ -164,6 +172,12 @@ public class RythmTimeLine : MonoBehaviour
                 BGEcranPrincipal.sprite = BGYellowDefense;
 
                 _player2AttackSuccess = fullSucses;
+
+                if (!fullSucses)
+                {
+                    _player1.SetTrigger("Sayajin");
+                }
+
                 _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;
 
 

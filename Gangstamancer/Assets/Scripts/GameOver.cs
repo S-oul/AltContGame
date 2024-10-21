@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
@@ -44,6 +45,12 @@ public class GameOver : MonoBehaviour
             _textVictorious.text = "Player 2 Wins!";
             _gameOverPlayer.sprite = _player2Sprite;
         }
+    }
+
+    IEnumerator TOEND()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }
