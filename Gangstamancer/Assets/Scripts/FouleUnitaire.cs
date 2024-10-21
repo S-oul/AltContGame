@@ -125,7 +125,7 @@ public class FouleUnitaire : MonoBehaviour
         int diff = FouleLeft - FouleRight;
         if (Mathf.Abs(diff) >= 2)
         {
-            StartCoroutine(goToRot(diff * _CamMaxDegre / 10f));
+            StartCoroutine(goToRot(diff * (_CamMaxDegre / 10f)));
         }
         else
         {
@@ -133,13 +133,13 @@ public class FouleUnitaire : MonoBehaviour
         }
     }
 
-    IEnumerator goToRot(float diff)
+    IEnumerator goToRot(float angle)
     {
         float oldAngle = Camera.main.transform.eulerAngles.z;
         int i = 0;
         while (i < 10)
         {
-            Camera.main.transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldAngle, diff, i / 50f));
+            Camera.main.transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldAngle, angle, i / 50f));
             i++;
             yield return null;
         }

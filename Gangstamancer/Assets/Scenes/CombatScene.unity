@@ -1694,7 +1694,7 @@ MonoBehaviour:
   MaxFoule: 10
   _fouleLeft: 0
   _fouleRight: 0
-  _CamMaxDegre: 0
+  _CamMaxDegre: 4.1
   posLeft:
   - {fileID: 1017366303}
   - {fileID: 1515329497}

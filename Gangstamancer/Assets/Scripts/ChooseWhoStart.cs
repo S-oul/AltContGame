@@ -45,7 +45,7 @@ public class ChooseWhoStart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasAWinner) if (CheckInputP1() == _player1Inputs.playerInputs.Count - 1 || Input.GetKeyDown(KeyCode.X))
+        if (!hasAWinner) if (CheckInputP1() == fingerType1.Count - 1 || Input.GetKeyDown(KeyCode.X))
             {
                 phasep1--;
                 if (phasep1 == 0)
@@ -60,7 +60,7 @@ public class ChooseWhoStart : MonoBehaviour
                 if(!hasAWinner)
                 ChooseP1RandomHands();
             }
-        if (!hasAWinner) if (CheckInputP2() == _player2Inputs.playerInputs.Count - 1 || Input.GetKeyDown(KeyCode.C))
+        if (!hasAWinner) if (CheckInputP2() == fingerType2.Count - 1 || Input.GetKeyDown(KeyCode.C))
             {
                 //APFJAUIZGEBUKDFGZIUDKFGBI
                 phasep2--;
