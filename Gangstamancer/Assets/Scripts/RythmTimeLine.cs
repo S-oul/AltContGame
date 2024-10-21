@@ -200,12 +200,6 @@ public class RythmTimeLine : MonoBehaviour
             inputText.text += key + " ";
     }
 
-    private void Start()
-    {
-        CreateNewSequenceAtStart();
-        DiplayCurrentKeyCodes();
-    }
-
     private void CreateNewSequenceAtStart()
     {
         _isPlayer1Turn = GameManager.Instance.PlayerTurn() == 1;
@@ -215,15 +209,15 @@ public class RythmTimeLine : MonoBehaviour
         _player2HandSequence.handSigns.Clear();
 
         List<HandsSign> tempHandSign = new List<HandsSign>();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(PlayerNumber.Player1, 2);
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 2);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
 
         tempHandSign.Clear();
-        tempHandSign = _player2HandSequence.CreateRandomHandSign(PlayerNumber.Player2, 2);
+        tempHandSign = _player2HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player2 : PlayerNumber.Player1, 2);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
 
         tempHandSign.Clear();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(PlayerNumber.Player1, 2);
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 2);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
     }
 
@@ -234,7 +228,9 @@ public class RythmTimeLine : MonoBehaviour
         if (_sucessTextPlayer1.color.a > 0) _sucessTextPlayer1.color = new Color(0, 0, 0, _sucessTextPlayer1.color.a - 0.01f);
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.Instance.ChangeState(GameManager.GameStates.Player1Attack);
+            GameManager.Instance.ChangeState(GameManager.GameStates.Player2Attack);
+            CreateNewSequenceAtStart();
+            DiplayCurrentKeyCodes();
             _isPlaying = true;
             _timeLine.Play();
         }
