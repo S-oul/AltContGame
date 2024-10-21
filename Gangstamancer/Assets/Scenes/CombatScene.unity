@@ -1708,6 +1708,7 @@ MonoBehaviour:
   BGYellowAttack: {fileID: 21300000, guid: bec9f85aa8cf0a2459a1e4388e9f867b, type: 3}
   BGYellowDefense: {fileID: 21300000, guid: 6046050dc0a5b334ca02a5e6bbe5b6b5, type: 3}
   BGEcranPrincipal: {fileID: 1579427903}
+  firstState: 0
 --- !u!82 &940111316
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3408,14 +3409,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2786e9447520684680d45dbf5e4ba18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeLine: {fileID: 940111315}
+  fouleeee: {fileID: 813704596}
   _player1Inputs: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
   _player2Inputs: {fileID: 11400000, guid: 005330c4de2e8d243b946f4baf81a845, type: 2}
   p1Left: {fileID: 1927817070}
   p1Right: {fileID: 1337657629}
   p2Left: {fileID: 91184583}
   p2Right: {fileID: 434405707}
-  P1TEXT: {fileID: 0}
-  P2TEXT: {fileID: 0}
+  P1TEXT: {fileID: 1122283522}
+  P2TEXT: {fileID: 2122390721}
+  bg: {fileID: 1135398808}
 --- !u!1 &1447942026
 GameObject:
   m_ObjectHideFlags: 0
