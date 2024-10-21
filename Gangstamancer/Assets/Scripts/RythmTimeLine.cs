@@ -19,6 +19,8 @@ public class RythmTimeLine : MonoBehaviour
 
     [SerializeField] PlayableDirector _timeLine;
 
+    [SerializeField] float winOnLastChance = 2;
+
     [Header("Players Inputs")]
     [SerializeField] PlayerHandsInput _player1Inputs;
     [SerializeField] PlayerHandsInput _player2Inputs;
@@ -86,6 +88,7 @@ public class RythmTimeLine : MonoBehaviour
         switch (GameManager.Instance.CurrentState)
         {
             case GameStates.Player1Defense:
+                
                 BGEcranPrincipal.sprite = BGYellowAttack;
                 _player1DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Defense is  " + fullSucses;
@@ -94,6 +97,13 @@ public class RythmTimeLine : MonoBehaviour
                 {
                     if (_player2AttackSuccess)
                     {
+                        if (FouleUnitaire.Instance.FouleRight == 0) 
+                        {
+                            for (int i = 0; i < winOnLastChance; i++)
+                            {
+                                FouleUnitaire.Instance.AddRightFan();
+                            }
+                        }
 
                         if (FouleUnitaire.Instance.FouleLeft == 0) Debug.LogError("GAMEOVER");
 
@@ -115,7 +125,7 @@ public class RythmTimeLine : MonoBehaviour
 
 
 
-                if (fullSucses) FouleUnitaire.Instance.AddLeftFan();
+                if (fullSucses && FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
                 break;
 
             case GameStates.Player2Defense:
@@ -128,7 +138,13 @@ public class RythmTimeLine : MonoBehaviour
                 {
                     if (_player1AttackSuccess)
                     {
-
+                        if (FouleUnitaire.Instance.FouleLeft == 0)
+                        {
+                            for (int i = 0; i < winOnLastChance; i++)
+                            {
+                                FouleUnitaire.Instance.AddLeftFan();
+                            }
+                        }
                         if (FouleUnitaire.Instance.FouleRight == 0) Debug.LogError("GAMEOVER");
 
                         print(FouleUnitaire.Instance.FouleLeft + "   " + FouleUnitaire.Instance.FouleLeft / 2);
@@ -148,7 +164,7 @@ public class RythmTimeLine : MonoBehaviour
                 _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;
 
 
-                if (fullSucses) FouleUnitaire.Instance.AddRightFan();
+                if (fullSucses && FouleUnitaire.Instance.FouleRight != 0) FouleUnitaire.Instance.AddRightFan();
 
                 break;
 

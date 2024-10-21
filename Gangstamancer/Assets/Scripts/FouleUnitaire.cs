@@ -34,7 +34,8 @@ public class FouleUnitaire : MonoBehaviour
     [SerializeField] int _fouleRight = 0;
 
 
-
+    [Range(0,15)]
+    [SerializeField] float _CamMaxDegre = 0;
 
     [SerializeField] List<Transform> posLeft;
     [SerializeField] List<Transform> posRight;
@@ -121,11 +122,10 @@ public class FouleUnitaire : MonoBehaviour
 
     void CheckCam()
     {
-        return;
         int diff = FouleLeft - FouleRight;
         if (Mathf.Abs(diff) >= 2)
         {
-            StartCoroutine(goToRot(diff * 1.5f));
+            StartCoroutine(goToRot(diff * _CamMaxDegre / 10f));
         }
         else
         {
