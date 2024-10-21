@@ -62,6 +62,9 @@ public class RythmTimeLine : MonoBehaviour
     bool _player2AttackSuccess = false;
     bool _player2DefenseSuccess = false;
 
+    bool _player1SuperAttack = false;
+    bool _player2SuperAttack = false;
+
 
 
 
@@ -94,13 +97,16 @@ public class RythmTimeLine : MonoBehaviour
         switch (GameManager.Instance.CurrentState)
         {
             case GameStates.Player1Defense:
-                
+
                 BGEcranPrincipal.sprite = BGYellowAttack;
                 _player1DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Defense is  " + fullSucses;
 
                 if (!fullSucses) // FAILED
                 {
+                    _player1.SetBool("Sayajin", false);
+                    _player1SuperAttack = false;
+
                     if (_player2AttackSuccess)
                     {
                         if (FouleUnitaire.Instance.FouleRight == 0) 
@@ -113,12 +119,21 @@ public class RythmTimeLine : MonoBehaviour
 
                         if (FouleUnitaire.Instance.FouleLeft == 0) OnGameOver?.Invoke(2);
 
-                        print(FouleUnitaire.Instance.FouleRight + "   " + FouleUnitaire.Instance.FouleRight / 2);
+                        if (_player2SuperAttack)
+                        {
+                            for (int i = 0; i < FouleUnitaire.Instance.FouleRight; i++)
+                            {
+                                FouleUnitaire.Instance.RemoveLeftFan();
+                            }
+                        }
+                            print(FouleUnitaire.Instance.FouleRight + "   " + FouleUnitaire.Instance.FouleRight / 2);
                         for (int i = 0; i < FouleUnitaire.Instance.FouleRight / 2; i++)
                         {
                             FouleUnitaire.Instance.RemoveLeftFan();
                         }
                     }
+                }else
+                {
                 }
 
                 break;
@@ -131,7 +146,9 @@ public class RythmTimeLine : MonoBehaviour
 
                 if (!fullSucses)
                 {
-                    _player2.SetTrigger("Sayajin");
+                    _player2SuperAttack = true;
+                    _player2.SetBool("Sayajin", true);
+
                 }
 
                 if (fullSucses && FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
@@ -140,13 +157,18 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player2Defense:
+
                 BGEcranPrincipal.sprite = BGPurpleAttack;
+                
 
                 _player2DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P2 Defense is  " + fullSucses;
 
                 if (!fullSucses) // FAILED
                 {
+                    _player2.SetBool("Sayajin", false);
+                    _player2SuperAttack = false;
+
                     if (_player1AttackSuccess)
                     {
                         if (FouleUnitaire.Instance.FouleLeft == 0)
@@ -159,6 +181,14 @@ public class RythmTimeLine : MonoBehaviour
                         if (FouleUnitaire.Instance.FouleRight == 0) OnGameOver?.Invoke(1);
 
                         print(FouleUnitaire.Instance.FouleLeft + "   " + FouleUnitaire.Instance.FouleLeft / 2);
+                        
+                        if (_player1SuperAttack)
+                        {
+                            for (int i = 0; i < FouleUnitaire.Instance.FouleRight; i++)
+                            {
+                                FouleUnitaire.Instance.RemoveLeftFan();
+                            }
+                        }
                         for (int i = 0; i < FouleUnitaire.Instance.FouleLeft / 2; i++)
                         {
                             FouleUnitaire.Instance.RemoveRightFan();
@@ -175,11 +205,12 @@ public class RythmTimeLine : MonoBehaviour
 
                 if (!fullSucses)
                 {
-                    _player1.SetTrigger("Sayajin");
+                    _player1SuperAttack = true;
+                    _player1.SetBool("Sayajin", true);
+
                 }
 
                 _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;
-
 
                 if (fullSucses && FouleUnitaire.Instance.FouleRight != 0) FouleUnitaire.Instance.AddRightFan();
 
