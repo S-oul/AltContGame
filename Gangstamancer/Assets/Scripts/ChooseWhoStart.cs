@@ -134,10 +134,14 @@ public class ChooseWhoStart : MonoBehaviour
             if (Input.GetKey(key))
             {
                 if (fingerType1.Contains(key))
+                {
+                    print("YEEEEEEEEEEEEEEES");
                     isSuccess++;
+                }
                 else isSuccess--;
             }
         }
+        print(isSuccess + "  " + _player1Inputs.playerInputs.Count);
         return isSuccess;
     }
     int CheckInputP2()
