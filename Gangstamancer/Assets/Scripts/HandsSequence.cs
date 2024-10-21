@@ -29,6 +29,19 @@ public class HandsSequence : ScriptableObject
         handSigns.Add(handSign);
         return handSign;
     }
+    
+    public static HandsSign CreateRandomHandSign(PlayerNumber playerNumber, bool none = false)
+    {
+        GameManager gameManager = GameManager.Instance;
+        HandsSign handSign = new HandsSign();
+        handSign.handSignLeft = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
+        handSign.handSignRight = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
+        handSign.height = (Height)UnityEngine.Random.Range(1, 3);
+        handSign.player = playerNumber;
+        handSign.inputsPlayer = handSign.player == PlayerNumber.Player1 ? gameManager.Player1Inputs : gameManager.Player2Inputs;
+        handSign.KeyCodesFingers = handSign.CreateKeyCodesFromFingers();
+        return handSign;
+    }
 
     public List<HandsSign> CreateRandomHandSign(PlayerNumber playerNumber, int numberToCreate)
     {
@@ -107,7 +120,7 @@ public struct HandsSign
         return KeyCodesFingers = keyCodes;
         
     }
-
+    
 
     #region Operators
 

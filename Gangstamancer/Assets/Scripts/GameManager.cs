@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
-    public static event System.Action Player1Turn;
-    public static event System.Action Player2Turn;
 
     #region GameStates
     public enum GameStates
@@ -31,11 +29,6 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    private int _currentSequenceIndex = 0;
-    private float _timeBetweenSequences = 3f;
-    private float _timeForPlayerToInput = 2f;
-    private HandsSign _currentHandSign;
-    private List<KeyCode> _player1InputKeys;
 
     [SerializeField, Expandable] private PlayerHandsInput _player1Inputs;
     [SerializeField, Expandable] private PlayerHandsInput _player2Inputs;
