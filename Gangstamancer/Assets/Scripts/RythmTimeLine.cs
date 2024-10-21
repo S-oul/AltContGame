@@ -12,6 +12,7 @@ using static GameManager;
 public class RythmTimeLine : MonoBehaviour
 {
     public static event System.Action OnBeat;
+    public static event System.Action<int> OnGameOver; // 1 = player 1, 2 = player 2
     public static event System.Action<HandsSign> CreateNewHandSign;
     public static event System.Action<List<HandsSign>> CreateNewMultipleHandsSigns;
 
@@ -95,7 +96,7 @@ public class RythmTimeLine : MonoBehaviour
                     if (_player2AttackSuccess)
                     {
 
-                        if (FouleUnitaire.Instance.FouleLeft == 0) Debug.LogError("GAMEOVER");
+                        if (FouleUnitaire.Instance.FouleLeft == 0) OnGameOver.Invoke(2);
 
                         print(FouleUnitaire.Instance.FouleRight + "   " + FouleUnitaire.Instance.FouleRight / 2);
                         for (int i = 0; i < FouleUnitaire.Instance.FouleRight / 2; i++)
@@ -129,7 +130,7 @@ public class RythmTimeLine : MonoBehaviour
                     if (_player1AttackSuccess)
                     {
 
-                        if (FouleUnitaire.Instance.FouleRight == 0) Debug.LogError("GAMEOVER");
+                        if (FouleUnitaire.Instance.FouleRight == 0) OnGameOver.Invoke(1);
 
                         print(FouleUnitaire.Instance.FouleLeft + "   " + FouleUnitaire.Instance.FouleLeft / 2);
                         for (int i = 0; i < FouleUnitaire.Instance.FouleLeft / 2; i++)
@@ -228,5 +229,11 @@ public class RythmTimeLine : MonoBehaviour
     {
         _inputTextPlayer1.text = "";
         _inputTextPlayer2.text = "";
+    }
+
+    public void StopBeat()
+    {
+        _timeLine.Stop();
+        _isPlaying = false;
     }
 }
