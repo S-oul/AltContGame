@@ -360,6 +360,7 @@ public class RythmTimeLine : MonoBehaviour
         _timeLine.Stop();
         _isPlaying = false;
     }
+
     public void DiplayPlayer1Hands(bool display)
     {
         _handsOnPlayer1.SetActive(display);

@@ -9,12 +9,10 @@ public class AnimScriptEvent : MonoBehaviour
     public UnityEvent OnAnimFinishedEvent;
     public void OnAnimStarted()
     {
-        Debug.Log("Anim Started");
         OnAnimStartedEvent.Invoke();
     }
     public void OnAnimFinished()
     {
-        Debug.Log("Anim Finished");
         OnAnimFinishedEvent.Invoke();
     }
 }
