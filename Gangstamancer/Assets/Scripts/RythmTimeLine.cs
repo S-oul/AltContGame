@@ -40,11 +40,15 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] Sprite BGYellowDefense;
     [SerializeField] SpriteRenderer BGEcranPrincipal;
 
-    [SerializeField] Animator _player1;
+    [SerializeField] Animator _player1Sayajin;
     [SerializeField] Animator _player1Attack;
+    [SerializeField] Animator _player1;
 
-    [SerializeField] Animator _player2;
+
+    [SerializeField] Animator _player2Sayajin;
     [SerializeField] Animator _player2Attack;
+    [SerializeField] Animator _player2;
+
 
 
     private HandsSequence _currentHandsSequence;
@@ -76,7 +80,7 @@ public class RythmTimeLine : MonoBehaviour
         {
             if (Input.GetKey(key))
             {
-                if (_currentKeyCodes.Contains(key)) 
+                if (_currentKeyCodes.Contains(key))
                     isSuccess++;
                 else isSuccess--;
             }
@@ -102,12 +106,13 @@ public class RythmTimeLine : MonoBehaviour
 
                 if (!fullSucses) // FAILED
                 {
-                    _player1.SetBool("Sayajin", false);
+                    _player1Sayajin.SetBool("Sayajin", false);
                     _player1SuperAttack = false;
 
                     if (_player2AttackSuccess)
                     {
-                        if (FouleUnitaire.Instance.FouleRight == 0) 
+                        _player1.SetTrigger("OnHit");
+                        if (FouleUnitaire.Instance.FouleRight == 0)
                         {
                             for (int i = 0; i < winOnLastChance; i++)
                             {
@@ -122,19 +127,20 @@ public class RythmTimeLine : MonoBehaviour
                             for (int i = 0; i < FouleUnitaire.Instance.FouleRight; i++)
                             {
                                 FouleUnitaire.Instance.RemoveLeftFan();
-                                _player2.SetBool("Sayajin", false);
+                                _player2Sayajin.SetBool("Sayajin", false);
                                 _player2SuperAttack = false;
                             }
                         }
-                            print(FouleUnitaire.Instance.FouleRight + "   " + FouleUnitaire.Instance.FouleRight / 2);
+                        print(FouleUnitaire.Instance.FouleRight + "   " + FouleUnitaire.Instance.FouleRight / 2);
                         for (int i = 0; i < FouleUnitaire.Instance.FouleRight / 2; i++)
                         {
                             FouleUnitaire.Instance.RemoveLeftFan();
                         }
                     }
-                }else
+                }
+                else
                 {
-                    if (_player1SuperAttack) _player1.SetBool("Sayajin", true);
+                    if (_player1SuperAttack) _player1Sayajin.SetBool("Sayajin", true);
                     else _player1Attack.SetTrigger("Defense");
 
                     PutGoodHandsOnPlayer1();
@@ -146,8 +152,8 @@ public class RythmTimeLine : MonoBehaviour
                 BGEcranPrincipal.sprite = BGPurpleDefense;
 
                 _player1AttackSuccess = fullSucses;
-                    _player1SuperAttack = false;
-                _player1.SetBool("Sayajin", false);
+                _player1SuperAttack = false;
+                _player1Sayajin.SetBool("Sayajin", false);
 
                 _sucessTextPlayer1.text = "P1 Attack is  " + fullSucses;
 
@@ -168,18 +174,19 @@ public class RythmTimeLine : MonoBehaviour
             case GameStates.Player2Defense:
 
                 BGEcranPrincipal.sprite = BGPurpleAttack;
-                
+
 
                 _player2DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P2 Defense is  " + fullSucses;
 
                 if (!fullSucses) // FAILED
                 {
-                    _player2.SetBool("Sayajin", false);
+                    _player2Sayajin.SetBool("Sayajin", false);
                     _player2SuperAttack = false;
 
                     if (_player1AttackSuccess)
                     {
+                        _player2.SetTrigger("OnHit");
                         if (FouleUnitaire.Instance.FouleLeft == 0)
                         {
                             for (int i = 0; i < winOnLastChance; i++)
@@ -190,13 +197,13 @@ public class RythmTimeLine : MonoBehaviour
                         if (FouleUnitaire.Instance.FouleRight == 0) OnGameOver?.Invoke(1);
 
                         print(FouleUnitaire.Instance.FouleLeft + "   " + FouleUnitaire.Instance.FouleLeft / 2);
-                        
+
                         if (_player1SuperAttack)
                         {
                             for (int i = 0; i < FouleUnitaire.Instance.FouleRight; i++)
                             {
                                 FouleUnitaire.Instance.RemoveLeftFan();
-                                _player1.SetBool("Sayajin", false);
+                                _player1Sayajin.SetBool("Sayajin", false);
                                 _player1SuperAttack = false;
                             }
                         }
@@ -205,9 +212,10 @@ public class RythmTimeLine : MonoBehaviour
                             FouleUnitaire.Instance.RemoveRightFan();
                         }
                     }
-                }else
+                }
+                else
                 {
-                    if(_player2SuperAttack) _player2.SetBool("Sayajin", true);
+                    if (_player2SuperAttack) _player2Sayajin.SetBool("Sayajin", true);
                     else _player2Attack.SetTrigger("Defense");
                     PutGoodHandsOnPlayer2();
                 }
@@ -218,7 +226,7 @@ public class RythmTimeLine : MonoBehaviour
                 BGEcranPrincipal.sprite = BGYellowDefense;
 
                 _player2AttackSuccess = fullSucses;
-                _player2.SetBool("Sayajin", false);
+                _player2Sayajin.SetBool("Sayajin", false);
 
                 if (!fullSucses)
                 {
@@ -251,7 +259,7 @@ public class RythmTimeLine : MonoBehaviour
         _currentHandsSequence.handSigns.RemoveAt(0); // remove the handsign that was just played
 
         _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
-        var handSign = _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1: PlayerNumber.Player2);
+        var handSign = _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2);
         CreateNewHandSign.Invoke(handSign);
         _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
 
@@ -261,7 +269,7 @@ public class RythmTimeLine : MonoBehaviour
 
     private string ChooseAnim()
     {
-        int ran = Random.Range(0,3);
+        int ran = Random.Range(0, 3);
         if (ran == 0) return "FireBall";
         if (ran == 1) return "Portal";
         if (ran == 2) return "Thunder";
@@ -301,7 +309,7 @@ public class RythmTimeLine : MonoBehaviour
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
     }
 
-    
+
 
     void Update()
     {
@@ -317,6 +325,9 @@ public class RythmTimeLine : MonoBehaviour
     }
     public void OnStart()
     {
+        _player1Sayajin.SetTrigger("OnHit");
+        _player2Sayajin.SetTrigger("OnHit");
+
         GameManager.Instance.ChangeState(firstState);
         CreateNewSequenceAtStart();
         DiplayCurrentKeyCodes();
