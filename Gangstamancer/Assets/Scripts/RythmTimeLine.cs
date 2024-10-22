@@ -1,12 +1,7 @@
-using NaughtyAttributes;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 using static GameManager;
 
 public class RythmTimeLine : MonoBehaviour
@@ -137,6 +132,9 @@ public class RythmTimeLine : MonoBehaviour
                     }
                 }else
                 {
+                    if (_player1SuperAttack) _player1.SetBool("Sayajin", true);
+                    else _player1Attack.SetTrigger("Defense");
+
                 }
 
                 break;
@@ -150,14 +148,16 @@ public class RythmTimeLine : MonoBehaviour
                 if (!fullSucses)
                 {
                     _player2SuperAttack = true;
-                    _player2.SetBool("Sayajin", true);
 
                     _player1SuperAttack = false;
                     _player1.SetBool("Sayajin", false);
                 }
 
-                if (fullSucses && FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
-
+                if (fullSucses)
+                {
+                    _player1Attack.SetTrigger(ChooseAnim());
+                    if (FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
+                }
 
                 break;
 
@@ -201,6 +201,11 @@ public class RythmTimeLine : MonoBehaviour
                             FouleUnitaire.Instance.RemoveRightFan();
                         }
                     }
+                }else
+                {
+                    if(_player2SuperAttack) _player2.SetBool("Sayajin", true);
+                    else _player2Attack.SetTrigger("Defense");
+
                 }
 
                 break;
@@ -213,7 +218,6 @@ public class RythmTimeLine : MonoBehaviour
                 if (!fullSucses)
                 {
                     _player1SuperAttack = true;
-                    _player1.SetBool("Sayajin", true);
 
                     _player2SuperAttack = false;
                     _player2.SetBool("Sayajin", false);
@@ -223,7 +227,12 @@ public class RythmTimeLine : MonoBehaviour
 
                 _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;
 
-                if (fullSucses && FouleUnitaire.Instance.FouleRight != 0) FouleUnitaire.Instance.AddRightFan();
+                if (fullSucses)
+                {
+                    _player2Attack.SetTrigger(ChooseAnim());
+
+                    if (FouleUnitaire.Instance.FouleRight != 0) FouleUnitaire.Instance.AddRightFan();
+                }
 
                 break;
 
@@ -246,6 +255,17 @@ public class RythmTimeLine : MonoBehaviour
         _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
 
         DiplayCurrentKeyCodes();
+
+    }
+
+    private string ChooseAnim()
+    {
+        int ran = Random.Range(0,3);
+        if (ran == 0) return "FireBall";
+        if (ran == 1) return "Portal";
+        if (ran == 2) return "Thunder";
+
+        return "FireBall";
 
     }
 
