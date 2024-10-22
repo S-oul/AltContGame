@@ -291,7 +291,7 @@ public class RythmTimeLine : MonoBehaviour
     private void DiplayCurrentKeyCodes()
     {
         _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
-        TextMeshProUGUI inputText = _currentHandsSequence.handSigns[0].player == PlayerNumber.Player1 ? _inputTextPlayer1 : _inputTextPlayer2;
+        TextMeshProUGUI inputText = _isPlayer1Turn ? _inputTextPlayer1 : _inputTextPlayer2;
         inputText.text = "";
 
         foreach (KeyCode key in _currentKeyCodes)
