@@ -99,13 +99,13 @@ public struct HandsSign
         List<KeyCode> keyCodes = new List<KeyCode>();
         KeyCodesFingers = new List<KeyCode>();
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Index))
-            keyCodes.Add(inputsPlayer.LeftHandInputs[3]);
-        if (handSignLeft.FingersTypes.HasFlag(FingerType.Middle))
-            keyCodes.Add(inputsPlayer.LeftHandInputs[2]);
-        if (handSignLeft.FingersTypes.HasFlag(FingerType.Ring))
-            keyCodes.Add(inputsPlayer.LeftHandInputs[1]);
-        if (handSignLeft.FingersTypes.HasFlag(FingerType.Pinky))
             keyCodes.Add(inputsPlayer.LeftHandInputs[0]);
+        if (handSignLeft.FingersTypes.HasFlag(FingerType.Middle))
+            keyCodes.Add(inputsPlayer.LeftHandInputs[1]);
+        if (handSignLeft.FingersTypes.HasFlag(FingerType.Ring))
+            keyCodes.Add(inputsPlayer.LeftHandInputs[2]);
+        if (handSignLeft.FingersTypes.HasFlag(FingerType.Pinky))
+            keyCodes.Add(inputsPlayer.LeftHandInputs[3]);
 
         if (handSignRight.FingersTypes.HasFlag(FingerType.Index))
             keyCodes.Add(inputsPlayer.RightHandInputs[0]);

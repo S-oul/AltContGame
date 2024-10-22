@@ -29,9 +29,6 @@ public class ChooseWhoStart : MonoBehaviour
     HandsSign handSign1;
     HandsSign handSign2;
 
-    List<KeyCode> fingerType1;
-    List<KeyCode> fingerType2;
-
     int phasep1 = 3;
     int phasep2 = 3;
     bool hasAWinner = false;
@@ -45,7 +42,7 @@ public class ChooseWhoStart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasAWinner) if (CheckInputP1() == fingerType1.Count - 1 || Input.GetKeyDown(KeyCode.X))
+        if (!hasAWinner) if (CheckInputP1() == handSign1.KeyCodesFingers.Count || Input.GetKeyDown(KeyCode.X))
             {
                 phasep1--;
                 if (phasep1 == 0)
@@ -60,7 +57,7 @@ public class ChooseWhoStart : MonoBehaviour
                 if(!hasAWinner)
                 ChooseP1RandomHands();
             }
-        if (!hasAWinner) if (CheckInputP2() == fingerType2.Count - 1 || Input.GetKeyDown(KeyCode.C))
+        if (!hasAWinner) if (CheckInputP2() == handSign2.KeyCodesFingers.Count || Input.GetKeyDown(KeyCode.C))
             {
                 //APFJAUIZGEBUKDFGZIUDKFGBI
                 phasep2--;
@@ -106,54 +103,50 @@ public class ChooseWhoStart : MonoBehaviour
     {
         handSign1 = HandsSequence.CreateRandomHandSign(PlayerNumber.Player1);
         p1Left.sprite = handSign1.handSignLeft.SpriteToDoLeft;
-        p1Right.sprite = handSign1.handSignLeft.SpriteToDoRight;
+        p1Right.sprite = handSign1.handSignRight.SpriteToDoRight;
 
 
         p1Right.rectTransform.localScale = new Vector3(-3, 3, 3);
 
-        fingerType1 = handSign1.CreateKeyCodesFromFingers();
 
     }
     void ChooseP2RandomHands()
     {
         handSign2 = HandsSequence.CreateRandomHandSign(PlayerNumber.Player2);
         p2Left.sprite = handSign2.handSignLeft.SpriteToDoLeft;
-        p2Right.sprite = handSign2.handSignLeft.SpriteToDoRight;
+        p2Right.sprite = handSign2.handSignRight.SpriteToDoRight;
 
         p2Right.rectTransform.localScale = new Vector3(-3, 3, 3);
 
-        fingerType2 = handSign2.CreateKeyCodesFromFingers();
     }
 
     int CheckInputP1()
     {
         int isSuccess = 0;
 
-        foreach (KeyCode key in _player1Inputs.playerInputs)
+        foreach (KeyCode key in handSign1.KeyCodesFingers)
         {
             if (Input.GetKey(key))
             {
-                if (fingerType1.Contains(key))
+                if (handSign1.KeyCodesFingers.Contains(key))
                 {
                     isSuccess++;
                 }
                 else isSuccess--;
             }
         }
-        print(isSuccess + "  " + _player1Inputs.playerInputs.Count);
+        print(isSuccess + "  " + handSign1.KeyCodesFingers.Count);
         return isSuccess;
     }
     int CheckInputP2()
     {
         int isSuccess = 0;
 
-        List<KeyCode> toUse;
-
-        foreach (KeyCode key in _player2Inputs.playerInputs)
+        foreach (KeyCode key in handSign2.KeyCodesFingers)
         {
             if (Input.GetKey(key))
             {
-                if (fingerType1.Contains(key))
+                if (handSign2.KeyCodesFingers.Contains(key))
                     isSuccess++;
                 else isSuccess--;
             }
