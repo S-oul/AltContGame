@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,13 +14,15 @@ public class RythmTimeLine : MonoBehaviour
 
     bool _isPlayer1Turn = false;
 
+    [SerializeField] int _nbOfBeatToSkipAtStart;
+
     [SerializeField] PlayableDirector _timeLine;
 
     [SerializeField] float winOnLastChance = 2;
 
     [Header("Players Inputs")]
-    [SerializeField] PlayerHandsInput _player1Inputs;
-    [SerializeField] PlayerHandsInput _player2Inputs;
+    [SerializeField, Expandable] PlayerHandsInput _player1Inputs;
+    [SerializeField, Expandable] PlayerHandsInput _player2Inputs;
 
     [Header("UI Players")]
     [SerializeField] TextMeshProUGUI _sucessTextPlayer1;
@@ -29,8 +32,8 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] private GameObject _handsOnPlayer2;
 
     [Header("Players Hands Sequences")]
-    [SerializeField] private HandsSequence _player1HandSequence;
-    [SerializeField] private HandsSequence _player2HandSequence;
+    [SerializeField, Expandable] private HandsSequence _player1HandSequence;
+    [SerializeField, Expandable] private HandsSequence _player2HandSequence;
 
 
     [Header("Ecren Principal PNG")]
@@ -90,9 +93,16 @@ public class RythmTimeLine : MonoBehaviour
 
     public void DoOnBeat()
     {
+        OnBeat?.Invoke();
+
+        if (_nbOfBeatToSkipAtStart > 0)
+        {
+            _nbOfBeatToSkipAtStart--;
+            return;
+        }
+
         BGEcranPrincipal.color = Color.white;
         _sucessTextPlayer1.text = GameManager.Instance.CurrentState.ToString() + "  ";
-        OnBeat?.Invoke();
         int intSuccess = CheckInput();
         bool fullSucses = intSuccess == _currentKeyCodes.Count || Input.GetKey(KeyCode.Space);
 
@@ -259,11 +269,11 @@ public class RythmTimeLine : MonoBehaviour
         _currentHandsSequence.handSigns.RemoveAt(0); // remove the handsign that was just played
 
         _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
+        _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
+        DiplayCurrentKeyCodes();
+
         var handSign = _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2);
         CreateNewHandSign.Invoke(handSign);
-        _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
-
-        DiplayCurrentKeyCodes();
 
     }
 
@@ -297,7 +307,7 @@ public class RythmTimeLine : MonoBehaviour
         _player2HandSequence.handSigns.Clear();
 
         List<HandsSign> tempHandSign = new List<HandsSign>();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 2);
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 1);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
 
         tempHandSign.Clear();
