@@ -69,8 +69,6 @@ public class RythmTimeLine : MonoBehaviour
     bool _player2SuperAttack = false;
 
 
-
-
     int CheckInput()
     {
         int isSuccess = 0;

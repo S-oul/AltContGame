@@ -140,7 +140,7 @@ public class ChooseWhoStart : MonoBehaviour
                 else isSuccess--;
             }
         }
-        print(isSuccess + "  " + _player1Inputs.playerInputs.Count);
+        print(isSuccess + "  " + fingerType1.Count);
         return isSuccess;
     }
     int CheckInputP2()
