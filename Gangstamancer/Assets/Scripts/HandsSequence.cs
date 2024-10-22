@@ -96,28 +96,27 @@ public struct HandsSign
 
     public List<KeyCode> CreateKeyCodesFromFingers()
     {
-        List<KeyCode> keyCodes = new List<KeyCode>();
         KeyCodesFingers = new List<KeyCode>();
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Index))
-            keyCodes.Add(inputsPlayer.LeftHandInputs[3]);
+            KeyCodesFingers.Add(inputsPlayer.LeftHandInputs[3]);
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Middle))
-            keyCodes.Add(inputsPlayer.LeftHandInputs[2]);
+            KeyCodesFingers.Add(inputsPlayer.LeftHandInputs[2]);
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Ring))
-            keyCodes.Add(inputsPlayer.LeftHandInputs[1]);
+            KeyCodesFingers.Add(inputsPlayer.LeftHandInputs[1]);
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Pinky))
-            keyCodes.Add(inputsPlayer.LeftHandInputs[0]);
+            KeyCodesFingers.Add(inputsPlayer.LeftHandInputs[0]);
 
         if (handSignRight.FingersTypes.HasFlag(FingerType.Index))
-            keyCodes.Add(inputsPlayer.RightHandInputs[0]);
+            KeyCodesFingers.Add(inputsPlayer.RightHandInputs[0]);
         if (handSignRight.FingersTypes.HasFlag(FingerType.Middle))
-            keyCodes.Add(inputsPlayer.RightHandInputs[1]);
+            KeyCodesFingers.Add(inputsPlayer.RightHandInputs[1]);
         if (handSignRight.FingersTypes.HasFlag(FingerType.Ring))
-            keyCodes.Add(inputsPlayer.RightHandInputs[2]);
+            KeyCodesFingers.Add(inputsPlayer.RightHandInputs[2]);
         if (handSignRight.FingersTypes.HasFlag(FingerType.Pinky))
-            keyCodes.Add(inputsPlayer.RightHandInputs[3]);
+            KeyCodesFingers.Add(inputsPlayer.RightHandInputs[3]);
 
 
-        return KeyCodesFingers = keyCodes;
+        return KeyCodesFingers;
         
     }
     
