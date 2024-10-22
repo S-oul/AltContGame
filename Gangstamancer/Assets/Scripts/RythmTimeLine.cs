@@ -52,7 +52,7 @@ public class RythmTimeLine : MonoBehaviour
 
 
     private HandsSequence _currentHandsSequence;
-    private List<KeyCode> _currentKeyCodes;
+    [SerializeField] private List<KeyCode> _currentKeyCodes;
 
     public GameManager.GameStates firstState;
 

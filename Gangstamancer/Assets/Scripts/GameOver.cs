@@ -9,10 +9,13 @@ public class GameOver : MonoBehaviour
 {
     [Header("GameOver")]
     [SerializeField] private Canvas _canvasGameOver;
-    [SerializeField] private TextMeshProUGUI _textVictorious;
+    [SerializeField] private Image _WinText;
     [SerializeField] private Image _gameOverPlayer;
 
     [Header("PlayersSprites")]
+    [SerializeField] private Sprite _playerYellowWin;
+    [SerializeField] private Sprite _playerPurpleWin;
+
     [SerializeField] private Sprite _player1Sprite;
     [SerializeField] private Sprite _player2Sprite;
 
@@ -37,12 +40,12 @@ public class GameOver : MonoBehaviour
         GameManager.Instance.ChangeState(GameManager.GameStates.GameOver);
         if (player == 1)
         {
-            _textVictorious.text = "Player 1 Wins!";
+            _WinText.sprite = _playerYellowWin;
             _gameOverPlayer.sprite = _player1Sprite;
         }
         else
         {
-            _textVictorious.text = "Player 2 Wins!";
+            _WinText.sprite = _playerPurpleWin;
             _gameOverPlayer.sprite = _player2Sprite;
         }
     }
