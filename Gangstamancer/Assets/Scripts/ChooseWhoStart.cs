@@ -21,11 +21,14 @@ public class ChooseWhoStart : MonoBehaviour
 
     public Image p2Left;
     public Image p2Right;
+    public Image bg;
+
+    [SerializeField] Image _eclair;
+    [SerializeField] Image _versus;
 
     public TextMeshProUGUI P1TEXT;
     public TextMeshProUGUI P2TEXT;
 
-    public Image bg;
     HandsSign handSign1;
     HandsSign handSign2;
 
@@ -85,6 +88,9 @@ public class ChooseWhoStart : MonoBehaviour
             p1Right.color = new Color(1, 1, 1, bg.color.a);
             p2Left.color = new Color(1, 1, 1, bg.color.a);
             p2Right.color = new Color(1, 1, 1, bg.color.a);
+            _eclair.color = new Color(1, 1, 1, bg.color.a);
+            _versus.color = new Color(1, 1, 1, bg.color.a);
+
             yield return null;
         }
         print("test");
