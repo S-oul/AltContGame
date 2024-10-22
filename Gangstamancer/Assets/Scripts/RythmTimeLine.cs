@@ -153,8 +153,8 @@ public class RythmTimeLine : MonoBehaviour
                     if (_player1SuperAttack) _player1Sayajin.SetBool("Sayajin", true);
                     else _player1Attack.SetTrigger("Defense");
 
-                    PutGoodHandsOnPlayer1();
                 }
+                    PutGoodHandsOnPlayer1();
 
                 break;
 
@@ -176,8 +176,8 @@ public class RythmTimeLine : MonoBehaviour
                 {
                     _player1Attack.SetTrigger(ChooseAnim());
                     if (FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
-                    PutGoodHandsOnPlayer1();
                 }
+                    PutGoodHandsOnPlayer1();
 
                 break;
 
@@ -227,8 +227,8 @@ public class RythmTimeLine : MonoBehaviour
                 {
                     if (_player2SuperAttack) _player2Sayajin.SetBool("Sayajin", true);
                     else _player2Attack.SetTrigger("Defense");
-                    PutGoodHandsOnPlayer2();
                 }
+                    PutGoodHandsOnPlayer2();
 
                 break;
 
@@ -250,8 +250,8 @@ public class RythmTimeLine : MonoBehaviour
                     _player2Attack.SetTrigger(ChooseAnim());
 
                     if (FouleUnitaire.Instance.FouleRight != 0) FouleUnitaire.Instance.AddRightFan();
-                    PutGoodHandsOnPlayer2();
                 }
+                    PutGoodHandsOnPlayer2();
 
                 break;
 
@@ -360,13 +360,16 @@ public class RythmTimeLine : MonoBehaviour
         _timeLine.Stop();
         _isPlaying = false;
     }
+
     public void DiplayPlayer1Hands(bool display)
     {
+        return;
         _handsOnPlayer1.SetActive(display);
     }
 
     public void DiplayPlayer2Hands(bool display)
     {
+            return;
         _handsOnPlayer2.SetActive(display);
     }
 
