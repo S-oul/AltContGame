@@ -143,14 +143,14 @@ public class RythmTimeLine : MonoBehaviour
                 BGEcranPrincipal.sprite = BGPurpleDefense;
 
                 _player1AttackSuccess = fullSucses;
+                    _player1SuperAttack = false;
+                _player1.SetBool("Sayajin", false);
+
                 _sucessTextPlayer1.text = "P1 Attack is  " + fullSucses;
 
                 if (!fullSucses)
                 {
                     _player2SuperAttack = true;
-
-                    _player1SuperAttack = false;
-                    _player1.SetBool("Sayajin", false);
                 }
 
                 if (fullSucses)
@@ -214,15 +214,11 @@ public class RythmTimeLine : MonoBehaviour
                 BGEcranPrincipal.sprite = BGYellowDefense;
 
                 _player2AttackSuccess = fullSucses;
+                _player2.SetBool("Sayajin", false);
 
                 if (!fullSucses)
                 {
                     _player1SuperAttack = true;
-
-                    _player2SuperAttack = false;
-                    _player2.SetBool("Sayajin", false);
-
-
                 }
 
                 _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;

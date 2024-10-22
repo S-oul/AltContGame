@@ -3854,9 +3854,11 @@ MonoBehaviour:
   p1Right: {fileID: 1337657629}
   p2Left: {fileID: 91184583}
   p2Right: {fileID: 434405707}
+  bg: {fileID: 1135398808}
+  _eclair: {fileID: 1939371577}
+  _versus: {fileID: 26253129}
   P1TEXT: {fileID: 1122283522}
   P2TEXT: {fileID: 2122390721}
-  bg: {fileID: 1135398808}
 --- !u!1 &1447942026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4015,7 +4017,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 28f273e0cc3494347acf8414ca143baf, type: 3}
-  m_Color: {r: 0.96470594, g: 0.6862745, b: 0.015686275, a: 1}
+  m_Color: {r: 0.9716981, g: 0.811674, b: 0.42626378, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5497,7 +5499,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2cb315838d6bf344ebf62cb7dbd2d90a, type: 3}
-  m_Color: {r: 0.36862746, g: 0.28235295, b: 0.74509805, a: 1}
+  m_Color: {r: 0.509633, g: 0.4448202, b: 0.7924528, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
