@@ -141,7 +141,6 @@ public class ChooseWhoStart : MonoBehaviour
                 else isSuccess--;
             }
         }
-        print(isSuccess + "  " + handSign1.KeyCodesFingers.Count);
         return isSuccess;
     }
     int CheckInputP2()

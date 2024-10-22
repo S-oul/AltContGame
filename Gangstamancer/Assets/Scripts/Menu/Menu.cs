@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI soustitre;
+    [SerializeField] Image fondue;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +50,18 @@ public class Menu : MonoBehaviour
 
     void StartGame()
     {
+        StartCoroutine(IgmFondue());
+    }
 
+    IEnumerator IgmFondue()
+    {
+        while(fondue.color.a <= .99f)
+        {
+            print(fondue.color.a);
+            fondue.color += new Color(0, 0, 0, .1f * Time.deltaTime);
+            yield return null;
+        }
+        fondue.color = new Color(0, 0, 0, 1);
+        SceneManager.LoadScene(1);
     }
 }
