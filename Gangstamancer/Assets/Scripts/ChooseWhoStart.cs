@@ -67,7 +67,7 @@ public class ChooseWhoStart : MonoBehaviour
                 if (phasep2 == 0)
                 {
                     hasAWinner = true;
-                    timeLine.firstState = GameManager.GameStates.Player1Attack;
+                    timeLine.firstState = GameManager.GameStates.Player2Attack;
                     StartCoroutine(ONWin());
 
                     //VIOLET START START
