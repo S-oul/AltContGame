@@ -48,7 +48,7 @@ public class HandsSequence : ScriptableObject
         List<HandsSign> handSignsTemp = new List<HandsSign>();
         for (int i = 0; i < numberToCreate; i++)
         {
-            var currentHandSign = CreateRandomHandSign(PlayerNumber.Player1, mirrorHands);
+            var currentHandSign = CreateRandomHandSign(playerNumber, mirrorHands);
             handSignsTemp.Add(currentHandSign);
         }
 
