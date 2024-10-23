@@ -74,22 +74,14 @@ public class RythmTimeLine : MonoBehaviour
     bool _player2SuperAttack = false;
 
 
-    int CheckInput()
+    bool CheckInput()
     {
         int isSuccess = 0;
 
-        List<KeyCode> toUse = _isPlayer1Turn ? _player1Inputs.playerInputs : _player2Inputs.playerInputs;
+        //List<KeyCode> toUse = _isPlayer1Turn ? _player1Inputs.playerInputs : _player2Inputs.playerInputs;
 
-        foreach (KeyCode key in toUse)
-        {
-            if (Input.GetKey(key))
-            {
-                if (_currentKeyCodes.Contains(key))
-                    isSuccess++;
-                else isSuccess--;
-            }
-        }
-        return isSuccess;
+        print(_currentHandsSequence.handSigns[0].inputString.ToString() + " " + PreviewHandsInputs.input1.ToString());
+        return _currentHandsSequence.handSigns[0].inputString.ToString() == PreviewHandsInputs.input1.ToString();
     }
 
     public void DoOnBeat()
@@ -104,8 +96,10 @@ public class RythmTimeLine : MonoBehaviour
 
         BGEcranPrincipal.color = Color.white;
         _sucessTextPlayer1.text = GameManager.Instance.CurrentState.ToString() + "  ";
-        int intSuccess = CheckInput();
-        bool fullSucses = intSuccess == _currentKeyCodes.Count || Input.GetKey(KeyCode.Space);
+        ////int intSuccess = CheckInput();
+        //print(intSuccess + ' ' + _currentKeyCodes.Count);
+        bool fullSucses = CheckInput() || Input.GetKey(KeyCode.Space);
+        //intSuccess == _currentKeyCodes.Count || Input.GetKey(KeyCode.Space);
 
         switch (GameManager.Instance.CurrentState)
         {
@@ -207,8 +201,6 @@ public class RythmTimeLine : MonoBehaviour
                         }
                         if (FouleUnitaire.Instance.FouleRight == 0) OnGameOver?.Invoke(1);
 
-                        print(FouleUnitaire.Instance.FouleLeft + "   " + FouleUnitaire.Instance.FouleLeft / 2);
-
                         if (_player1SuperAttack)
                         {
                             for (int i = 0; i < FouleUnitaire.Instance.FouleRight; i++)
@@ -280,7 +272,7 @@ public class RythmTimeLine : MonoBehaviour
 
     private string ChooseAnim()
     {
-        int ran = 2; Random.Range(0, 3);
+        int ran = Random.Range(0, 3);
         if (ran == 0) return "FireBall";
         if (ran == 1) return "Portal";
         if (ran == 2) return "Thunder";

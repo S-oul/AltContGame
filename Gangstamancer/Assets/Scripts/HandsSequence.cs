@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using static Fingers;
 using System.Linq;
 using static HandsSign;
+using System.Text;
 
 [CreateAssetMenu(fileName = "HandsSequence", menuName = "Scriptables/HandsSequence")]
 public class HandsSequence : ScriptableObject
@@ -77,6 +78,7 @@ public struct HandsSign
 
     public PlayerHandsInput inputsPlayer;
     public List<KeyCode> KeyCodesFingers;
+    public  StringBuilder inputString;
 
     public enum Height
     {
@@ -88,24 +90,49 @@ public struct HandsSign
 
     public List<KeyCode> CreateKeyCodesFromFingers()
     {
+        inputString = new StringBuilder("00000000");
         KeyCodesFingers = new List<KeyCode>();
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Index))
+        {
             KeyCodesFingers.Add(inputsPlayer.LeftHandInputs[3]);
+            inputString[0] = '1';
+        }
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Middle))
+        {
+            inputString[1] = '1';
             KeyCodesFingers.Add(inputsPlayer.LeftHandInputs[2]);
+        }
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Ring))
+        {
+            inputString[2] = '1';
             KeyCodesFingers.Add(inputsPlayer.LeftHandInputs[1]);
+        }
         if (handSignLeft.FingersTypes.HasFlag(FingerType.Pinky))
+        {
+            inputString[3] = '1';
             KeyCodesFingers.Add(inputsPlayer.LeftHandInputs[0]);
+        }
 
         if (handSignRight.FingersTypes.HasFlag(FingerType.Index))
+        {
+            inputString[4] = '1';
             KeyCodesFingers.Add(inputsPlayer.RightHandInputs[0]);
+        }
         if (handSignRight.FingersTypes.HasFlag(FingerType.Middle))
+        {
+            inputString[5] = '1';
             KeyCodesFingers.Add(inputsPlayer.RightHandInputs[1]);
-        if (handSignRight.FingersTypes.HasFlag(FingerType.Ring))
+        }
+        if (handSignRight.FingersTypes.HasFlag(FingerType.Ring)) 
+        { 
             KeyCodesFingers.Add(inputsPlayer.RightHandInputs[2]);
+            inputString[6] = '1';
+        }
         if (handSignRight.FingersTypes.HasFlag(FingerType.Pinky))
+        {
+            inputString[7] = '1';
             KeyCodesFingers.Add(inputsPlayer.RightHandInputs[3]);
+        }
 
 
         return KeyCodesFingers;

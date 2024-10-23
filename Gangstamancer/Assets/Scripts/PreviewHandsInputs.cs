@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using System.Text;
 
 public class PreviewHandsInputs : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class PreviewHandsInputs : MonoBehaviour
     [SerializeField] private Transform _player2Lefthand;
     [SerializeField] private Transform _player2Righthand;
 
+    [SerializeField] public static StringBuilder input1 = new StringBuilder("00000000");
+
     private void Update()
     {
         CheckPlayer1Inputs();
@@ -37,10 +40,13 @@ public class PreviewHandsInputs : MonoBehaviour
             if (Input.GetKeyDown(_player1Inputs.LeftHandInputs[i]))
             {
                 ReplaceFinger(_player1Lefthand, fingersClosed, i);
+                input1[i] = '1';
             }
             else if (Input.GetKeyUp(_player1Inputs.LeftHandInputs[i]))
             {
                 ReplaceFinger(_player1Lefthand, fingersOpened, i);
+                input1[i] = '0';
+
             }
         }
 
@@ -49,12 +55,17 @@ public class PreviewHandsInputs : MonoBehaviour
             if (Input.GetKeyDown(_player1Inputs.RightHandInputs[i]))
             {
                 ReplaceFinger(_player1Righthand, fingersClosed, i);
+                input1[i + 4] = '1';
+
             }
             else if (Input.GetKeyUp(_player1Inputs.RightHandInputs[i]))
             {
                 ReplaceFinger(_player1Righthand, fingersOpened, i);
+                input1[i+4] = '0';
+
             }
-        }   
+        }
+        //print(input1.ToString());
     }
 
     private void CheckPlayer2Inputs()

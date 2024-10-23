@@ -127,7 +127,6 @@ public class FouleUnitaire : MonoBehaviour
         {
             //StartCoroutine(goToRot(diff * (_CamMaxDegre / 10f)));
             Camera.main.transform.eulerAngles = new Vector3(0,0,diff * (_CamMaxDegre / 10f));
-            print(diff * (_CamMaxDegre / 10f));
         }
         else
         {

@@ -129,19 +129,9 @@ public class ChooseWhoStart : MonoBehaviour
     int CheckInputP1()
     {
         int isSuccess = 0;
-
-        foreach (KeyCode key in handSign1.KeyCodesFingers)
-        {
-            if (Input.GetKey(key))
-            {
-                if (handSign1.KeyCodesFingers.Contains(key))
-                {
-                    isSuccess++;
-                }
-                else isSuccess--;
-            }
-        }
-        return isSuccess;
+        print(PreviewHandsInputs.input1.ToString() + "\n" + handSign1.inputString.ToString());
+        if (PreviewHandsInputs.input1.ToString() == handSign1.inputString.ToString()) return handSign1.KeyCodesFingers.Count;
+        else return 0;
     }
     int CheckInputP2()
     {
