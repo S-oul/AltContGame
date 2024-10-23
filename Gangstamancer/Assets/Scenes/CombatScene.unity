@@ -209,6 +209,7 @@ Transform:
   - {fileID: 2012556493}
   - {fileID: 1698247473}
   - {fileID: 111970569}
+  - {fileID: 5951950631806776166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &25618440
@@ -1247,6 +1248,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f67fb7fbff02a348b011a2cff8ee551, type: 3}
+--- !u!1 &515349754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515349756}
+  - component: {fileID: 515349755}
+  m_Layer: 0
+  m_Name: HandsSpriteOnPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &515349755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515349754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a22fe8e0b99a548bdaaa385d1a2a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handsOnPlayer1: {fileID: 3695945909619361970}
+  _handsOnPlayer2: {fileID: 3695945910203465357}
+  handPlayer1: {fileID: 5951950632399570267}
+  handPlayer2: {fileID: 5951950631806776168}
+  _handsSigns: []
+--- !u!4 &515349756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515349754}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 672902952}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,6 +1703,7 @@ Transform:
   - {fileID: 965808405}
   - {fileID: 813704595}
   - {fileID: 724352986}
+  - {fileID: 515349756}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &701704660
@@ -2148,7 +2199,7 @@ SpriteRenderer:
   m_Size: {x: 7, y: 5.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &773552874
@@ -2166,8 +2217,8 @@ MonoBehaviour:
   OnAnimStartedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 940111315}
-        m_TargetAssemblyTypeName: RythmTimeLine, Assembly-CSharp
+      - m_Target: {fileID: 515349755}
+        m_TargetAssemblyTypeName: HandsSpriteOnPlayers, Assembly-CSharp
         m_MethodName: DiplayPlayer1Hands
         m_Mode: 6
         m_Arguments:
@@ -2181,8 +2232,8 @@ MonoBehaviour:
   OnAnimFinishedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 940111315}
-        m_TargetAssemblyTypeName: RythmTimeLine, Assembly-CSharp
+      - m_Target: {fileID: 515349755}
+        m_TargetAssemblyTypeName: HandsSpriteOnPlayers, Assembly-CSharp
         m_MethodName: DiplayPlayer1Hands
         m_Mode: 6
         m_Arguments:
@@ -2448,8 +2499,7 @@ MonoBehaviour:
   _sucessTextPlayer1: {fileID: 1677159411}
   _inputTextPlayer1: {fileID: 557887972}
   _inputTextPlayer2: {fileID: 956625773}
-  _handsOnPlayer1: {fileID: 3695945909619361970}
-  _handsOnPlayer2: {fileID: 3695945910203465357}
+  _handsSpriteOnPlayers: {fileID: 515349755}
   _player1HandSequence: {fileID: 11400000, guid: e195a4b0ae078de4b8be6a87a4f45500, type: 2}
   _player2HandSequence: {fileID: 11400000, guid: a136619e72410d240a302aa92dee8a16, type: 2}
   BGPurpleAttack: {fileID: 21300000, guid: c085a10b069318a4da61206b10b3c804, type: 3}
@@ -3800,6 +3850,7 @@ Transform:
   - {fileID: 1604929308}
   - {fileID: 773552871}
   - {fileID: 2134825753}
+  - {fileID: 5951950632399570265}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1365574156
@@ -5259,8 +5310,8 @@ MonoBehaviour:
   OnAnimStartedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 940111315}
-        m_TargetAssemblyTypeName: RythmTimeLine, Assembly-CSharp
+      - m_Target: {fileID: 515349755}
+        m_TargetAssemblyTypeName: HandsSpriteOnPlayers, Assembly-CSharp
         m_MethodName: DiplayPlayer2Hands
         m_Mode: 6
         m_Arguments:
@@ -5274,8 +5325,8 @@ MonoBehaviour:
   OnAnimFinishedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 940111315}
-        m_TargetAssemblyTypeName: RythmTimeLine, Assembly-CSharp
+      - m_Target: {fileID: 515349755}
+        m_TargetAssemblyTypeName: HandsSpriteOnPlayers, Assembly-CSharp
         m_MethodName: DiplayPlayer2Hands
         m_Mode: 6
         m_Arguments:
@@ -6824,14 +6875,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3695945910203465357}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.46, y: -2.7, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.24000025, y: -0.46000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1512148259405794695}
   - {fileID: 2992302853100476293}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 25618439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5951950631806776167
 MonoBehaviour:
@@ -6875,14 +6926,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3695945909619361970}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3, y: -2.72, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.7, y: -0.48000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1512148259996187576}
   - {fileID: 2992302853682799034}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1365574155}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5951950632399570266
 MonoBehaviour:
@@ -6962,5 +7013,3 @@ SceneRoots:
   - {fileID: 1189995753}
   - {fileID: 1365574155}
   - {fileID: 25618439}
-  - {fileID: 5951950632399570265}
-  - {fileID: 5951950631806776166}

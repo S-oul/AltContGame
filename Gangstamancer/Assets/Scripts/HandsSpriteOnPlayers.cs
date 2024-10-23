@@ -6,12 +6,15 @@ public class HandsSpriteOnPlayers : MonoBehaviour
 {
     [SerializeField] private GameObject _handsOnPlayer1;
     [SerializeField] private GameObject _handsOnPlayer2;
-    [SerializeField] private Animator handPlayer1;
-    [SerializeField] private Animator handPlayer2;
-
-    [SerializeField] private List<Fingers> _handsSigns;
+    private Animator handPlayer1;
+    private Animator handPlayer2;
 
 
+    private void Start()
+    {
+        handPlayer1 = _handsOnPlayer1.GetComponent<Animator>();
+        handPlayer2 = _handsOnPlayer2.GetComponent<Animator>(); 
+    }
     public void DiplayPlayer1Hands(bool display)
     {
         _handsOnPlayer1.SetActive(display);
