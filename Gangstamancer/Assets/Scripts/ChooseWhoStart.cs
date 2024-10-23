@@ -107,7 +107,7 @@ public class ChooseWhoStart : MonoBehaviour
     }
     void ChooseP1RandomHands()
     {
-        handSign1 = HandsSequence.CreateRandomHandSign(PlayerNumber.Player1);
+        handSign1 = HandsSequence.CreateStaticRandomHandSign(PlayerNumber.Player1, timeLine.GenerateMirrorHands);
         p1Left.sprite = handSign1.handSignLeft.SpriteToDoLeft;
         p1Right.sprite = handSign1.handSignRight.SpriteToDoRight;
 
@@ -118,7 +118,7 @@ public class ChooseWhoStart : MonoBehaviour
     }
     void ChooseP2RandomHands()
     {
-        handSign2 = HandsSequence.CreateRandomHandSign(PlayerNumber.Player2);
+        handSign2 = HandsSequence.CreateStaticRandomHandSign(PlayerNumber.Player2, timeLine.GenerateMirrorHands);
         p2Left.sprite = handSign2.handSignLeft.SpriteToDoLeft;
         p2Right.sprite = handSign2.handSignRight.SpriteToDoRight;
 

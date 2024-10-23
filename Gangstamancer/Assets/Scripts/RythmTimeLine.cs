@@ -15,6 +15,8 @@ public class RythmTimeLine : MonoBehaviour
     bool _isPlayer1Turn = false;
 
     [SerializeField] int _nbOfBeatToSkipAtStart;
+    [SerializeField] bool _generateMirrorhands;
+    public bool GenerateMirrorHands { get => _generateMirrorhands; set => _generateMirrorhands = value; }   
 
     [SerializeField] PlayableDirector _timeLine;
 
@@ -272,7 +274,7 @@ public class RythmTimeLine : MonoBehaviour
         _currentKeyCodes = _currentHandsSequence.handSigns[0].KeyCodesFingers;
         DiplayCurrentKeyCodes();
 
-        var handSign = _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2);
+        var handSign = _currentHandsSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, _generateMirrorhands);
         CreateNewHandSign.Invoke(handSign);
 
     }
@@ -307,15 +309,15 @@ public class RythmTimeLine : MonoBehaviour
         _player2HandSequence.handSigns.Clear();
 
         List<HandsSign> tempHandSign = new List<HandsSign>();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 1);
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 1, _generateMirrorhands);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
 
         tempHandSign.Clear();
-        tempHandSign = _player2HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player2 : PlayerNumber.Player1, 2);
+        tempHandSign = _player2HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player2 : PlayerNumber.Player1, 2, _generateMirrorhands);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
 
         tempHandSign.Clear();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 2);
+        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 2, _generateMirrorhands);
         CreateNewMultipleHandsSigns.Invoke(tempHandSign);
     }
 
