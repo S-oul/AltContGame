@@ -30,8 +30,7 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] TextMeshProUGUI _sucessTextPlayer1;
     [SerializeField] TextMeshProUGUI _inputTextPlayer1;
     [SerializeField] TextMeshProUGUI _inputTextPlayer2;
-    [SerializeField] private GameObject _handsOnPlayer1;
-    [SerializeField] private GameObject _handsOnPlayer2;
+    [SerializeField] HandsSpriteOnPlayers _handsSpriteOnPlayers;
 
     [Header("Players Hands Sequences")]
     [SerializeField, Expandable] private HandsSequence _player1HandSequence;
@@ -155,7 +154,7 @@ public class RythmTimeLine : MonoBehaviour
                     if (_player1SuperAttack) _player1Sayajin.SetBool("Sayajin", true);
                     else _player1Attack.SetTrigger("Defense");
 
-                    PutGoodHandsOnPlayer1();
+                    _handsSpriteOnPlayers.PutGoodHandsOnPlayer1(_player1HandSequence.handSigns[0]);
                 }
 
                 break;
@@ -178,7 +177,7 @@ public class RythmTimeLine : MonoBehaviour
                 {
                     _player1Attack.SetTrigger(ChooseAnim());
                     if (FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
-                    PutGoodHandsOnPlayer1();
+                    _handsSpriteOnPlayers.PutGoodHandsOnPlayer1(_player1HandSequence.handSigns[0]);
                 }
 
                 break;
@@ -229,7 +228,7 @@ public class RythmTimeLine : MonoBehaviour
                 {
                     if (_player2SuperAttack) _player2Sayajin.SetBool("Sayajin", true);
                     else _player2Attack.SetTrigger("Defense");
-                    PutGoodHandsOnPlayer2();
+                    _handsSpriteOnPlayers.PutGoodHandsOnPlayer2(_player2HandSequence.handSigns[0]);
                 }
 
                 break;
@@ -252,7 +251,7 @@ public class RythmTimeLine : MonoBehaviour
                     _player2Attack.SetTrigger(ChooseAnim());
 
                     if (FouleUnitaire.Instance.FouleRight != 0) FouleUnitaire.Instance.AddRightFan();
-                    PutGoodHandsOnPlayer2();
+                    _handsSpriteOnPlayers.PutGoodHandsOnPlayer2(_player2HandSequence.handSigns[0]);
                 }
 
                 break;
@@ -362,28 +361,5 @@ public class RythmTimeLine : MonoBehaviour
         _timeLine.Stop();
         _isPlaying = false;
     }
-
-    public void DiplayPlayer1Hands(bool display)
-    {
-        _handsOnPlayer1.SetActive(display);
-    }
-
-    public void DiplayPlayer2Hands(bool display)
-    {
-        _handsOnPlayer2.SetActive(display);
-    }
-
-    public void PutGoodHandsOnPlayer1()
-    {
-        _handsOnPlayer1.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _player1HandSequence.handSigns[0].handSignLeft.SpriteLeft;
-        _handsOnPlayer1.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = _player1HandSequence.handSigns[0].handSignRight.SpriteRight;
-    }
-
-    public void PutGoodHandsOnPlayer2()
-    {
-        _handsOnPlayer2.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _player2HandSequence.handSigns[0].handSignLeft.SpriteLeft;
-        _handsOnPlayer2.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = _player2HandSequence.handSigns[0].handSignRight.SpriteRight;
-    }
-
 
 }
