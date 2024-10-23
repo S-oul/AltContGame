@@ -33,7 +33,7 @@ public class Menu : MonoBehaviour
             && Input.GetKey(KeyCode.O)
             && Input.GetKey(KeyCode.P)
 
-            /*&& Input.GetKey(KeyCode.Q)
+            && Input.GetKey(KeyCode.Q)
             && Input.GetKey(KeyCode.S)
             && Input.GetKey(KeyCode.D)
             && Input.GetKey(KeyCode.F)
@@ -41,7 +41,7 @@ public class Menu : MonoBehaviour
             && Input.GetKey(KeyCode.J)
             && Input.GetKey(KeyCode.K)
             && Input.GetKey(KeyCode.L)
-            && Input.GetKey(KeyCode.M)*/
+            && Input.GetKey(KeyCode.M)
             )
 
             || Input.GetKey(KeyCode.Space))
