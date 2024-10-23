@@ -53,6 +53,10 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] Animator _player2Attack;
     [SerializeField] Animator _player2;
 
+    [SerializeField] Animator _feebbackFouleYellow;
+    [SerializeField] Animator _feebbackFouleViolette;
+
+
 
 
     private HandsSequence _currentHandsSequence;
@@ -107,12 +111,14 @@ public class RythmTimeLine : MonoBehaviour
         {
             case GameStates.Player1Defense:
 
+
                 BGEcranPrincipal.sprite = BGYellowAttack;
                 _player1DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Defense is  " + fullSucses;
 
                 if (!fullSucses) // FAILED
                 {
+                    _feebbackFouleYellow.SetTrigger(0);
                     _player1Sayajin.SetBool("Sayajin", false);
                     _player1SuperAttack = false;
 
@@ -149,6 +155,7 @@ public class RythmTimeLine : MonoBehaviour
                 }
                 else
                 {
+                    _feebbackFouleYellow.SetTrigger(1);
                     if (_player1SuperAttack) _player1Sayajin.SetBool("Sayajin", true);
                     else _player1Attack.SetTrigger("Defense");
 
@@ -168,11 +175,12 @@ public class RythmTimeLine : MonoBehaviour
 
                 if (!fullSucses)
                 {
+                    _feebbackFouleYellow.SetTrigger(1);
                     _player2SuperAttack = true;
-                }
-
-                if (fullSucses)
+                }else
                 {
+                    _feebbackFouleYellow.SetTrigger(0);
+
                     _player1Attack.SetTrigger(ChooseAnim());
                     if (FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
                     _handsSpriteOnPlayers.PutGoodHandsOnPlayer1(_player1HandSequence.handSigns[0]);
