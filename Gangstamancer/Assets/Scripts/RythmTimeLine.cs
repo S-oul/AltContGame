@@ -118,7 +118,7 @@ public class RythmTimeLine : MonoBehaviour
 
                 if (!fullSucses) // FAILED
                 {
-                    _feebbackFouleYellow.SetTrigger(0);
+                    _feebbackFouleYellow.SetTrigger("boooo");
                     _player1Sayajin.SetBool("Sayajin", false);
                     _player1SuperAttack = false;
 
@@ -155,7 +155,7 @@ public class RythmTimeLine : MonoBehaviour
                 }
                 else
                 {
-                    _feebbackFouleYellow.SetTrigger(1);
+                    _feebbackFouleYellow.SetTrigger("Yay");
                     if (_player1SuperAttack) _player1Sayajin.SetBool("Sayajin", true);
                     else _player1Attack.SetTrigger("Defense");
 
@@ -175,11 +175,11 @@ public class RythmTimeLine : MonoBehaviour
 
                 if (!fullSucses)
                 {
-                    _feebbackFouleYellow.SetTrigger(1);
+                    _feebbackFouleYellow.SetTrigger("boooo");
                     _player2SuperAttack = true;
                 }else
                 {
-                    _feebbackFouleYellow.SetTrigger(0);
+                    _feebbackFouleYellow.SetTrigger("Yay");
 
                     _player1Attack.SetTrigger(ChooseAnim());
                     if (FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
@@ -198,6 +198,7 @@ public class RythmTimeLine : MonoBehaviour
 
                 if (!fullSucses) // FAILED
                 {
+                    _feebbackFouleViolette.SetTrigger("BooViolette");
                     _player2Sayajin.SetBool("Sayajin", false);
                     _player2SuperAttack = false;
 
@@ -231,6 +232,8 @@ public class RythmTimeLine : MonoBehaviour
                 }
                 else
                 {
+                    _feebbackFouleViolette.SetTrigger("YayViolette");
+
                     if (_player2SuperAttack) _player2Sayajin.SetBool("Sayajin", true);
                     else _player2Attack.SetTrigger("Defense");
                     _handsSpriteOnPlayers.PutGoodHandsOnPlayer2(_player2HandSequence.handSigns[0]);
@@ -242,17 +245,17 @@ public class RythmTimeLine : MonoBehaviour
                 BGEcranPrincipal.sprite = BGYellowDefense;
 
                 _player2AttackSuccess = fullSucses;
+                _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;
                 _player2Sayajin.SetBool("Sayajin", false);
 
                 if (!fullSucses)
                 {
+                    _feebbackFouleViolette.SetTrigger("BooViolette");
                     _player1SuperAttack = true;
-                }
-
-                _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;
-
-                if (fullSucses)
+                }else
                 {
+                    _feebbackFouleViolette.SetTrigger("YayViolette");
+
                     _player2Attack.SetTrigger(ChooseAnim());
 
                     if (FouleUnitaire.Instance.FouleRight != 0) FouleUnitaire.Instance.AddRightFan();
