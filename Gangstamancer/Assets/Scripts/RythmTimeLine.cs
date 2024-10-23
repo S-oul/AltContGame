@@ -281,7 +281,7 @@ public class RythmTimeLine : MonoBehaviour
 
     private string ChooseAnim()
     {
-        int ran = Random.Range(0, 3);
+        int ran = 2; Random.Range(0, 3);
         if (ran == 0) return "FireBall";
         if (ran == 1) return "Portal";
         if (ran == 2) return "Thunder";

@@ -29,4 +29,22 @@ public class AnimScriptEvent : MonoBehaviour
     {
         ImpactAnimator.SetTrigger("Explosion");
     }
+
+    public void Bullets()
+    {
+        ProjectilAnimator.SetTrigger("Bullets");
+    }
+    public void BulletsImpact()
+    {
+        ImpactAnimator.SetTrigger("BulletsImpact");
+    }
+    public void Thunder()
+    {
+        ProjectilAnimator.SetTrigger("Thunder");
+    }
+    public void ThunderImpact()
+    {
+        ImpactAnimator.SetTrigger("ThunderImpact");
+    }
+
 }
