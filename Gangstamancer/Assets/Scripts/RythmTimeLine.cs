@@ -309,20 +309,25 @@ public class RythmTimeLine : MonoBehaviour
         _isPlayer1Turn = GameManager.Instance.PlayerTurn() == 1;
         _currentHandsSequence = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
 
-        _player1HandSequence.handSigns.Clear();
-        _player2HandSequence.handSigns.Clear();
+        
+        var handSequenceStarting = _isPlayer1Turn ? _player1HandSequence : _player2HandSequence;
+        var handSequenceSecond = _isPlayer1Turn ? _player2HandSequence : _player1HandSequence;
 
-        List<HandsSign> tempHandSign = new List<HandsSign>();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 1, _generateMirrorHands);
-        CreateNewMultipleHandsSigns.Invoke(tempHandSign);
+        handSequenceStarting.handSigns.Clear();
+        handSequenceSecond.handSigns.Clear();
 
-        tempHandSign.Clear();
-        tempHandSign = _player2HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player2 : PlayerNumber.Player1, 2, _generateMirrorHands);
-        CreateNewMultipleHandsSigns.Invoke(tempHandSign);
+        Debug.Log($"_isPlayer1Turn: {_isPlayer1Turn} \nCurrentState: {GameManager.Instance.CurrentState}");
 
-        tempHandSign.Clear();
-        tempHandSign = _player1HandSequence.CreateRandomHandSign(_isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 2, _generateMirrorHands);
-        CreateNewMultipleHandsSigns.Invoke(tempHandSign);
+       
+        CreateAndInvokeHandSigns(handSequenceStarting, _isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 1);
+        CreateAndInvokeHandSigns(handSequenceSecond, _isPlayer1Turn ? PlayerNumber.Player2 : PlayerNumber.Player1, 2);
+        CreateAndInvokeHandSigns(handSequenceStarting, _isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 2);
+
+        void CreateAndInvokeHandSigns(HandsSequence sequence, PlayerNumber playerNumber, int numberToCreate)
+        {
+            var tempHandSign = sequence.CreateRandomHandSign(playerNumber, numberToCreate, _generateMirrorHands);
+            CreateNewMultipleHandsSigns.Invoke(tempHandSign);
+        }
     }
 
 
@@ -332,11 +337,7 @@ public class RythmTimeLine : MonoBehaviour
         if (_sucessTextPlayer1.color.a > 0) _sucessTextPlayer1.color = new Color(0, 0, 0, _sucessTextPlayer1.color.a - 0.01f);
         if (!_isPlaying && Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.Instance.ChangeState(firstState);
-            CreateNewSequenceAtStart();
-            DiplayCurrentKeyCodes();
-            _isPlaying = true;
-            _timeLine.Play();
+            OnStart();
         }
     }
     public void OnStart()

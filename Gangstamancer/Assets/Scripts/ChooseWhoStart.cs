@@ -93,7 +93,7 @@ public class ChooseWhoStart : MonoBehaviour
 
             yield return null;
         }
-        print("test");
+        print(timeLine.firstState + " start");
         bg.rectTransform.parent.GetComponent<Canvas>().enabled = false;
         fouleeee.OnStart();
 
