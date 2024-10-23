@@ -16,12 +16,12 @@ public class HandsSequence : ScriptableObject
     public HandsSign GetHandSign(int index) => handSigns[index];
     public int SequenceCount => handSigns.Count;
 
-    public HandsSign CreateRandomHandSign(PlayerNumber playerNumber)
+    public HandsSign CreateRandomHandSign(PlayerNumber playerNumber, bool mirrorHands = false)
     {
         GameManager gameManager = GameManager.Instance;
         HandsSign handSign = new HandsSign();
         handSign.handSignLeft = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
-        handSign.handSignRight = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
+        handSign.handSignRight = mirrorHands ? handSign.handSignLeft : gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
         handSign.height = (Height)UnityEngine.Random.Range(1, 3);
         handSign.player = playerNumber;
         handSign.inputsPlayer = handSign.player == PlayerNumber.Player1 ? gameManager.Player1Inputs : gameManager.Player2Inputs;
@@ -30,7 +30,7 @@ public class HandsSequence : ScriptableObject
         return handSign;
     }
     
-    public static HandsSign CreateRandomHandSign(PlayerNumber playerNumber, bool none = false)
+    public static HandsSign CreateStaticRandomHandSign(PlayerNumber playerNumber, bool mirrorHands = false)
     {
         GameManager gameManager = GameManager.Instance;
         HandsSign handSign = new HandsSign();
@@ -43,21 +43,13 @@ public class HandsSequence : ScriptableObject
         return handSign;
     }
 
-    public List<HandsSign> CreateRandomHandSign(PlayerNumber playerNumber, int numberToCreate)
+    public List<HandsSign> CreateRandomHandSign(PlayerNumber playerNumber, int numberToCreate, bool mirrorHands = false)
     {
         List<HandsSign> handSignsTemp = new List<HandsSign>();
         for (int i = 0; i < numberToCreate; i++)
         {
-            GameManager gameManager = GameManager.Instance;
-            HandsSign handSign = new HandsSign();
-            handSign.handSignLeft = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
-            handSign.handSignRight = gameManager.AllFingers[UnityEngine.Random.Range(0, gameManager.AllFingers.Count)];
-            handSign.height = (Height)UnityEngine.Random.Range(1, 3);
-            handSign.player = playerNumber;
-            handSign.inputsPlayer = handSign.player == PlayerNumber.Player1 ? gameManager.Player1Inputs : gameManager.Player2Inputs;
-            handSign.KeyCodesFingers = handSign.CreateKeyCodesFromFingers();
-            handSigns.Add(handSign);
-            handSignsTemp.Add(handSign);
+            var currentHandSign = CreateRandomHandSign(playerNumber, mirrorHands);
+            handSignsTemp.Add(currentHandSign);
         }
 
         return handSignsTemp;
