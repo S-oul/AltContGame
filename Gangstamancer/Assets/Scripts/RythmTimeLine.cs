@@ -76,12 +76,16 @@ public class RythmTimeLine : MonoBehaviour
 
     bool CheckInput()
     {
-        int isSuccess = 0;
-
-        //List<KeyCode> toUse = _isPlayer1Turn ? _player1Inputs.playerInputs : _player2Inputs.playerInputs;
-
-        print(_currentHandsSequence.handSigns[0].inputString.ToString() + " " + PreviewHandsInputs.input1.ToString());
-        return _currentHandsSequence.handSigns[0].inputString.ToString() == PreviewHandsInputs.input1.ToString();
+        if (_isPlayer1Turn)
+        {
+            print(_currentHandsSequence.handSigns[0].inputString.ToString() + " " + PreviewHandsInputs.input1.ToString());
+            return _currentHandsSequence.handSigns[0].inputString.ToString() == PreviewHandsInputs.input1.ToString();
+        }
+        else
+        {
+            print(_currentHandsSequence.handSigns[0].inputString.ToString() + " " + PreviewHandsInputs.input2.ToString());
+            return _currentHandsSequence.handSigns[0].inputString.ToString() == PreviewHandsInputs.input2.ToString();
+        }
     }
 
     public void DoOnBeat()

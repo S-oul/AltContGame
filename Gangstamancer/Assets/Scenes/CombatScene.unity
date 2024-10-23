@@ -1243,6 +1243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasGameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 7082657721240416980, guid: 1f67fb7fbff02a348b011a2cff8ee551, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1279,9 +1283,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _handsOnPlayer1: {fileID: 3695945909619361970}
   _handsOnPlayer2: {fileID: 3695945910203465357}
-  handPlayer1: {fileID: 5951950632399570267}
-  handPlayer2: {fileID: 5951950631806776168}
-  _handsSigns: []
 --- !u!4 &515349756
 Transform:
   m_ObjectHideFlags: 0
@@ -2491,7 +2492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nbOfBeatToSkipAtStart: 3
-  _generateMirrorhands: 0
+  _generateMirrorhands: 1
   _timeLine: {fileID: 940111312}
   winOnLastChance: 2
   _player1Inputs: {fileID: 11400000, guid: 4db72d3e42b91aa4da859cd347957af8, type: 2}
@@ -3306,7 +3307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6117647}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

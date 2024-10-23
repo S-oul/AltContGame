@@ -26,6 +26,7 @@ public class PreviewHandsInputs : MonoBehaviour
     [SerializeField] private Transform _player2Righthand;
 
     [SerializeField] public static StringBuilder input1 = new StringBuilder("00000000");
+    [SerializeField] public static StringBuilder input2 = new StringBuilder("00000000");
 
     private void Update()
     {
@@ -75,10 +76,14 @@ public class PreviewHandsInputs : MonoBehaviour
             if (Input.GetKeyDown(_player2Inputs.LeftHandInputs[i]))
             {
                 ReplaceFinger(_player2Lefthand, fingersClosed, i);
+                input1[i] = '1';
+
             }
             else if (Input.GetKeyUp(_player2Inputs.LeftHandInputs[i]))
             {
                 ReplaceFinger(_player2Lefthand, fingersOpened, i);
+                input1[i] = '0';
+
             }
         }
 
@@ -87,10 +92,12 @@ public class PreviewHandsInputs : MonoBehaviour
             if (Input.GetKeyDown(_player2Inputs.RightHandInputs[i]))
             {
                 ReplaceFinger(_player2Righthand, fingersClosed, i);
+                input1[i + 4] = '1';
             }
             else if (Input.GetKeyUp(_player2Inputs.RightHandInputs[i]))
             {
                 ReplaceFinger(_player2Righthand, fingersOpened, i);
+                input1[i + 4] = '0';
             }
         }
     }   
