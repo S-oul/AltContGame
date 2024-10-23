@@ -9,13 +9,15 @@ public class DebugHand : MonoBehaviour
 {
     public HandsSign handSign;
     public TextMeshProUGUI text;
-    public Image image;
+    public Image handLeft;
+    public Image handRight;
 
     [Button]
     public void GetKeyCodesFromHandSign()
     {
         handSign.CreateKeyCodesFromFingers();
-        image.sprite = handSign.handSignLeft.SpriteLeft;
+        handLeft.sprite = handSign.handSignLeft.SpriteLeft;
+        handRight.sprite = handSign.handSignRight.SpriteRight;
         text.text = "";
         foreach (var item in handSign.KeyCodesFingers)
         {
