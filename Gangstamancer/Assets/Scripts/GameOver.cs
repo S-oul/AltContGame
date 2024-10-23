@@ -48,12 +48,13 @@ public class GameOver : MonoBehaviour
             _WinText.sprite = _playerPurpleWin;
             _gameOverPlayer.sprite = _player2Sprite;
         }
+        StartCoroutine(TOEND());
     }
 
     IEnumerator TOEND()
     {
-        yield return new WaitForSeconds(5);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene(0);
     }
 
 }

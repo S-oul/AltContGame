@@ -100,10 +100,8 @@ public class RythmTimeLine : MonoBehaviour
 
         BGEcranPrincipal.color = Color.white;
         _sucessTextPlayer1.text = GameManager.Instance.CurrentState.ToString() + "  ";
-        ////int intSuccess = CheckInput();
-        //print(intSuccess + ' ' + _currentKeyCodes.Count);
+        
         bool fullSucses = CheckInput() || Input.GetKey(KeyCode.Space);
-        //intSuccess == _currentKeyCodes.Count || Input.GetKey(KeyCode.Space);
 
         switch (GameManager.Instance.CurrentState)
         {
@@ -121,6 +119,9 @@ public class RythmTimeLine : MonoBehaviour
                     if (_player2AttackSuccess)
                     {
                         _player1.SetTrigger("OnHit");
+
+                        if (FouleUnitaire.Instance.FouleLeft == 0) OnGameOver?.Invoke(2);
+                        
                         if (FouleUnitaire.Instance.FouleRight == 0)
                         {
                             for (int i = 0; i < winOnLastChance; i++)
@@ -129,7 +130,6 @@ public class RythmTimeLine : MonoBehaviour
                             }
                         }
 
-                        if (FouleUnitaire.Instance.FouleLeft == 0) OnGameOver?.Invoke(2);
 
                         if (_player2SuperAttack)
                         {
@@ -196,6 +196,8 @@ public class RythmTimeLine : MonoBehaviour
                     if (_player1AttackSuccess)
                     {
                         _player2.SetTrigger("OnHit");
+                        if (FouleUnitaire.Instance.FouleRight == 0) OnGameOver?.Invoke(1);
+
                         if (FouleUnitaire.Instance.FouleLeft == 0)
                         {
                             for (int i = 0; i < winOnLastChance; i++)
@@ -203,7 +205,6 @@ public class RythmTimeLine : MonoBehaviour
                                 FouleUnitaire.Instance.AddLeftFan();
                             }
                         }
-                        if (FouleUnitaire.Instance.FouleRight == 0) OnGameOver?.Invoke(1);
 
                         if (_player1SuperAttack)
                         {
@@ -332,9 +333,6 @@ public class RythmTimeLine : MonoBehaviour
     }
     public void OnStart()
     {
-        _player1Sayajin.SetTrigger("OnHit");
-        _player2Sayajin.SetTrigger("OnHit");
-
         GameManager.Instance.ChangeState(firstState);
         CreateNewSequenceAtStart();
         DiplayCurrentKeyCodes();
