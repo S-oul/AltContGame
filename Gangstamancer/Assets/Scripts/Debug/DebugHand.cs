@@ -16,8 +16,8 @@ public class DebugHand : MonoBehaviour
     public void GetKeyCodesFromHandSign()
     {
         handSign.CreateKeyCodesFromFingers();
-        handLeft.sprite = handSign.handSignLeft.SpriteLeft;
-        handRight.sprite = handSign.handSignRight.SpriteRight;
+        handLeft.sprite = handSign.handSignLeft.SpriteToDoLeft;
+        handRight.sprite = handSign.handSignRight.SpriteToDoRight;
         text.text = "";
         foreach (var item in handSign.KeyCodesFingers)
         {

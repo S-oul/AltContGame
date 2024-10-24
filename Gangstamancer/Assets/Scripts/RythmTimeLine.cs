@@ -44,6 +44,11 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] Sprite BGYellowDefense;
     [SerializeField] SpriteRenderer BGEcranPrincipal;
 
+    [Header("Ecran Principal Validation")]
+    [SerializeField] SpriteRenderer EcranPrincipalValidation;
+    [SerializeField] Sprite EcranSuccess;
+    [SerializeField] Sprite EcranFail;
+
     [SerializeField] Animator _player1Sayajin;
     [SerializeField] Animator _player1Attack;
     [SerializeField] Animator _player1;
@@ -106,6 +111,7 @@ public class RythmTimeLine : MonoBehaviour
         _sucessTextPlayer1.text = GameManager.Instance.CurrentState.ToString() + "  ";
         
         bool fullSucses = CheckInput() || Input.GetKey(KeyCode.Space);
+        EcranPrincipalValidation.sprite = fullSucses ? EcranSuccess : EcranFail;
 
         if (fullSucses)
         {
@@ -116,7 +122,7 @@ public class RythmTimeLine : MonoBehaviour
         {
             case GameStates.Player1Defense:
 
-
+                EcranPrincipalValidation.GetComponent<Animator>().SetTrigger("Validation");
                 BGEcranPrincipal.sprite = BGYellowAttack;
                 _player1DefenseSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P1 Defense is  " + fullSucses;
@@ -168,6 +174,8 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player1Attack:
+
+                EcranPrincipalValidation.GetComponent<Animator>().SetTrigger("Validation");
                 BGEcranPrincipal.sprite = BGPurpleDefense;
 
                 _player1AttackSuccess = fullSucses;
@@ -192,6 +200,7 @@ public class RythmTimeLine : MonoBehaviour
 
             case GameStates.Player2Defense:
 
+                EcranPrincipalValidation.GetComponent<Animator>().SetTrigger("Validation");
                 BGEcranPrincipal.sprite = BGPurpleAttack;
 
 
@@ -243,6 +252,8 @@ public class RythmTimeLine : MonoBehaviour
                 break;
 
             case GameStates.Player2Attack:
+
+                EcranPrincipalValidation.GetComponent<Animator>().SetTrigger("Validation");
                 BGEcranPrincipal.sprite = BGYellowDefense;
 
                 _player2AttackSuccess = fullSucses;
