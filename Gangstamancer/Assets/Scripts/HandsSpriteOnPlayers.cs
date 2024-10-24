@@ -19,13 +19,13 @@ public class HandsSpriteOnPlayers : MonoBehaviour
     }
     public void DiplayPlayer1Hands(bool display)
     {
-        if (!display) return;
+        //if (!display) return;
         _handsOnPlayer1.SetActive(display);
     }
 
     public void DiplayPlayer2Hands(bool display)
     {
-        if (!display) return;
+        //if (!display) return;
         _handsOnPlayer2.SetActive(display);
     }
 
