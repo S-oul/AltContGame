@@ -320,8 +320,10 @@ public class RythmTimeLine : MonoBehaviour
         handSequenceSecond.handSigns.Clear();
 
         Debug.Log($"_isPlayer1Turn: {_isPlayer1Turn} \nCurrentState: {GameManager.Instance.CurrentState}");
+        
+        BGEcranPrincipal.color = Color.white;
+        BGEcranPrincipal.sprite = _isPlayer1Turn ? BGYellowAttack : BGPurpleAttack;
 
-       
         CreateAndInvokeHandSigns(handSequenceStarting, _isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 1);
         CreateAndInvokeHandSigns(handSequenceSecond, _isPlayer1Turn ? PlayerNumber.Player2 : PlayerNumber.Player1, 2);
         CreateAndInvokeHandSigns(handSequenceStarting, _isPlayer1Turn ? PlayerNumber.Player1 : PlayerNumber.Player2, 2);
