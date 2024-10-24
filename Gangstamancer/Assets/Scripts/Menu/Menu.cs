@@ -71,4 +71,10 @@ public class Menu : MonoBehaviour
         fondue.color = new Color(0, 0, 0, 1);
         SceneManager.LoadScene(1);
     }
+
+    private void OnGUI()
+    {
+        GUILayout.Label("Version : " + Application.version);
+
+    }
 }

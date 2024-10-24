@@ -259,7 +259,7 @@ public class RythmTimeLine : MonoBehaviour
                 _player2AttackSuccess = fullSucses;
                 _sucessTextPlayer1.text = "P2 Attack is  " + fullSucses;
                 _player2Sayajin.SetBool("Sayajin", false);
-
+                _player2SuperAttack = false;
                 if (!fullSucses)
                 {
                     _feebbackFouleViolette.SetTrigger("BooViolette");
@@ -363,10 +363,6 @@ public class RythmTimeLine : MonoBehaviour
         DiplayCurrentKeyCodes();
         _isPlaying = true;
         _timeLine.Play();
-    }
-    private void OnGUI()
-    {
-        GUILayout.Label("CONVERSION QWERTY DE SES MORTS -- JOUEZ EN FULL HD 1920/1080");
     }
 
     private void ClearTextInput()

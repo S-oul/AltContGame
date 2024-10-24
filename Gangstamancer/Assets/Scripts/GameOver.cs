@@ -19,6 +19,8 @@ public class GameOver : MonoBehaviour
     [SerializeField] private Sprite _player1Sprite;
     [SerializeField] private Sprite _player2Sprite;
 
+    int _players = 9;
+
     private void Start()
     {
         _canvasGameOver.enabled = false;
@@ -26,16 +28,23 @@ public class GameOver : MonoBehaviour
 
     private void OnEnable()
     {
-        RythmTimeLine.OnGameOver += GameOverScreen;
+        RythmTimeLine.OnGameOver += gameOver;
     }
 
     private void OnDisable()
     {
-        RythmTimeLine.OnGameOver -= GameOverScreen;
+        RythmTimeLine.OnGameOver -= gameOver;
     }
 
+
+    private void gameOver(int p)
+    {
+        _players = p;
+        StartCoroutine(ToFinnish());
+    }
     private void GameOverScreen(int player)
     {
+
         _canvasGameOver.enabled = true;
         GameManager.Instance.ChangeState(GameManager.GameStates.GameOver);
         if (player == 1)
@@ -51,8 +60,21 @@ public class GameOver : MonoBehaviour
         StartCoroutine(TOEND());
     }
 
+    IEnumerator ToFinnish()
+    { 
+        while(Time.timeScale > .25f)
+        {
+            print(Time.timeScale);
+            Time.timeScale -= Time.deltaTime;
+
+            yield return null;
+        }
+        GameOverScreen(_players);
+    }
+
     IEnumerator TOEND()
     {
+        Time.timeScale = 1;
         yield return new WaitForSeconds(10);
         SceneManager.LoadScene(0);
     }
