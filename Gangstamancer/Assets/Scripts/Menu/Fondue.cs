@@ -17,7 +17,7 @@ public class Fondue : MonoBehaviour
     {
         while (fondue.color.a >= 0)
         {
-            fondue.color -= new Color(0, 0, 0, .1f * Time.deltaTime);
+            fondue.color -= new Color(0, 0, 0, 1f * Time.deltaTime);
             yield return null;
         }
         fondue.color = new Color(0, 0, 0, 0);

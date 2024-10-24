@@ -26,8 +26,13 @@ public class ChooseWhoStart : MonoBehaviour
     [SerializeField] Image _eclair;
     [SerializeField] Image _versus;
 
-    public TextMeshProUGUI P1TEXT;
-    public TextMeshProUGUI P2TEXT;
+    public Image JauneCD;
+    public Image PurpleCD;
+
+
+    public List<Sprite> CdYeloow = new List<Sprite>();
+    public List<Sprite> CdPurple = new List<Sprite>();
+
 
     HandsSign handSign1;
     HandsSign handSign2;
@@ -54,11 +59,13 @@ public class ChooseWhoStart : MonoBehaviour
                     timeLine.firstState = GameManager.GameStates.Player1Attack;
                     //YELLOW START
                     StartCoroutine(ONWin());
+                    JauneCD.color = new Color(0,0,0,0);
                 }
-                P1TEXT.text = phasep1.ToString();
                 //PLAY AUDIO CUE
-                if(!hasAWinner)
-                ChooseP1RandomHands();
+                if (!hasAWinner)
+                    ChooseP1RandomHands();
+
+                JauneCD.sprite = CdYeloow[phasep1];
             }
         if (!hasAWinner) if (CheckInputP2() == handSign2.KeyCodesFingers.Count || Input.GetKeyDown(KeyCode.C))
             {
@@ -71,10 +78,13 @@ public class ChooseWhoStart : MonoBehaviour
                     StartCoroutine(ONWin());
 
                     //VIOLET START START
+                    PurpleCD.color = new Color(0, 0, 0, 0);
+
                 }
-                P2TEXT.text = phasep2.ToString();
-                if(!hasAWinner)
+                if (!hasAWinner)
                     ChooseP2RandomHands();
+
+                PurpleCD.sprite = CdPurple[phasep2];
             }
 
     }
@@ -83,7 +93,7 @@ public class ChooseWhoStart : MonoBehaviour
     {
         while (bg.color.a > 0)
         {
-            bg.color -= new Color(0, 0, 0,Time.deltaTime * 3);
+            bg.color -= new Color(0, 0, 0, Time.deltaTime * 3);
             p1Left.color = new Color(1, 1, 1, bg.color.a);
             p1Right.color = new Color(1, 1, 1, bg.color.a);
             p2Left.color = new Color(1, 1, 1, bg.color.a);
