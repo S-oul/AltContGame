@@ -97,7 +97,7 @@ public class ChooseWhoStart : MonoBehaviour
         bg.rectTransform.parent.GetComponent<Canvas>().enabled = false;
         fouleeee.OnStart();
 
-        int test = 50;
+        int test = 25;
         while (test > 0)
         {
             test--;
@@ -128,23 +128,12 @@ public class ChooseWhoStart : MonoBehaviour
 
     int CheckInputP1()
     {
-        int isSuccess = 0;
         if (PreviewHandsInputs.input1.ToString() == handSign1.inputString.ToString()) return handSign1.KeyCodesFingers.Count;
         else return 0;
     }
     int CheckInputP2()
     {
-        int isSuccess = 0;
-
-        foreach (KeyCode key in handSign2.KeyCodesFingers)
-        {
-            if (Input.GetKey(key))
-            {
-                if (handSign2.KeyCodesFingers.Contains(key))
-                    isSuccess++;
-                else isSuccess--;
-            }
-        }
-        return isSuccess;
+        if (PreviewHandsInputs.input2.ToString() == handSign2.inputString.ToString()) return handSign2.KeyCodesFingers.Count;
+        else return 0;
     }
 }

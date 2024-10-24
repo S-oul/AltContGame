@@ -76,13 +76,13 @@ public class PreviewHandsInputs : MonoBehaviour
             if (Input.GetKeyDown(_player2Inputs.LeftHandInputs[i]))
             {
                 ReplaceFinger(_player2Lefthand, fingersClosed, i);
-                input1[i] = '1';
+                input2[i] = '1';
 
             }
             else if (Input.GetKeyUp(_player2Inputs.LeftHandInputs[i]))
             {
                 ReplaceFinger(_player2Lefthand, fingersOpened, i);
-                input1[i] = '0';
+                input2[i] = '0';
 
             }
         }
@@ -92,12 +92,12 @@ public class PreviewHandsInputs : MonoBehaviour
             if (Input.GetKeyDown(_player2Inputs.RightHandInputs[i]))
             {
                 ReplaceFinger(_player2Righthand, fingersClosed, i);
-                input1[i + 4] = '1';
+                input2[i + 4] = '1';
             }
             else if (Input.GetKeyUp(_player2Inputs.RightHandInputs[i]))
             {
                 ReplaceFinger(_player2Righthand, fingersOpened, i);
-                input1[i + 4] = '0';
+                input2[i + 4] = '0';
             }
         }
     }   
