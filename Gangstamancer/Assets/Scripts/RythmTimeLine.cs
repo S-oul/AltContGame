@@ -63,7 +63,7 @@ public class RythmTimeLine : MonoBehaviour
     [SerializeField] Animator _feebbackFouleViolette;
 
 
-
+    [SerializeField] AudioSource _audioSource;
 
     private HandsSequence _currentHandsSequence;
     [SerializeField] private List<KeyCode> _currentKeyCodes;
@@ -359,6 +359,8 @@ public class RythmTimeLine : MonoBehaviour
     }
     public void OnStart()
     {
+        _audioSource.Stop();
+
         GameManager.Instance.ChangeState(firstState);
         CreateNewSequenceAtStart();
         DiplayCurrentKeyCodes();
