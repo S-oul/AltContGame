@@ -107,6 +107,11 @@ public class RythmTimeLine : MonoBehaviour
         
         bool fullSucses = CheckInput() || Input.GetKey(KeyCode.Space);
 
+        if (fullSucses)
+        {
+            _handsSpriteOnPlayers.PutGoodHandsOnPlayer(_isPlayer1Turn ? _player1HandSequence.handSigns[0] : _player2HandSequence.handSigns[0]);
+        }
+
         switch (GameManager.Instance.CurrentState)
         {
             case GameStates.Player1Defense:
@@ -158,8 +163,6 @@ public class RythmTimeLine : MonoBehaviour
                     _feebbackFouleYellow.SetTrigger("Yay");
                     if (_player1SuperAttack) _player1Sayajin.SetBool("Sayajin", true);
                     else _player1Attack.SetTrigger("Defense");
-
-                    _handsSpriteOnPlayers.PutGoodHandsOnPlayer1(_player1HandSequence.handSigns[0]);
                 }
 
                 break;
@@ -183,7 +186,6 @@ public class RythmTimeLine : MonoBehaviour
 
                     _player1Attack.SetTrigger(ChooseAnim());
                     if (FouleUnitaire.Instance.FouleLeft != 0) FouleUnitaire.Instance.AddLeftFan();
-                    _handsSpriteOnPlayers.PutGoodHandsOnPlayer1(_player1HandSequence.handSigns[0]);
                 }
 
                 break;
@@ -236,7 +238,6 @@ public class RythmTimeLine : MonoBehaviour
 
                     if (_player2SuperAttack) _player2Sayajin.SetBool("Sayajin", true);
                     else _player2Attack.SetTrigger("Defense");
-                    _handsSpriteOnPlayers.PutGoodHandsOnPlayer2(_player2HandSequence.handSigns[0]);
                 }
 
                 break;
@@ -259,7 +260,6 @@ public class RythmTimeLine : MonoBehaviour
                     _player2Attack.SetTrigger(ChooseAnim());
 
                     if (FouleUnitaire.Instance.FouleRight != 0) FouleUnitaire.Instance.AddRightFan();
-                    _handsSpriteOnPlayers.PutGoodHandsOnPlayer2(_player2HandSequence.handSigns[0]);
                 }
 
                 break;
