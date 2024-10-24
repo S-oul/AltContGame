@@ -14,40 +14,47 @@ public class HandsSpriteOnPlayers : MonoBehaviour
 
     private void Start()
     {
-        handPlayer1 = _handsOnPlayer1.GetComponent<Animator>();
-        handPlayer2 = _handsOnPlayer2.GetComponent<Animator>(); 
+        SelectRandomHandsAtStart(_handsOnPlayer1);
+        SelectRandomHandsAtStart(_handsOnPlayer2);
+    }
+
+    private void SelectRandomHandsAtStart(GameObject parent)
+    {
+        Animator handPlayer = parent.GetComponent<Animator>();
+        int random = Random.Range(0, _allFingers.Count);
+        SendTriggerToAnimator(handPlayer, _allFingers[random]);
     }
     public void DiplayPlayer1Hands(bool display)
     {
-        if (!display) return;
-        _handsOnPlayer1.SetActive(display);
+        //if (!display) return;
+        DisplayChildrenSprites(display, _handsOnPlayer1);
     }
 
     public void DiplayPlayer2Hands(bool display)
     {
-        if (!display) return;
-        _handsOnPlayer2.SetActive(display);
+        //if (!display) return;
+        DisplayChildrenSprites(display, _handsOnPlayer2);
     }
 
-    public void PutGoodHandsOnPlayer1(HandsSign handSign)
+    private void DisplayChildrenSprites(bool display, GameObject parent)
     {
-        Debug.Log("PutGoodHandsOnPlayer1");
-        SendTriggerToAnimator(handPlayer1, handSign.handSignLeft);
-        _handsOnPlayer1.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handSign.handSignLeft.SpriteLeft;
-        _handsOnPlayer1.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handSign.handSignRight.SpriteRight;
+        foreach (var item in parent.GetComponentsInChildren<SpriteRenderer>())
+        {
+            item.enabled = display;
+        }
     }
 
-    public void PutGoodHandsOnPlayer2(HandsSign handSign)
+    public void PutGoodHandsOnPlayer(HandsSign handSign)
     {
-        Debug.Log("PutGoodHandsOnPlayer2");
-        SendTriggerToAnimator(handPlayer2, handSign.handSignLeft);
-        _handsOnPlayer2.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handSign.handSignLeft.SpriteLeft;
-        _handsOnPlayer2.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handSign.handSignRight.SpriteRight;
+        var handsOnPlayer = handSign.player == PlayerNumber.Player1 ? _handsOnPlayer1 : _handsOnPlayer2;
+        Animator animator = handsOnPlayer.GetComponent<Animator>();
+        SendTriggerToAnimator(animator, handSign.handSignLeft);
+        handsOnPlayer.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = handSign.handSignLeft.SpriteLeft;
+        handsOnPlayer.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = handSign.handSignRight.SpriteRight;
     }
 
     private void SendTriggerToAnimator(Animator animator, Fingers finger)
     {
-            Debug.Log(finger);
         if (_allFingers[0] == finger)
             animator.SetTrigger("Call");
         else if (_allFingers[1] == finger)
