@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -376,5 +377,15 @@ public class RythmTimeLine : MonoBehaviour
         _timeLine.Stop();
         _isPlaying = false;
     }
+    public void Restart()
+    {
+        StartCoroutine(waitToRestart());
+    }
 
+    private IEnumerator waitToRestart()
+    {
+        yield return new WaitForSeconds(4);
+        _timeLine.time = 0;
+        _timeLine.Play();
+    }
 }

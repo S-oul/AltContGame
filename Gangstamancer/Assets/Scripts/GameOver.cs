@@ -19,6 +19,8 @@ public class GameOver : MonoBehaviour
     [SerializeField] private Sprite _player1Sprite;
     [SerializeField] private Sprite _player2Sprite;
 
+    [SerializeField] private float _delay = 1;
+
     int _players = 9;
 
     private void Start()
@@ -62,10 +64,10 @@ public class GameOver : MonoBehaviour
 
     IEnumerator ToFinnish()
     { 
-        while(Time.timeScale > .25f)
+        while(Time.timeScale > .05f)
         {
             print(Time.timeScale);
-            Time.timeScale -= Time.deltaTime;
+            Time.timeScale -= Time.deltaTime* _delay;
 
             yield return null;
         }
