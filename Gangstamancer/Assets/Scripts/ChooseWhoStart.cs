@@ -34,6 +34,9 @@ public class ChooseWhoStart : MonoBehaviour
     public List<Sprite> CdPurple = new List<Sprite>();
 
 
+    public Animator Y;
+    public Animator P;
+
     HandsSign handSign1;
     HandsSign handSign2;
 
@@ -53,6 +56,7 @@ public class ChooseWhoStart : MonoBehaviour
         if (!hasAWinner) if (CheckInputP1() == handSign1.KeyCodesFingers.Count || Input.GetKeyDown(KeyCode.X))
             {
                 phasep1--;
+                Y.Play("Bounc");
                 if (phasep1 == 0)
                 {
                     hasAWinner = true;
@@ -71,6 +75,7 @@ public class ChooseWhoStart : MonoBehaviour
             {
                 //APFJAUIZGEBUKDFGZIUDKFGBI
                 phasep2--;
+                P.Play("Bounc");
                 if (phasep2 == 0)
                 {
                     hasAWinner = true;
