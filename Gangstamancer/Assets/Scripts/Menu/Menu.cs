@@ -12,17 +12,13 @@ public class Menu : MonoBehaviour
     [SerializeField] Image fondue;
 
     bool _hasStarted = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
 
-        soustitre.color = new Color(1, 1, 1, (Mathf.Sin(Time.time * 2) + 1) / 2);
+        soustitre.color = new Color(0, 0, 0, (Mathf.Sin(Time.time * 2) + 1) / 2);
 
 
         if ((Input.GetKey(KeyCode.A)
