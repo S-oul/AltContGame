@@ -83,7 +83,7 @@ public class ChooseWhoStart : MonoBehaviour
     {
         while (bg.color.a > 0)
         {
-            bg.color -= new Color(0, 0, 0, 1 * Time.deltaTime / 3);
+            bg.color -= new Color(0, 0, 0,Time.deltaTime * 3);
             p1Left.color = new Color(1, 1, 1, bg.color.a);
             p1Right.color = new Color(1, 1, 1, bg.color.a);
             p2Left.color = new Color(1, 1, 1, bg.color.a);
