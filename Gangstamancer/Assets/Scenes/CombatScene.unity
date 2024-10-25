@@ -6322,12 +6322,12 @@ MonoBehaviour:
   JauneCD: {fileID: 771742353}
   PurpleCD: {fileID: 1558582835}
   CdYeloow:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b0cc27512edde7b439932fcd00f6641a, type: 3}
   - {fileID: 21300000, guid: b0cc27512edde7b439932fcd00f6641a, type: 3}
   - {fileID: 21300000, guid: aa3de97f6217c1146a7c2fd37b9131e4, type: 3}
   - {fileID: 21300000, guid: 56c3e69b9e4290a4c9968368ce0ebb61, type: 3}
   CdPurple:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 37ec6b5b97c2ba74ab678545e5c78fcb, type: 3}
   - {fileID: 21300000, guid: 37ec6b5b97c2ba74ab678545e5c78fcb, type: 3}
   - {fileID: 21300000, guid: 7a19812f5cbbe934584488792b74f1dd, type: 3}
   - {fileID: 21300000, guid: be0b52e80bcb62d439fa4ec928a35250, type: 3}
