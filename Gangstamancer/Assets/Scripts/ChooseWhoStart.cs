@@ -55,6 +55,7 @@ public class ChooseWhoStart : MonoBehaviour
     {
         if (!hasAWinner) if (CheckInputP1() == handSign1.KeyCodesFingers.Count || Input.GetKeyDown(KeyCode.X))
             {
+                CameraShaker.Instance.Shake();
                 phasep1--;
                 Y.Play("Bounc");
                 if (phasep1 == 0)
@@ -73,7 +74,7 @@ public class ChooseWhoStart : MonoBehaviour
             }
         if (!hasAWinner) if (CheckInputP2() == handSign2.KeyCodesFingers.Count || Input.GetKeyDown(KeyCode.C))
             {
-                //APFJAUIZGEBUKDFGZIUDKFGBI
+                CameraShaker.Instance.Shake();
                 phasep2--;
                 P.Play("Bounc");
                 if (phasep2 == 0)
@@ -105,6 +106,8 @@ public class ChooseWhoStart : MonoBehaviour
             p2Right.color = new Color(1, 1, 1, bg.color.a);
             _eclair.color = new Color(1, 1, 1, bg.color.a);
             _versus.color = new Color(1, 1, 1, bg.color.a);
+            JauneCD.color = new Color(1, 1, 1, bg.color.a);
+            PurpleCD.color = new Color(1, 1, 1, bg.color.a);
 
             yield return null;
         }

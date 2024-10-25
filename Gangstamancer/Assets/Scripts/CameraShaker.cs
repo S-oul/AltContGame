@@ -8,11 +8,11 @@ public class CameraShaker : MonoBehaviour
     public static CameraShaker Instance { get; private set; } = null;
 
     [SerializeField] private float _shakePeriod = 0.05f;
+    [SerializeField] private float _shakePower = 0.05f;
 
     public bool IsShaking { get; private set; } = false;
 
-    private float _shakePower = 1f;
-    private float _shakeDuration = 0f;
+    private float _shakeDuration = 0.1f;
 
     private float _shakeTimer = 0f;
 
@@ -23,6 +23,16 @@ public class CameraShaker : MonoBehaviour
         Instance = this;
     }
 
+    private void OnEnable()
+    {
+        RythmTimeLine.OnBeat += Shake;
+    }
+
+    private void OnDisable()
+    {
+        RythmTimeLine.OnBeat -= Shake;
+    }
+
     private void Update()
     {
         _UpdateShake();
@@ -31,9 +41,9 @@ public class CameraShaker : MonoBehaviour
     [Button]
     public void Shake()
     {
-        Shake(0.5f,0.1f); 
+        Shake(_shakePower, _shakeDuration); 
     }
-    public void Shake(float power, float duration)
+    public void Shake(float power, float duration = 0.1f)
     {
         _shakePower = power;
         _shakeDuration = duration;
@@ -59,6 +69,7 @@ public class CameraShaker : MonoBehaviour
         if (_shakeTimer < _shakeDuration || _shakeDuration < 0f)
         {
             _shakeOffset.x = (Mathf.PingPong(_shakeTimer, _shakePeriod) / _shakePeriod) * _shakePower;
+            _shakeOffset.y = (Mathf.PingPong(_shakeTimer, _shakePeriod) / _shakePeriod) * _shakePower;
         }
         else
         {
