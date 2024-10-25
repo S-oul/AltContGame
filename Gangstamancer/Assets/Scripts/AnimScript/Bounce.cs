@@ -10,6 +10,7 @@ public class Bounce : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         RythmTimeLine.OnBeat += DoOnBeat;
+        Menu.OnBeat += DoOnBeat;
     }
 
     // Update is called once per frame

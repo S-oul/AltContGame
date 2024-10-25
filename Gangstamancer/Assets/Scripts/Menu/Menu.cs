@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditorInternal.VersionControl.ListControl;
 
 public class Menu : MonoBehaviour
 {
+    public bool isBouncing;
+    public static event System.Action OnBeat;
+    [SerializeField] PlayableDirector _menuTimeLine;
 
     [SerializeField] TextMeshProUGUI soustitre;
     [SerializeField] Image fondue;
 
     bool _hasStarted = false;
-    
+    public void OnStart()
+    {
+        _menuTimeLine.Play();
+    }
 
     // Update is called once per frame
     void Update()
@@ -52,6 +60,8 @@ public class Menu : MonoBehaviour
     {
         if (!_hasStarted)
         {
+            if (isBouncing)
+                _menuTimeLine.Stop();
             StartCoroutine(IgmFondue());
             _hasStarted = true;
         }
@@ -72,5 +82,22 @@ public class Menu : MonoBehaviour
     {
         GUILayout.Label("Version : " + Application.version);
 
+    }
+
+    public void DoOnBeat()
+    {
+        if (isBouncing)
+            OnBeat?.Invoke();
+    }
+    public void Restart()
+    {
+        StartCoroutine(waitToRestart());
+    }
+
+    private IEnumerator waitToRestart()
+    {
+        yield return new WaitForSeconds(4);
+        _menuTimeLine.time = 0;
+        _menuTimeLine.Play();
     }
 }
