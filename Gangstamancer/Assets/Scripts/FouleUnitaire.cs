@@ -34,7 +34,7 @@ public class FouleUnitaire : MonoBehaviour
     [SerializeField] int _fouleRight = 0;
 
 
-    [Range(0,15)]
+    [Range(0, 15)]
     [SerializeField] float _CamMaxDegre = 0;
 
     [SerializeField] List<Transform> posLeft;
@@ -48,6 +48,14 @@ public class FouleUnitaire : MonoBehaviour
 
     List<GameObject> _LastLeftJoined = new List<GameObject>();
     List<GameObject> _LastRightJoined = new List<GameObject>();
+
+    public Animator yellowAnim;
+    public Animator PurpleAnim;
+
+    List<Transform> yellowFoule = new List<Transform>();
+    List<Transform> purpleFoule = new List<Transform>();
+
+
     // Start is called before the first frame update
     public void OnStart()
     {
@@ -126,7 +134,7 @@ public class FouleUnitaire : MonoBehaviour
         if (Mathf.Abs(diff) >= 2)
         {
             //StartCoroutine(goToRot(diff * (_CamMaxDegre / 10f)));
-            Camera.main.transform.eulerAngles = new Vector3(0,0,diff * (_CamMaxDegre / 10f));
+            Camera.main.transform.eulerAngles = new Vector3(0, 0, diff * (_CamMaxDegre / 10f));
         }
         else
         {
@@ -143,6 +151,24 @@ public class FouleUnitaire : MonoBehaviour
             Camera.main.transform.eulerAngles = new Vector3(0, 0, Mathf.Lerp(oldAngle, angle, i / 50f));
             i++;
             yield return null;
+        }
+    }
+
+    public void FinnishYellow()
+    {
+        foreach(GameObject go in _LastLeftJoined)
+        {
+            go.transform.GetComponent<Animator>().SetTrigger("ToutDroit");
+
+        }
+    }
+
+    public void FinnishPurple()
+    {
+        foreach (GameObject go in _LastRightJoined)
+        {
+            go.transform.GetComponent<Animator>().SetTrigger("ToutDroit");
+
         }
     }
 }

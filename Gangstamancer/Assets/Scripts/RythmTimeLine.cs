@@ -381,12 +381,22 @@ public class RythmTimeLine : MonoBehaviour
     }
     public void Restart()
     {
+
+        if(FouleUnitaire.Instance.FouleRight > FouleUnitaire.Instance.FouleLeft)
+        {
+            FouleUnitaire.Instance.FinnishPurple();
+        }
+        else
+        {
+            FouleUnitaire.Instance.FinnishYellow();
+        }
+
         StartCoroutine(waitToRestart());
     }
 
     private IEnumerator waitToRestart()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2);
         _timeLine.time = 0;
         _timeLine.Play();
     }
