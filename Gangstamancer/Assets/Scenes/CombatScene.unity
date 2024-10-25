@@ -4053,10 +4053,10 @@ MonoBehaviour:
   _handsSpriteOnPlayers: {fileID: 515349755}
   _player1HandSequence: {fileID: 11400000, guid: e195a4b0ae078de4b8be6a87a4f45500, type: 2}
   _player2HandSequence: {fileID: 11400000, guid: a136619e72410d240a302aa92dee8a16, type: 2}
-  BGPurpleAttack: {fileID: 21300000, guid: 3cf9573544e1f5e4b8d7f36c8fc5f761, type: 3}
-  BGPurpleDefense: {fileID: 21300000, guid: 09df755a7b3256d4f9a13436d9567500, type: 3}
-  BGYellowAttack: {fileID: 21300000, guid: 54ed3b04d2329e342a79dfe8e813675e, type: 3}
-  BGYellowDefense: {fileID: 21300000, guid: 73c5b816de31dd44ea052c251e86c471, type: 3}
+  BGPurpleAttack: {fileID: 21300000, guid: c085a10b069318a4da61206b10b3c804, type: 3}
+  BGPurpleDefense: {fileID: 21300000, guid: 98719b55f9b9db84f93fed55071a7ff4, type: 3}
+  BGYellowAttack: {fileID: 21300000, guid: bec9f85aa8cf0a2459a1e4388e9f867b, type: 3}
+  BGYellowDefense: {fileID: 21300000, guid: 6046050dc0a5b334ca02a5e6bbe5b6b5, type: 3}
   BGEcranPrincipal: {fileID: 1579427903}
   EcranPrincipalValidation: {fileID: 1581555210}
   EcranSuccess: {fileID: 21300000, guid: 0839a8cf9bbcbab489df6fd4ac914a79, type: 3}
