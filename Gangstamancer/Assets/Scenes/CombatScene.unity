@@ -2172,6 +2172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shakePeriod: 0.05
+  _shakePower: 0.075
 --- !u!1 &537416909
 GameObject:
   m_ObjectHideFlags: 0
